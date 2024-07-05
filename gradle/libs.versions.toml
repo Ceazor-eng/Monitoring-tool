@@ -1,10 +1,10 @@
 [versions]
-agp = "8.4.1"
-kotlin = "1.9.0"
+agp = "8.4.2"
+kotlin = "1.9.10"
 coreKtx = "1.13.1"
 junit = "4.13.2"
-junitVersion = "1.1.5"
-espressoCore = "3.5.1"
+junitVersion = "1.2.1"
+espressoCore = "3.6.1"
 appcompat = "1.7.0"
 material = "1.12.0"
 activity = "1.9.0"
@@ -14,8 +14,8 @@ retrofitSerializationConverter = "1.0.0"
 serializationJson = "1.5.1"
 coroutines = "1.7.3"
 okhttp3 = "4.11.0"
-kapt = "2.44"
-hilt = "2.44"
+kapt = "2.49"
+hilt = "2.49"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }

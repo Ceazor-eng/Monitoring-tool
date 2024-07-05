@@ -10,6 +10,8 @@ android {
     namespace = "com.monitoringtendepay"
     compileSdk = 34
 
+
+
     defaultConfig {
         applicationId = "com.monitoringtendepay"
         minSdk = 24
@@ -18,6 +20,8 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+
     }
 
     buildTypes {
@@ -48,6 +52,7 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
     implementation(libs.bundles.networking)
     implementation(libs.bundles.dagger)
 }
