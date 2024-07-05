@@ -4,6 +4,8 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android) apply false
     id("org.jlleitschuh.gradle.ktlint") version "11.6.1"
     id("io.gitlab.arturbosch.detekt") version "1.23.1"
+    id("org.jetbrains.kotlin.plugin.serialization") version "1.8.20" apply false
+    id("com.google.dagger.hilt.android") version "2.44" apply false
 }
 
 subprojects {
