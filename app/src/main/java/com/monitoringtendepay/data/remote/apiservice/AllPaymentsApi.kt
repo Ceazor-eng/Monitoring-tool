@@ -1,6 +1,5 @@
 package com.monitoringtendepay.data.remote.apiservice
 
-import com.monitoringtendepay.data.remote.dto.FetchAllPaymentsDto
 import com.monitoringtendepay.data.remote.dto.Paymentss
 import retrofit2.http.GET
 import retrofit2.http.Query

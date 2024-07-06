@@ -1,12 +1,11 @@
 package com.monitoringtendepay.core.di.network
 
-import okhttp3.ResponseBody
-import retrofit2.Converter
-import retrofit2.Retrofit
 import java.lang.reflect.Type
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.RequestBody
-
+import okhttp3.ResponseBody
+import retrofit2.Converter
+import retrofit2.Retrofit
 
 class CustomConverterFactory : Converter.Factory() {
 
@@ -42,4 +41,3 @@ class CustomConverterFactory : Converter.Factory() {
         }
     }
 }
-

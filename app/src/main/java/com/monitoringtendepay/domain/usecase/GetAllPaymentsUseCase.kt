@@ -11,7 +11,6 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import retrofit2.HttpException
 
-
 class GetAllPaymentsUseCase @Inject constructor(
     private val repository: AllPaymentsRepository
 ) {
@@ -41,4 +40,3 @@ class GetAllPaymentsUseCase @Inject constructor(
         }
     }
 }
-
