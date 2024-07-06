@@ -9,6 +9,7 @@ class AllPaymentsRepositoryImpl @Inject constructor(
     private val api: AllPaymentsApi
 ) : AllPaymentsRepository {
     override suspend fun getAllPayments(action: String): List<FetchAllPaymentsDto> {
-        return api.getAllPayments(action)
+        val response = api.getAllPayments(action)
+        return response.data
     }
 }
