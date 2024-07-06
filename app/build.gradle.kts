@@ -53,8 +53,11 @@ dependencies {
     // Kotlin Serialization dependencies
     implementation(libs.serialization.json)
 
-    // Other dependencies
+    // network manager with retrofit
     implementation(libs.bundles.networking)
+
+    // viewModel
+    implementation(libs.bundles.viewModel)
 
     // Test dependencies
     testImplementation(libs.junit)
