@@ -1,4 +1,4 @@
-package com.monitoringtendepay.data.remote.dto
+package com.monitoringtendepay.data.remote.dto.payments
 
 data class Paymentss(
     val `data`: List<FetchAllPaymentsDto>,
