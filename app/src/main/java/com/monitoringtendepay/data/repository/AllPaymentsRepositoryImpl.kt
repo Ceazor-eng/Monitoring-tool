@@ -12,6 +12,4 @@ class AllPaymentsRepositoryImpl @Inject constructor(
         val response = api.getAllPayments(action)
         return response.data
     }
-
-
 }
