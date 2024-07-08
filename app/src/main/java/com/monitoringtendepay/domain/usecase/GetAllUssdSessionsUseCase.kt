@@ -19,11 +19,17 @@ class GetAllUssdSessionsUseCase @Inject constructor(
         try {
             emit(Resource.Loading())
             Log.d("GetAllUssdSessionsUseCase", "Fetching sessions...")
-            val ussdSessionsDto = repository.getUssdSessions(action)
-            Log.d("GetAllUssdSessionsUseCase", "Fetched ussdSessions DTO: $ussdSessionsDto")
-            val ussdSessions = ussdSessionsDto.map { it.toAllUssdSessions() }
-            Log.d("GetAllUssdSessionsUseCase", "Mapped ussdSessions: $ussdSessions")
-            emit(Resource.Success(ussdSessions))
+            val fetchUssdSessions = repository.getUssdSessions(action)
+            Log.d("GetAllUssdSessionsUseCase", "Fetched ussdSessions DTO: $fetchUssdSessions")
+
+            if (fetchUssdSessions.isNullOrEmpty()) {
+                Log.e("GetAllUssdSessionsUseCase", "ussdSessionsDto is null or empty")
+                emit(Resource.Error("No data found"))
+            } else {
+                val ussdSessions = fetchUssdSessions.map { it.toAllUssdSessions() }
+                Log.d("GetAllUssdSessionsUseCase", "Mapped ussdSessions: $ussdSessions")
+                emit(Resource.Success(ussdSessions))
+            }
         } catch (e: HttpException) {
             Log.e("GetAllUssdSessionsUseCase", "HttpException: ${e.localizedMessage}")
             emit(
