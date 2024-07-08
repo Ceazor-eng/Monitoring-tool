@@ -1,4 +1,4 @@
-package com.monitoringtendepay.data.remote.dto
+package com.monitoringtendepay.data.remote.dto.payments
 
 import com.monitoringtendepay.domain.models.AllPayments
 

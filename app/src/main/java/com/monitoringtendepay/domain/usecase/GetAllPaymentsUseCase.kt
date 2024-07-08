@@ -2,7 +2,7 @@ package com.monitoringtendepay.domain.usecase
 
 import android.util.Log
 import com.monitoringtendepay.core.common.Resource
-import com.monitoringtendepay.data.remote.dto.toAllPayments
+import com.monitoringtendepay.data.remote.dto.payments.toAllPayments
 import com.monitoringtendepay.domain.models.AllPayments
 import com.monitoringtendepay.domain.repository.AllPaymentsRepository
 import java.io.IOException

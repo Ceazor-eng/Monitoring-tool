@@ -1,7 +1,7 @@
 package com.monitoringtendepay.data.repository
 
 import com.monitoringtendepay.data.remote.apiservice.AllPaymentsApi
-import com.monitoringtendepay.data.remote.dto.FetchAllPaymentsDto
+import com.monitoringtendepay.data.remote.dto.payments.FetchAllPaymentsDto
 import com.monitoringtendepay.domain.repository.AllPaymentsRepository
 import javax.inject.Inject
 
