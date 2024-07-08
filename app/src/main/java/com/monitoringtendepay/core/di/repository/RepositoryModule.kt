@@ -23,7 +23,7 @@ object RepositoryModule {
 
     @Singleton
     @Provides
-    fun provideUssdSessionsRepository(api: AllPaymentsApi):UssdSessionsRepository{
+    fun provideUssdSessionsRepository(api: AllPaymentsApi): UssdSessionsRepository {
         return AllUssdSessionsRepositoryImpl(api)
     }
 }

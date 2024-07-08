@@ -7,7 +7,7 @@ import javax.inject.Inject
 
 class AllUssdSessionsRepositoryImpl @Inject constructor(
     private val api: AllPaymentsApi
-):UssdSessionsRepository{
+) : UssdSessionsRepository {
     override suspend fun getUssdSessions(action: String): List<UssdData> {
         val response = api.getAllUssdSessions(action)
         return response.data

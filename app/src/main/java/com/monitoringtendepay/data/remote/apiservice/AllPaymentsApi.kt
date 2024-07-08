@@ -9,6 +9,7 @@ interface AllPaymentsApi {
 
     @GET("Tende_monitoring_tool-main/fetch_payments_monitoring_tool.php")
     suspend fun getAllPayments(@Query("action")action: String): Paymentss
+
     @GET("Tende_monitoring_tool-main/fetch_payments_monitoring_tool.php")
     suspend fun getAllUssdSessions(@Query("action")action: String): FetchUssdSessions
 }

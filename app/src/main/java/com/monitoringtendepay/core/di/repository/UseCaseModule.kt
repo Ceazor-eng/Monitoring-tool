@@ -22,7 +22,7 @@ object UseCaseModule {
 
     @Singleton
     @Provides
-    fun provideGetAllUssdSessionsUseCase(repository: UssdSessionsRepository):GetAllUssdSessionsUseCase{
+    fun provideGetAllUssdSessionsUseCase(repository: UssdSessionsRepository): GetAllUssdSessionsUseCase {
         return GetAllUssdSessionsUseCase(repository)
     }
 }

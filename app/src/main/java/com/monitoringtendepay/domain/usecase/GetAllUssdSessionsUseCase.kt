@@ -2,15 +2,14 @@ package com.monitoringtendepay.domain.usecase
 
 import android.util.Log
 import com.monitoringtendepay.core.common.Resource
-import com.monitoringtendepay.data.remote.dto.payments.toAllPayments
 import com.monitoringtendepay.data.remote.dto.ussd.toAllUssdSessions
 import com.monitoringtendepay.domain.models.AllUssdSessions
 import com.monitoringtendepay.domain.repository.UssdSessionsRepository
+import java.io.IOException
+import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import retrofit2.HttpException
-import java.io.IOException
-import javax.inject.Inject
 
 class GetAllUssdSessionsUseCase @Inject constructor(
     private val repository: UssdSessionsRepository
@@ -41,5 +40,4 @@ class GetAllUssdSessionsUseCase @Inject constructor(
             )
         }
     }
-
 }

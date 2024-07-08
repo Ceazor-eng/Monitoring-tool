@@ -8,7 +8,7 @@ data class UssdData(
     val sessionsDate: String
 )
 
-fun UssdData.toAllUssdSessions() : AllUssdSessions{
+fun UssdData.toAllUssdSessions(): AllUssdSessions {
     return AllUssdSessions(
         msisdn,
         sessionId,
