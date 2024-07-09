@@ -10,7 +10,7 @@
 
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/greetings_card"
+        android:id="@+id/greetingcard"
         android:layout_width="wrap_content"
         android:layout_height="90dp"
         app:cardElevation="58dp"
@@ -30,7 +30,7 @@
                 android:elevation="40dp" />
 
             <View
-                android:id="@+id/notification_bell"
+                android:id="@+id/vector"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_alignParentEnd="true"
@@ -49,253 +49,237 @@
                 android:fontFamily="@font/josefinsansregular"
                 android:textSize="18sp"
                 android:layout_marginTop="33dp"
-                android:text="@string/welcoming_textview"
+                android:text="Welcome Ian!"
                 android:textColor="@android:color/white"
                 android:elevation="40dp" />
         </RelativeLayout>
 
 </androidx.cardview.widget.CardView>
-    <!--<Button
-            android:id="@+id/signup_button"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/login_button"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="15dp"
-            android:background="@color/purple"
-            android:text="@string/register"
-            android:textColor="@color/white"
-            android:textSize="20sp" />
-    -->
 
-        <TextView
+
+        <EditText
             android:id="@+id/rectangle_2"
             android:layout_width="292dp"
             android:layout_height="42dp"
-            android:layout_marginLeft="56dp"
-            android:layout_marginTop="114dp"
-            android:paddingTop="10dp"
-            android:paddingStart="15dp"
-            android:layout_centerHorizontal="true"
+            android:layout_centerInParent="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="110dp"
+            android:padding="10dp"
+            android:paddingStart="20dp"
             android:fontFamily="@font/josefinsansregular"
-            android:text="@string/search_transaction_textview"
+            android:text="Search Transaction"
             android:textColor="#A48989"
             android:background="@drawable/rectangle_2" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/total_transaction_card"
-        android:layout_width="150dp"
-        android:layout_height="69dp"
-        app:cardElevation="28dp"
-        android:layout_marginTop="180dp"
-        android:layout_marginStart="50dp"
-        app:cardCornerRadius="15dp"
-        android:background="@android:color/transparent">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/tc">
+        <androidx.cardview.widget.CardView
+            android:id="@+id/totaltransactioncard"
+            android:layout_width="150dp"
+            android:layout_height="69dp"
+            app:cardElevation="28dp"
+            android:layout_marginTop="180dp"
+            android:layout_marginStart="30dp"
+            app:cardCornerRadius="15dp"
+            android:background="@android:color/transparent">
 
-            <TextView
-                android:id="@+id/total_transactions"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginLeft="53dp"
-                android:layout_marginTop="11dp"
-                android:elevation="40dp"
-                android:fontFamily="@font/josefinsansregular"
-                android:text="1000"
-                android:textColor="@android:color/black"
-                android:textSize="20dp" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/tc">
 
-            <TextView
-                android:id="@+id/total_transactions_txt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginLeft="23dp"
-                android:layout_marginTop="37dp"
-                android:elevation="40dp"
-                android:fontFamily="@font/josefinsansregular"
-                android:text="@string/total_transactions_textview"
-                android:textColor="@android:color/black"
-                android:textSize="14dp"
-                tools:ignore="TextSizeCheck" />
+                <TextView
+                    android:id="@+id/totaltransactionsnumber_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="10dp"
+                    android:elevation="40dp"
+                    android:fontFamily="@font/josefinsansregular"
+                    android:text="1000"
+                    android:textColor="@android:color/black"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:id="@+id/totaltransaction_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="10dp"
+                    android:elevation="40dp"
+                    android:fontFamily="@font/josefinsansregular"
+                    android:text="Total transactions"
+                    android:textColor="@android:color/black"
+                    android:textSize="14dp" />
 
 
-        </RelativeLayout>
+            </RelativeLayout>
 
 
 
-    </androidx.cardview.widget.CardView>
-    <androidx.cardview.widget.CardView
-        android:id="@+id/pending_transaction_card"
-        android:layout_width="150dp"
-        android:layout_height="69dp"
-        app:cardElevation="28dp"
-        android:layout_marginTop="180dp"
-        android:layout_marginStart="220dp"
-        app:cardCornerRadius="15dp"
-        android:background="@android:color/transparent">
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:id="@+id/pendingtransactioncard"
+            android:layout_width="150dp"
+            android:layout_height="69dp"
+            app:cardElevation="28dp"
+            android:layout_toRightOf="@id/totaltransactioncard"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="180dp"
+            app:cardCornerRadius="15dp"
+            android:background="@android:color/transparent">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="95dp"
-            android:background="@drawable/tc">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="95dp"
+                android:background="@drawable/tc">
 
-            <TextView
-                android:id="@+id/pending_transactions"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginLeft="60dp"
-                android:layout_marginTop="10dp"
-                android:elevation="40dp"
-                android:fontFamily="@font/josefinsansregular"
-                android:text="200"
-                android:textColor="@android:color/black"
-                android:textSize="20dp" />
+                <TextView
+                    android:id="@+id/pendingtransactionsnumber_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="10dp"
+                    android:elevation="40dp"
+                    android:fontFamily="@font/josefinsansregular"
+                    android:text="200"
+                    android:textColor="@android:color/black"
+                    android:textSize="20dp" />
 
-            <TextView
-                android:id="@+id/pending_transactions_txt"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="37dp"
-                android:elevation="40dp"
-                android:fontFamily="@font/josefinsansregular"
-                android:text="@string/pending_transactions_textview"
-                android:textColor="@android:color/black"
-                android:textSize="14dp"
-                tools:ignore="TextSizeCheck" />
+                <TextView
+                    android:id="@+id/pendingtransaction_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="37dp"
+                    android:elevation="40dp"
+                    android:fontFamily="@font/josefinsansregular"
+                    android:text="Pending transactions"
+                    android:textColor="@android:color/black"
+                    android:textSize="14dp" />
 
 
-        </RelativeLayout>
+            </RelativeLayout>
 
 
 
-    </androidx.cardview.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/missing_transactions_card"
-        android:layout_width="150dp"
-        android:layout_height="69dp"
-        app:cardElevation="28dp"
-        android:layout_marginTop="260dp"
-        android:layout_marginStart="220dp"
-        app:cardCornerRadius="15dp"
-        android:background="@android:color/transparent">
+        <androidx.cardview.widget.CardView
+            android:id="@+id/transactioncard"
+            android:layout_width="150dp"
+            android:layout_height="69dp"
+            app:cardElevation="28dp"
+            android:layout_toRightOf="@id/failedtransactioncard"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="257dp"
+            app:cardCornerRadius="15dp"
+            android:background="@android:color/transparent">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="95dp"
-            android:background="@drawable/tc">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="95dp"
+                android:background="@drawable/tc">
 
-            <TextView
-                android:id="@+id/missing_transactions"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginLeft="57dp"
-                android:layout_marginTop="10dp"
-                android:elevation="40dp"
-                android:fontFamily="@font/josefinsansregular"
-                android:text="100"
-                android:textColor="@android:color/black"
-                android:textSize="20dp" />
+                <TextView
+                    android:id="@+id/missingtransactionsnumber_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="10dp"
+                    android:elevation="40dp"
+                    android:fontFamily="@font/josefinsansregular"
+                    android:text="100"
+                    android:textColor="@android:color/black"
+                    android:textSize="20dp" />
 
-            <TextView
-                android:id="@+id/missing_transactions_txt"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="34dp"
-                android:elevation="40dp"
-                android:fontFamily="@font/josefinsansregular"
-                android:text="Missing transactions"
-                android:textColor="@android:color/black"
-                android:textSize="14dp"
-                tools:ignore="TextSizeCheck" />
+                <TextView
+                    android:id="@+id/missingtransaction_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="35dp"
+                    android:elevation="40dp"
+                    android:fontFamily="@font/josefinsansregular"
+                    android:text="Missing transactions"
+                    android:textColor="@android:color/black"
+                    android:textSize="14dp" />
 
 
-        </RelativeLayout>
+            </RelativeLayout>
 
 
 
-    </androidx.cardview.widget.CardView>
-    <androidx.cardview.widget.CardView
-        android:id="@+id/failed_transactions_card"
-        android:layout_width="150dp"
-        android:layout_height="69dp"
-        app:cardElevation="28dp"
-        android:layout_marginTop="260dp"
-        android:layout_marginStart="50dp"
-        app:cardCornerRadius="15dp"
-        android:background="@android:color/transparent">
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:id="@+id/failedtransactioncard"
+            android:layout_width="150dp"
+            android:layout_height="69dp"
+            app:cardElevation="28dp"
+            android:layout_below="@id/totaltransactioncard"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="30dp"
+            app:cardCornerRadius="15dp"
+            android:background="@android:color/transparent">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="95dp"
-            android:background="@drawable/tc">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="95dp"
+                android:background="@drawable/tc">
 
-            <TextView
-                android:id="@+id/failed_transactions"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginLeft="56dp"
-                android:layout_marginTop="6dp"
-                android:elevation="40dp"
-                android:fontFamily="@font/josefinsansregular"
-                android:text="400"
-                android:textColor="@android:color/black"
-                android:textSize="20dp" />
+                <TextView
+                    android:id="@+id/failestransactionsnumber_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="10dp"
+                    android:elevation="40dp"
+                    android:fontFamily="@font/josefinsansregular"
+                    android:text="400"
+                    android:textColor="@android:color/black"
+                    android:textSize="20dp" />
 
-            <TextView
-                android:id="@+id/failed_transactions_txt"
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="33dp"
-                android:elevation="40dp"
-                android:fontFamily="@font/josefinsansregular"
-                android:text="Failed transactions"
-                android:textColor="@android:color/black"
-                android:textSize="14dp"
-                tools:ignore="TextSizeCheck" />
+                <TextView
+                    android:id="@+id/failestransaction_txt"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="35dp"
+                    android:elevation="40dp"
+                    android:fontFamily="@font/josefinsansregular"
+                    android:text="Failed transactions"
+                    android:textColor="@android:color/black"
+                    android:textSize="14dp" />
 
 
-        </RelativeLayout>
+            </RelativeLayout>
 
 
 
-    </androidx.cardview.widget.CardView>
+        </androidx.cardview.widget.CardView>
+
+
 
 
     <TextView
-        android:id="@+id/recent_transactions"
+        android:id="@+id/recent_tran"
         android:layout_width="146dp"
         android:layout_height="18dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="47dp"
+        android:layout_marginLeft="20dp"
         android:layout_marginTop="350dp"
         android:fontFamily="@font/josefinsansregular"
         android:gravity="top"
-        android:text="@string/recent_transactions_textview" />
+
+        android:text="Recent Transactions" />
 
     <TextView
         android:id="@+id/view_more"
@@ -303,11 +287,11 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="305dp"
-        android:layout_marginTop="351dp"
+        android:layout_marginLeft="279dp"
+        android:layout_marginTop="354dp"
         android:fontFamily="@font/josefinsansregular"
         android:gravity="top"
-        android:text="@string/view_more_textview"
+        android:text="View more"
         android:textColor="#6C2671"
         android:textSize="12sp" />
 
@@ -315,7 +299,7 @@
         android:layout_width="295dp"
         android:layout_height="304dp"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="66dp"
+        android:layout_marginStart="30dp"
         android:layout_alignParentTop="true"
         android:layout_marginTop="382dp"
         app:cardElevation="30dp"
@@ -326,7 +310,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/tc">
             <View
-                android:id="@+id/transactions_rectangle"
+                android:id="@+id/rectangle_7"
                 android:layout_width="295dp"
                 android:layout_height="304dp"
                 android:layout_alignParentLeft="true"
@@ -335,16 +319,59 @@
                 android:layout_marginTop="462dp"
                 android:elevation="4dp"
                 />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/phonenumbertxt"
+                android:text="Phonenumber"
+                android:fontFamily="@font/josefinsansregular"
+                android:textSize="11.5sp"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="10dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/reference_id_txt"
+                android:text="Reference Id"
+                android:fontFamily="@font/josefinsansregular"
+                android:textSize="11.5sp"
+                android:layout_marginStart="105dp"
+                android:layout_marginTop="10dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/status_txt"
+                android:text="Status"
+                android:fontFamily="@font/josefinsansregular"
+                android:textSize="11.5sp"
+                android:layout_marginStart="185dp"
+                android:layout_marginTop="10dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/time_txt"
+                android:text="Time"
+                android:fontFamily="@font/josefinsansregular"
+                android:textSize="11.5sp"
+                android:layout_marginStart="232dp"
+                android:layout_marginTop="10dp"/>
+
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:layout_centerInParent="true">
                 <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                    android:id="@+id/recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="40dp"
+                    tools:listitem="@layout/itemmlayout" />
             </LinearLayout>
-
 
 
         </RelativeLayout>

@@ -13,8 +13,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.monitoringtendepay.R
-import com.monitoringtendepay.presentation.adapters.UssdSessionsAdapter
-import com.monitoringtendepay.presentation.viewmodels.AllUssdSessionsViewModel
+import com.monitoringtendepay.presentation.adapters.PaymentsAdapter
+import com.monitoringtendepay.presentation.viewmodels.AllPaymentsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -22,9 +22,9 @@ import kotlinx.coroutines.flow.onEach
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    private val viewModel: AllUssdSessionsViewModel by viewModels()
+    private val viewModel: AllPaymentsViewModel by viewModels()
     private lateinit var recyclerView: RecyclerView
-    private lateinit var ussdSessionAdapter: UssdSessionsAdapter
+    private lateinit var paymentsAdapter: PaymentsAdapter
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,15 +39,15 @@ class MainActivity : AppCompatActivity() {
 
         recyclerView = findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
-        ussdSessionAdapter = UssdSessionsAdapter(emptyList())
-        recyclerView.adapter = ussdSessionAdapter
+        paymentsAdapter = PaymentsAdapter(emptyList())
+        recyclerView.adapter = paymentsAdapter
 
         observePayments()
-        viewModel.fetchAllUssdSessions("fetchSessionMonitoring")
+        viewModel.fetchAllPayments("fetchAllPayments")
     }
 
     private fun observePayments() {
-        viewModel.ussdSessionsState.onEach { state ->
+        viewModel.paymentState.onEach { state ->
             when {
                 state.isLoading -> {
                     Log.d("MainActivity", "Loading...")
@@ -57,9 +57,9 @@ class MainActivity : AppCompatActivity() {
                     Log.d("MainActivity", "Error: ${state.error}")
                     Toast.makeText(this, state.error, Toast.LENGTH_SHORT).show()
                 }
-                state.ussdSessions.isNotEmpty() -> {
-                    Log.d("MainActivity", "Success: ${state.ussdSessions}")
-                    ussdSessionAdapter.updateData(state.ussdSessions)
+                state.payments.isNotEmpty() -> {
+                    Log.d("MainActivity", "Success: ${state.payments}")
+                    paymentsAdapter.updateData(state.payments)
                     Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show()
                 }
             }

@@ -8,4 +8,8 @@
     <string name="welcoming_textview">Welcome Ian!</string>
     <string name="recent_transactions_textview">Recent Transactions</string>
     <string name="view_more_textview">View more</string>
+    <string name="success">success</string>
+    <string name="_00_00">00:00</string>
+    <string name="sqc45756u">sqc45756u</string>
+    <string name="_07">07*******</string>
 </resources>

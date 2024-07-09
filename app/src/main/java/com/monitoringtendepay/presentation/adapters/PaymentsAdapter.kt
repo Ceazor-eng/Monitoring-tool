@@ -29,17 +29,14 @@ class PaymentsAdapter(private var payments: List<AllPayments>) : RecyclerView.Ad
     }
 
     class PaymentViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val serviceCodeTextView: TextView = itemView.findViewById(R.id.serviceCodeTextView)
+
         private val initiatorPhoneTextView: TextView = itemView.findViewById(R.id.initiatorPhoneTextView)
-        private val amountTextView: TextView = itemView.findViewById(R.id.amountTextView)
         private val mpesaRefSessionIdTextView: TextView = itemView.findViewById(R.id.mpesaRefSessionIdTextView)
         private val paymentStatusTextView: TextView = itemView.findViewById(R.id.paymentStatusTextView)
         private val dateTimeTextView: TextView = itemView.findViewById(R.id.dateTimeTextView)
 
         fun bind(payment: AllPayments) {
-            serviceCodeTextView.text = "Service Code: ${payment.serviceCode}"
             initiatorPhoneTextView.text = "Initiator Phone: ${payment.initiatorPhone}"
-            amountTextView.text = "Amount: ${payment.amount}"
             mpesaRefSessionIdTextView.text = "Mpesa Ref Session Id: ${payment.mpesaRef}"
             paymentStatusTextView.text = "Payment Status: ${payment.paymentStatus}"
             dateTimeTextView.text = "Date and Time: ${payment.transactionDate}"
