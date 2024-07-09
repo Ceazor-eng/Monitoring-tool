@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -9,7 +10,7 @@
 
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/greetingcard"
+        android:id="@+id/greetings_card"
         android:layout_width="wrap_content"
         android:layout_height="90dp"
         app:cardElevation="58dp"
@@ -29,7 +30,7 @@
                 android:elevation="40dp" />
 
             <View
-                android:id="@+id/vector"
+                android:id="@+id/notification_bell"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_alignParentEnd="true"
@@ -46,9 +47,9 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginLeft="32dp"
                 android:fontFamily="@font/josefinsansregular"
-                android:textSize="18p"
+                android:textSize="18sp"
                 android:layout_marginTop="33dp"
-                android:text="Welcome Ian!"
+                android:text="@string/welcoming_textview"
                 android:textColor="@android:color/white"
                 android:elevation="40dp" />
         </RelativeLayout>
@@ -65,12 +66,12 @@
             android:paddingTop="10dp"
             android:paddingStart="15dp"
             android:fontFamily="@font/josefinsansregular"
-            android:text="Search Transaction"
+            android:text="@string/search_transaction_textview"
             android:textColor="#A48989"
             android:background="@drawable/rectangle_2" />
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/transactioncard"
+        android:id="@+id/total_transaction_card"
         android:layout_width="150dp"
         android:layout_height="69dp"
         app:cardElevation="28dp"
@@ -85,7 +86,7 @@
             android:background="@drawable/tc">
 
             <TextView
-                android:id="@+id/welcome_ian"
+                android:id="@+id/total_transactions"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
@@ -99,7 +100,7 @@
                 android:textSize="20dp" />
 
             <TextView
-                android:id="@+id/welcome_ian"
+                android:id="@+id/total_transactions_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
@@ -108,9 +109,10 @@
                 android:layout_marginTop="37dp"
                 android:elevation="40dp"
                 android:fontFamily="@font/josefinsansregular"
-                android:text="Total transactions"
+                android:text="@string/total_transactions_textview"
                 android:textColor="@android:color/black"
-                android:textSize="14dp" />
+                android:textSize="14dp"
+                tools:ignore="TextSizeCheck" />
 
 
         </RelativeLayout>
@@ -119,7 +121,7 @@
 
     </androidx.cardview.widget.CardView>
     <androidx.cardview.widget.CardView
-        android:id="@+id/transactioncard"
+        android:id="@+id/pending_transaction_card"
         android:layout_width="150dp"
         android:layout_height="69dp"
         app:cardElevation="28dp"
@@ -134,7 +136,7 @@
             android:background="@drawable/tc">
 
             <TextView
-                android:id="@+id/welcome_ian"
+                android:id="@+id/pending_transactions"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
@@ -148,7 +150,7 @@
                 android:textSize="20dp" />
 
             <TextView
-                android:id="@+id/welcome_ian"
+                android:id="@+id/pending_transactions_txt"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
@@ -157,9 +159,10 @@
                 android:layout_marginTop="37dp"
                 android:elevation="40dp"
                 android:fontFamily="@font/josefinsansregular"
-                android:text="Pending transactions"
+                android:text="@string/pending_transactions_textview"
                 android:textColor="@android:color/black"
-                android:textSize="14dp" />
+                android:textSize="14dp"
+                tools:ignore="TextSizeCheck" />
 
 
         </RelativeLayout>
@@ -169,7 +172,7 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/transactioncard"
+        android:id="@+id/missing_transactions_card"
         android:layout_width="150dp"
         android:layout_height="69dp"
         app:cardElevation="28dp"
@@ -184,7 +187,7 @@
             android:background="@drawable/tc">
 
             <TextView
-                android:id="@+id/welcome_ian"
+                android:id="@+id/missing_transactions"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
@@ -198,7 +201,7 @@
                 android:textSize="20dp" />
 
             <TextView
-                android:id="@+id/welcome_ian"
+                android:id="@+id/missing_transactions_txt"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
@@ -209,7 +212,8 @@
                 android:fontFamily="@font/josefinsansregular"
                 android:text="Missing transactions"
                 android:textColor="@android:color/black"
-                android:textSize="14dp" />
+                android:textSize="14dp"
+                tools:ignore="TextSizeCheck" />
 
 
         </RelativeLayout>
@@ -218,7 +222,7 @@
 
     </androidx.cardview.widget.CardView>
     <androidx.cardview.widget.CardView
-        android:id="@+id/transactioncard"
+        android:id="@+id/failed_transactions_card"
         android:layout_width="150dp"
         android:layout_height="69dp"
         app:cardElevation="28dp"
@@ -233,7 +237,7 @@
             android:background="@drawable/tc">
 
             <TextView
-                android:id="@+id/welcome_ian"
+                android:id="@+id/failed_transactions"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
@@ -247,7 +251,7 @@
                 android:textSize="20dp" />
 
             <TextView
-                android:id="@+id/welcome_ian"
+                android:id="@+id/failed_transactions_txt"
                 android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
@@ -258,7 +262,8 @@
                 android:fontFamily="@font/josefinsansregular"
                 android:text="Failed transactions"
                 android:textColor="@android:color/black"
-                android:textSize="14dp" />
+                android:textSize="14dp"
+                tools:ignore="TextSizeCheck" />
 
 
         </RelativeLayout>
@@ -269,7 +274,7 @@
 
 
     <TextView
-        android:id="@+id/recent_tran"
+        android:id="@+id/recent_transactions"
         android:layout_width="146dp"
         android:layout_height="18dp"
         android:layout_alignParentLeft="true"
@@ -278,8 +283,7 @@
         android:layout_marginTop="350dp"
         android:fontFamily="@font/josefinsansregular"
         android:gravity="top"
-
-        android:text="Recent Transactions" />
+        android:text="@string/recent_transactions_textview" />
 
     <TextView
         android:id="@+id/view_more"
@@ -291,7 +295,7 @@
         android:layout_marginTop="351dp"
         android:fontFamily="@font/josefinsansregular"
         android:gravity="top"
-        android:text="View more"
+        android:text="@string/view_more_textview"
         android:textColor="#6C2671"
         android:textSize="12sp" />
 
@@ -310,7 +314,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/tc">
             <View
-                android:id="@+id/rectangle_7"
+                android:id="@+id/transactions_rectangle"
                 android:layout_width="295dp"
                 android:layout_height="304dp"
                 android:layout_alignParentLeft="true"
