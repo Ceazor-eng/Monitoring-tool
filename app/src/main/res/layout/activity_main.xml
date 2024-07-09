@@ -1,12 +1,344 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main"
+    android:background="#FFFF"
     android:orientation="vertical">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-</LinearLayout>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/greetingcard"
+        android:layout_width="wrap_content"
+        android:layout_height="90dp"
+        app:cardElevation="58dp"
+        android:padding="10dp"
+        android:background="@android:color/transparent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <View
+                android:id="@+id/rectangle_1"
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:background="@drawable/bg1"
+                android:elevation="40dp" />
+
+            <View
+                android:id="@+id/vector"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="23dp"
+                android:layout_marginTop="34dp"
+                android:background="@drawable/notification"
+                android:elevation="40dp" />
+
+            <TextView
+                android:id="@+id/welcome_ian"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="32dp"
+                android:fontFamily="@font/josefinsansregular"
+                android:textSize="18p"
+                android:layout_marginTop="33dp"
+                android:text="Welcome Ian!"
+                android:textColor="@android:color/white"
+                android:elevation="40dp" />
+        </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
+
+
+        <TextView
+            android:id="@+id/rectangle_2"
+            android:layout_width="292dp"
+            android:layout_height="42dp"
+            android:layout_marginLeft="56dp"
+            android:layout_marginTop="114dp"
+            android:paddingTop="10dp"
+            android:paddingStart="15dp"
+            android:fontFamily="@font/josefinsansregular"
+            android:text="Search Transaction"
+            android:textColor="#A48989"
+            android:background="@drawable/rectangle_2" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/transactioncard"
+        android:layout_width="150dp"
+        android:layout_height="69dp"
+        app:cardElevation="28dp"
+        android:layout_marginTop="180dp"
+        android:layout_marginStart="50dp"
+        app:cardCornerRadius="15dp"
+        android:background="@android:color/transparent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/tc">
+
+            <TextView
+                android:id="@+id/welcome_ian"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="53dp"
+                android:layout_marginTop="11dp"
+                android:elevation="40dp"
+                android:fontFamily="@font/josefinsansregular"
+                android:text="1000"
+                android:textColor="@android:color/black"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/welcome_ian"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="23dp"
+                android:layout_marginTop="37dp"
+                android:elevation="40dp"
+                android:fontFamily="@font/josefinsansregular"
+                android:text="Total transactions"
+                android:textColor="@android:color/black"
+                android:textSize="14dp" />
+
+
+        </RelativeLayout>
+
+
+
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/transactioncard"
+        android:layout_width="150dp"
+        android:layout_height="69dp"
+        app:cardElevation="28dp"
+        android:layout_marginTop="180dp"
+        android:layout_marginStart="220dp"
+        app:cardCornerRadius="15dp"
+        android:background="@android:color/transparent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="95dp"
+            android:background="@drawable/tc">
+
+            <TextView
+                android:id="@+id/welcome_ian"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="60dp"
+                android:layout_marginTop="10dp"
+                android:elevation="40dp"
+                android:fontFamily="@font/josefinsansregular"
+                android:text="200"
+                android:textColor="@android:color/black"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/welcome_ian"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="37dp"
+                android:elevation="40dp"
+                android:fontFamily="@font/josefinsansregular"
+                android:text="Pending transactions"
+                android:textColor="@android:color/black"
+                android:textSize="14dp" />
+
+
+        </RelativeLayout>
+
+
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/transactioncard"
+        android:layout_width="150dp"
+        android:layout_height="69dp"
+        app:cardElevation="28dp"
+        android:layout_marginTop="260dp"
+        android:layout_marginStart="220dp"
+        app:cardCornerRadius="15dp"
+        android:background="@android:color/transparent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="95dp"
+            android:background="@drawable/tc">
+
+            <TextView
+                android:id="@+id/welcome_ian"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="57dp"
+                android:layout_marginTop="10dp"
+                android:elevation="40dp"
+                android:fontFamily="@font/josefinsansregular"
+                android:text="100"
+                android:textColor="@android:color/black"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/welcome_ian"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="34dp"
+                android:elevation="40dp"
+                android:fontFamily="@font/josefinsansregular"
+                android:text="Missing transactions"
+                android:textColor="@android:color/black"
+                android:textSize="14dp" />
+
+
+        </RelativeLayout>
+
+
+
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/transactioncard"
+        android:layout_width="150dp"
+        android:layout_height="69dp"
+        app:cardElevation="28dp"
+        android:layout_marginTop="260dp"
+        android:layout_marginStart="50dp"
+        app:cardCornerRadius="15dp"
+        android:background="@android:color/transparent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="95dp"
+            android:background="@drawable/tc">
+
+            <TextView
+                android:id="@+id/welcome_ian"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="56dp"
+                android:layout_marginTop="6dp"
+                android:elevation="40dp"
+                android:fontFamily="@font/josefinsansregular"
+                android:text="400"
+                android:textColor="@android:color/black"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/welcome_ian"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="33dp"
+                android:elevation="40dp"
+                android:fontFamily="@font/josefinsansregular"
+                android:text="Failed transactions"
+                android:textColor="@android:color/black"
+                android:textSize="14dp" />
+
+
+        </RelativeLayout>
+
+
+
+    </androidx.cardview.widget.CardView>
+
+
+    <TextView
+        android:id="@+id/recent_tran"
+        android:layout_width="146dp"
+        android:layout_height="18dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="47dp"
+        android:layout_marginTop="350dp"
+        android:fontFamily="@font/josefinsansregular"
+        android:gravity="top"
+
+        android:text="Recent Transactions" />
+
+    <TextView
+        android:id="@+id/view_more"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="305dp"
+        android:layout_marginTop="351dp"
+        android:fontFamily="@font/josefinsansregular"
+        android:gravity="top"
+        android:text="View more"
+        android:textColor="#6C2671"
+        android:textSize="12sp" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="295dp"
+        android:layout_height="304dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="66dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="382dp"
+        app:cardElevation="30dp"
+        app:cardCornerRadius="10dp">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/tc">
+            <View
+                android:id="@+id/rectangle_7"
+                android:layout_width="295dp"
+                android:layout_height="304dp"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="66dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="462dp"
+                android:elevation="4dp"
+                />
+
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</RelativeLayout>
