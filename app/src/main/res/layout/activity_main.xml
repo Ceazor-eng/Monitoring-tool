@@ -55,7 +55,18 @@
         </RelativeLayout>
 
 </androidx.cardview.widget.CardView>
-
+    <!--<Button
+            android:id="@+id/signup_button"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/login_button"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:background="@color/purple"
+            android:text="@string/register"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+    -->
 
         <TextView
             android:id="@+id/rectangle_2"
@@ -65,6 +76,7 @@
             android:layout_marginTop="114dp"
             android:paddingTop="10dp"
             android:paddingStart="15dp"
+            android:layout_centerHorizontal="true"
             android:fontFamily="@font/josefinsansregular"
             android:text="@string/search_transaction_textview"
             android:textColor="#A48989"
@@ -323,6 +335,16 @@
                 android:layout_marginTop="462dp"
                 android:elevation="4dp"
                 />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+            </LinearLayout>
+
 
 
         </RelativeLayout>
