@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">MonitoringTendePay</string>
+    <string name="welcome_ian">Welcome ian</string>
+    <string name="search">Search</string>
+    <string name="pending_transactions_textview">Pending transactions</string>
+    <string name="total_transactions_textview">Total transactions</string>
+    <string name="search_transaction_textview">Search Transaction</string>
+    <string name="welcoming_textview">Welcome Ian!</string>
+    <string name="recent_transactions_textview">Recent Transactions</string>
+    <string name="view_more_textview">View more</string>
 </resources>
