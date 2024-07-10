@@ -36,10 +36,10 @@ class PaymentsAdapter(private var payments: List<AllPayments>) : RecyclerView.Ad
         private val dateTimeTextView: TextView = itemView.findViewById(R.id.dateTimeTextView)
 
         fun bind(payment: AllPayments) {
-            initiatorPhoneTextView.text = "Initiator Phone: ${payment.initiatorPhone}"
-            mpesaRefSessionIdTextView.text = "Mpesa Ref Session Id: ${payment.mpesaRef}"
-            paymentStatusTextView.text = "Payment Status: ${payment.paymentStatus}"
-            dateTimeTextView.text = "Date and Time: ${payment.transactionDate}"
+            initiatorPhoneTextView.text = payment.initiatorPhone
+            mpesaRefSessionIdTextView.text = payment.mpesaRef
+            paymentStatusTextView.text = payment.paymentStatus
+            dateTimeTextView.text = payment.transactionDate
         }
     }
 }

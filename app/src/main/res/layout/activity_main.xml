@@ -343,20 +343,21 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/time_txt"
+                android:text="Time"
+                android:layout_marginStart="232dp"
+                android:fontFamily="@font/josefinsansregular"
+                android:textSize="11.5sp"
+
+                android:layout_marginTop="10dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:id="@+id/status_txt"
                 android:text="Status"
                 android:fontFamily="@font/josefinsansregular"
                 android:textSize="11.5sp"
                 android:layout_marginStart="185dp"
-                android:layout_marginTop="10dp"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/time_txt"
-                android:text="Time"
-                android:fontFamily="@font/josefinsansregular"
-                android:textSize="11.5sp"
-                android:layout_marginStart="232dp"
                 android:layout_marginTop="10dp"/>
 
 

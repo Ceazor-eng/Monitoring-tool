@@ -2,50 +2,45 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
-    android:padding="16dp">
+    android:padding="10dp">
 
-<TextView
-    android:id="@+id/initiatorPhoneTextView"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="@string/_07"
-    android:textSize="11sp"
-    android:fontFamily="@font/josefinsansregular"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/initiatorPhoneTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Phone"
+        android:textSize="11sp"
+        android:fontFamily="@font/josefinsansregular" />
 
-<TextView
-    android:id="@+id/mpesaRefSessionIdTextView"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="@string/sqc45756u"
-    android:layout_marginStart="10dp"
-    android:textSize="11sp"
-    android:fontFamily="@font/josefinsansregular"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/mpesaRefSessionIdTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Reference"
+        android:textSize="11sp"
+        android:layout_marginStart="10dp"
+        android:fontFamily="@font/josefinsansregular" />
 
-<TextView
-    android:id="@+id/dateTimeTextView"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="@string/_00_00"
-    android:textSize="11sp"
-    android:layout_marginStart="10dp"
-    android:fontFamily="@font/josefinsansregular"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/paymentStatusTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Status"
+        android:textSize="11sp"
+        android:layout_marginStart="10dp"
+        android:fontFamily="@font/josefinsansregular" />
 
-<TextView
-    android:id="@+id/paymentStatusTextView"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="@string/success"
-    android:textSize="11sp"
-    android:layout_marginStart="10dp"
-    android:fontFamily="@font/josefinsansregular"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/dateTimeTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Time"
+        android:textSize="11sp"
+        android:layout_marginStart="10dp"
+        android:fontFamily="@font/josefinsansregular" />
 </LinearLayout>
