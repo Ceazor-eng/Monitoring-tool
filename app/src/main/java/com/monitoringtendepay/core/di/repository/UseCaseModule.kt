@@ -1,11 +1,15 @@
 package com.monitoringtendepay.core.di.repository
 
 import com.monitoringtendepay.domain.repository.AllPaymentsRepository
+import com.monitoringtendepay.domain.repository.CompleteMonthlyTransactionsRepository
 import com.monitoringtendepay.domain.repository.FilterPaymentsRepository
+import com.monitoringtendepay.domain.repository.PendingMonthlyTransactionsRepository
 import com.monitoringtendepay.domain.repository.UssdSessionsRepository
 import com.monitoringtendepay.domain.usecase.GetAllPaymentsUseCase
 import com.monitoringtendepay.domain.usecase.GetAllUssdSessionsUseCase
+import com.monitoringtendepay.domain.usecase.GetCompleteMonthlyTransactionsUseCase
 import com.monitoringtendepay.domain.usecase.GetFilteredPaymentsUseCase
+import com.monitoringtendepay.domain.usecase.GetPendingMonthlyTransactionsUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -32,5 +36,17 @@ object UseCaseModule {
     @Provides
     fun provideGetFilteredPaymentsUseCase(repository: FilterPaymentsRepository): GetFilteredPaymentsUseCase {
         return GetFilteredPaymentsUseCase(repository)
+    }
+
+    @Singleton
+    @Provides
+    fun provideGetPendingMonthlyTransactionsUseCase(repository: PendingMonthlyTransactionsRepository): GetPendingMonthlyTransactionsUseCase {
+        return GetPendingMonthlyTransactionsUseCase(repository)
+    }
+
+    @Singleton
+    @Provides
+    fun provideGetCompleteMonthlyTransactionsUseCase(repository: CompleteMonthlyTransactionsRepository): GetCompleteMonthlyTransactionsUseCase {
+        return GetCompleteMonthlyTransactionsUseCase(repository)
     }
 }

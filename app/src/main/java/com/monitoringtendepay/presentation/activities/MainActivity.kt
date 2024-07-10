@@ -27,6 +27,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var paymentsAdapter: PaymentsAdapter
     private lateinit var completeMonthlyTransactions: TextView
+    private lateinit var pendingMonthlyTransactions: TextView
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,11 +46,34 @@ class MainActivity : AppCompatActivity() {
         recyclerView.adapter = paymentsAdapter
 
         completeMonthlyTransactions = findViewById(R.id.total_transactions_number_txt)
+        pendingMonthlyTransactions = findViewById(R.id.pending_transactions_number_txt)
 
         observePayments()
         observeCompleteTransactions()
+        observePendingTransactions()
         viewModel.fetchAllPayments("fetchAllPayments")
         viewModel.fetchCompleteMonthlyTransactions("fetchTotalCompletedPayments")
+        viewModel.fetchPendingMonthlyTransactions("fetchTotalPendingPayments")
+    }
+
+    private fun observePendingTransactions() {
+        viewModel.pendingTransactionsState.onEach { state ->
+            when {
+                state.isLoading -> {
+                    Log.d("MainActivity", "Loading...")
+                    // Toast.makeText(this, "Loading", Toast.LENGTH_SHORT).show()
+                }
+                state.error.isNotEmpty() -> {
+                    Log.d("MainActivity", "Error: ${state.error}")
+                    Toast.makeText(this, state.error, Toast.LENGTH_SHORT).show()
+                }
+                state.pendingTransactions != null -> {
+                    Log.d("MainActivity", "Success: ${state.pendingTransactions.pendingPayments}")
+                    pendingMonthlyTransactions.text = state.pendingTransactions.pendingPayments
+                    // Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }.launchIn(lifecycleScope)
     }
 
     private fun observePayments() {
@@ -77,7 +101,7 @@ class MainActivity : AppCompatActivity() {
             when {
                 state.isLoading -> {
                     Log.d("MainActivity", "Loading...")
-                    Toast.makeText(this, "Loading", Toast.LENGTH_SHORT).show()
+                    //   Toast.makeText(this, "Loading", Toast.LENGTH_SHORT).show()
                 }
                 state.error.isNotEmpty() -> {
                     Log.d("MainActivity", "Error: ${state.error}")
@@ -86,7 +110,7 @@ class MainActivity : AppCompatActivity() {
                 state.completeTransactions != null -> {
                     Log.d("MainActivity", "Success: ${state.completeTransactions.completePayments}")
                     completeMonthlyTransactions.text = state.completeTransactions.completePayments
-                    Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show()
+                    // Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show()
                 }
             }
         }.launchIn(lifecycleScope)
