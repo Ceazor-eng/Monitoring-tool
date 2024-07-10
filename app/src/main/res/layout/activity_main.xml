@@ -232,7 +232,7 @@
             android:background="@drawable/tc">
 
             <TextView
-                android:id="@+id/failestransactionsnumber_txt"
+                android:id="@+id/failed_Transactions_number_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
