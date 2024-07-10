@@ -5,8 +5,10 @@ import androidx.lifecycle.viewModelScope
 import com.monitoringtendepay.core.common.Resource
 import com.monitoringtendepay.domain.usecase.GetAllPaymentsUseCase
 import com.monitoringtendepay.domain.usecase.GetCompleteMonthlyTransactionsUseCase
+import com.monitoringtendepay.domain.usecase.GetPendingMonthlyTransactionsUseCase
 import com.monitoringtendepay.presentation.states.AllPaymentsState
 import com.monitoringtendepay.presentation.states.CompleteTransactionsState
+import com.monitoringtendepay.presentation.states.PendingTransactionsState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.channels.Channel
@@ -17,7 +19,8 @@ import kotlinx.coroutines.flow.receiveAsFlow
 @HiltViewModel
 class AllPaymentsViewModel @Inject constructor(
     private val getAllPaymentsUseCase: GetAllPaymentsUseCase,
-    private val getCompleteMonthlyTransactionsUseCase: GetCompleteMonthlyTransactionsUseCase
+    private val getCompleteMonthlyTransactionsUseCase: GetCompleteMonthlyTransactionsUseCase,
+    private val getPendingMonthlyTransactionsUseCase: GetPendingMonthlyTransactionsUseCase
 ) : ViewModel() {
 
     private val _allPaymentsState = Channel<AllPaymentsState>()
@@ -25,6 +28,9 @@ class AllPaymentsViewModel @Inject constructor(
 
     private val _completeTransactionsState = Channel<CompleteTransactionsState>()
     val completeTransactionsState = _completeTransactionsState.receiveAsFlow()
+
+    private val _pendingTransactionsState = Channel<PendingTransactionsState>()
+    val pendingTransactionsState = _pendingTransactionsState.receiveAsFlow()
 
     fun fetchAllPayments(action: String) {
         getAllPaymentsUseCase(action).onEach { result ->
@@ -58,6 +64,25 @@ class AllPaymentsViewModel @Inject constructor(
                 is Resource.Error -> {
                     _completeTransactionsState.send(
                         CompleteTransactionsState(error = result.message ?: "An unexpected error occurred")
+                    )
+                }
+            }
+        }.launchIn(viewModelScope)
+    }
+    fun fetchPendingMonthlyTransactions(action: String) {
+        getPendingMonthlyTransactionsUseCase(action).onEach { result ->
+            when (result) {
+                is Resource.Success -> {
+                    _pendingTransactionsState.send(
+                        PendingTransactionsState(pendingTransactions = result.data)
+                    )
+                }
+                is Resource.Loading -> {
+                    _pendingTransactionsState.send(PendingTransactionsState(isLoading = true))
+                }
+                is Resource.Error -> {
+                    _pendingTransactionsState.send(
+                        PendingTransactionsState(error = result.message ?: "An unexpected error occurred")
                     )
                 }
             }
