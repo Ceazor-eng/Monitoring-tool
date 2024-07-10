@@ -2,12 +2,14 @@ package com.monitoringtendepay.core.di.repository
 
 import com.monitoringtendepay.domain.repository.AllPaymentsRepository
 import com.monitoringtendepay.domain.repository.CompleteMonthlyTransactionsRepository
+import com.monitoringtendepay.domain.repository.FailedTransactionsRepository
 import com.monitoringtendepay.domain.repository.FilterPaymentsRepository
 import com.monitoringtendepay.domain.repository.PendingMonthlyTransactionsRepository
 import com.monitoringtendepay.domain.repository.UssdSessionsRepository
 import com.monitoringtendepay.domain.usecase.GetAllPaymentsUseCase
 import com.monitoringtendepay.domain.usecase.GetAllUssdSessionsUseCase
 import com.monitoringtendepay.domain.usecase.GetCompleteMonthlyTransactionsUseCase
+import com.monitoringtendepay.domain.usecase.GetFailedTransactionsUseCase
 import com.monitoringtendepay.domain.usecase.GetFilteredPaymentsUseCase
 import com.monitoringtendepay.domain.usecase.GetPendingMonthlyTransactionsUseCase
 import dagger.Module
@@ -48,5 +50,11 @@ object UseCaseModule {
     @Provides
     fun provideGetCompleteMonthlyTransactionsUseCase(repository: CompleteMonthlyTransactionsRepository): GetCompleteMonthlyTransactionsUseCase {
         return GetCompleteMonthlyTransactionsUseCase(repository)
+    }
+
+    @Singleton
+    @Provides
+    fun provideGetFailedMonthlyTransactionsUseCase(repository: FailedTransactionsRepository): GetFailedTransactionsUseCase {
+        return GetFailedTransactionsUseCase(repository)
     }
 }
