@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_centerInParent="true"
     android:id="@+id/main"
     android:background="#FFFF"
     android:orientation="vertical">
@@ -78,7 +79,7 @@
             android:layout_height="69dp"
             app:cardElevation="28dp"
             android:layout_marginTop="180dp"
-            android:layout_marginStart="30dp"
+            android:layout_marginStart="38dp"
             app:cardCornerRadius="15dp"
             android:background="@android:color/transparent">
 
@@ -223,7 +224,7 @@
             app:cardElevation="28dp"
             android:layout_below="@id/totaltransactioncard"
             android:layout_marginTop="10dp"
-            android:layout_marginStart="30dp"
+            android:layout_marginStart="38dp"
             app:cardCornerRadius="15dp"
             android:background="@android:color/transparent">
 
@@ -281,25 +282,13 @@
 
         android:text="Recent Transactions" />
 
-    <TextView
-        android:id="@+id/view_more"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="279dp"
-        android:layout_marginTop="354dp"
-        android:fontFamily="@font/josefinsansregular"
-        android:gravity="top"
-        android:text="View more"
-        android:textColor="#6C2671"
-        android:textSize="12sp" />
+
 
     <androidx.cardview.widget.CardView
         android:layout_width="295dp"
         android:layout_height="304dp"
         android:layout_alignParentLeft="true"
-        android:layout_marginStart="30dp"
+        android:layout_marginStart="40dp"
         android:layout_alignParentTop="true"
         android:layout_marginTop="382dp"
         app:cardElevation="30dp"
@@ -382,4 +371,28 @@
     </androidx.cardview.widget.CardView>
 
 
-</RelativeLayout>
+
+
+
+
+            <RelativeLayout
+           android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#FFFFFF"
+    android:layout_alignParentBottom="true">
+
+                <com.google.android.material.bottomnavigation.BottomNavigationView
+                    android:id="@+id/bottom_nav_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:layout_marginBottom="-58dp"
+                    app:menu="@menu/bottom_navigation_menu" />
+            </RelativeLayout>
+
+
+
+
+
+
+    </RelativeLayout>
