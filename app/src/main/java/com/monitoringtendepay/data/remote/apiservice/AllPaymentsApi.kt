@@ -1,6 +1,7 @@
 package com.monitoringtendepay.data.remote.apiservice
 
 import com.monitoringtendepay.data.remote.dto.filterpayments.FilteredPayments
+import com.monitoringtendepay.data.remote.dto.monthlytransactions.TotalMonthlyTransactionsDto
 import com.monitoringtendepay.data.remote.dto.payments.Paymentss
 import com.monitoringtendepay.data.remote.dto.ussd.FetchUssdSessions
 import com.monitoringtendepay.domain.models.PaymentsFilterParams
@@ -18,6 +19,9 @@ interface AllPaymentsApi {
         @Query("action") action: String,
         @Query("params") params: PaymentsFilterParams
     ): FilteredPayments
+
+    @GET("Tende_monitoring_tool-main/fetch_payments_monitoring_tool.php")
+    suspend fun getTotalMonthlyTransactions(@Query("action") action: String): TotalMonthlyTransactionsDto
 
     @GET("Tende_monitoring_tool-main/fetch_sessions_monitoring_tool.php")
     suspend fun getAllUssdSessions(@Query("action") action: String): FetchUssdSessions

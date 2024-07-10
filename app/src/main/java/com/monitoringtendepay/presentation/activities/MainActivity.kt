@@ -3,6 +3,7 @@ package com.monitoringtendepay.presentation.activities
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
@@ -25,6 +26,7 @@ class MainActivity : AppCompatActivity() {
     private val viewModel: AllPaymentsViewModel by viewModels()
     private lateinit var recyclerView: RecyclerView
     private lateinit var paymentsAdapter: PaymentsAdapter
+    private lateinit var completeMonthlyTransactions: TextView
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,8 +44,12 @@ class MainActivity : AppCompatActivity() {
         paymentsAdapter = PaymentsAdapter(emptyList())
         recyclerView.adapter = paymentsAdapter
 
+        completeMonthlyTransactions = findViewById(R.id.total_transactions_number_txt)
+
         observePayments()
+        observeCompleteTransactions()
         viewModel.fetchAllPayments("fetchAllPayments")
+        viewModel.fetchCompleteMonthlyTransactions("fetchTotalCompletedPayments")
     }
 
     private fun observePayments() {
@@ -60,6 +66,26 @@ class MainActivity : AppCompatActivity() {
                 state.payments.isNotEmpty() -> {
                     Log.d("MainActivity", "Success: ${state.payments}")
                     paymentsAdapter.updateData(state.payments)
+                    Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }.launchIn(lifecycleScope)
+    }
+
+    private fun observeCompleteTransactions() {
+        viewModel.completeTransactionsState.onEach { state ->
+            when {
+                state.isLoading -> {
+                    Log.d("MainActivity", "Loading...")
+                    Toast.makeText(this, "Loading", Toast.LENGTH_SHORT).show()
+                }
+                state.error.isNotEmpty() -> {
+                    Log.d("MainActivity", "Error: ${state.error}")
+                    Toast.makeText(this, state.error, Toast.LENGTH_SHORT).show()
+                }
+                state.completeTransactions != null -> {
+                    Log.d("MainActivity", "Success: ${state.completeTransactions.completePayments}")
+                    completeMonthlyTransactions.text = state.completeTransactions.completePayments
                     Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show()
                 }
             }
