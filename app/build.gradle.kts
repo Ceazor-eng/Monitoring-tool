@@ -59,6 +59,10 @@ dependencies {
     // viewModel
     implementation(libs.bundles.viewModel)
 
+    // Charts
+//    implementation ("com.github.PhilJay:MPAndroidChart:v3.1.0")
+    implementation("com.github.PhilJay:MPAndroidChart:v3.0.3")
+
     // Test dependencies
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

@@ -13,10 +13,21 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.github.mikephil.charting.charts.LineChart
+import com.github.mikephil.charting.components.AxisBase
+import com.github.mikephil.charting.components.XAxis
+import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.data.LineData
+import com.github.mikephil.charting.data.LineDataSet
+import com.github.mikephil.charting.formatter.IAxisValueFormatter
 import com.monitoringtendepay.R
+import com.monitoringtendepay.domain.models.AllPayments
 import com.monitoringtendepay.presentation.adapters.PaymentsAdapter
 import com.monitoringtendepay.presentation.viewmodels.AllPaymentsViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
@@ -30,6 +41,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var pendingMonthlyTransactions: TextView
     private lateinit var failedMonthlyTransactions: TextView
     private lateinit var missingPayments: TextView
+    private lateinit var lineChart: LineChart
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,6 +58,7 @@ class MainActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
         paymentsAdapter = PaymentsAdapter(emptyList())
         recyclerView.adapter = paymentsAdapter
+        lineChart = findViewById(R.id.barChart)
 
         completeMonthlyTransactions = findViewById(R.id.total_transactions_number_txt)
         pendingMonthlyTransactions = findViewById(R.id.pending_transactions_number_txt)
@@ -57,11 +70,76 @@ class MainActivity : AppCompatActivity() {
         observePendingTransactions()
         observeFailedTransactions()
         observeMissingPayments()
+        fetchDataAndPopulateChart()
+        setUpChart()
         viewModel.fetchAllPayments("fetchAllPayments")
         viewModel.fetchCompleteMonthlyTransactions("fetchTotalCompletedPayments")
         viewModel.fetchPendingMonthlyTransactions("fetchTotalPendingPayments")
         viewModel.fetchFailedMonthlyTransactions("fetchTotalFailedPayments")
         viewModel.fetchMissingPayments("fetchTotalMissingPayments")
+    }
+
+    private fun setUpChart() {
+        // Configure chart settings
+        lineChart.apply {
+            xAxis.position = XAxis.XAxisPosition.BOTTOM
+            xAxis.valueFormatter = object : IAxisValueFormatter {
+                private val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+
+                override fun getFormattedValue(value: Float, axis: AxisBase): String {
+                    val millis = value.toLong()
+                    return dateFormat.format(Date(millis))
+                }
+            }
+        }
+    }
+
+    private fun fetchDataAndPopulateChart() {
+        // Replace with actual API action as needed
+        val action = "fetchAllPayments"
+
+        viewModel.fetchAllPayments(action)
+
+        lifecycleScope.launchWhenStarted {
+            viewModel.paymentState.collect { state ->
+                when (state.isLoading) {
+                    true -> {
+                        // Handle loading state if needed
+                    }
+                    false -> {
+                        state.payments?.let { payments ->
+                            // Update chart with fetched data
+                            updateChartWithData(payments)
+                        }
+                        state.error?.let { errorMessage ->
+                            // Handle error state if needed
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private fun updateChartWithData(payments: List<AllPayments>?) {
+        payments?.let { data ->
+            val totalTransactions = data.size.toFloat()
+            val totalSuccessfulPayments = data.count { it.paymentStatus.toIntOrNull() == 1 }.toFloat()
+
+            val entries = listOf(
+                Entry(0f, totalSuccessfulPayments)
+            )
+            val dataSet = LineDataSet(entries, "Successful Payments")
+            dataSet.color = getColor(R.color.green)
+            dataSet.valueTextColor = getColor(R.color.black)
+
+            val lineData = LineData(dataSet)
+
+            lineChart.data = lineData
+
+            lineChart.invalidate()
+        } ?: run {
+            Log.d("MainActivity", "Payments data is null.")
+        }
     }
 
     private fun observeMissingPayments() {
