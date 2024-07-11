@@ -12,6 +12,7 @@
         android:layout_weight="1"
         android:text="Phone"
         android:textSize="11sp"
+        android:textColor="@color/black"
         android:fontFamily="@font/josefinsansregular" />
 
     <TextView
@@ -21,6 +22,7 @@
         android:layout_weight="1"
         android:text="Reference"
         android:textSize="11sp"
+        android:textColor="@color/black"
         android:layout_marginStart="10dp"
         android:fontFamily="@font/josefinsansregular" />
 
@@ -31,6 +33,7 @@
         android:layout_weight="1"
         android:text="Status"
         android:textSize="11sp"
+        android:textColor="@color/black"
         android:layout_marginStart="10dp"
         android:fontFamily="@font/josefinsansregular" />
 
@@ -41,6 +44,7 @@
         android:layout_weight="1"
         android:text="Time"
         android:textSize="11sp"
+        android:textColor="@color/black"
         android:layout_marginStart="10dp"
         android:fontFamily="@font/josefinsansregular" />
 </LinearLayout>
