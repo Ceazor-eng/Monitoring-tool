@@ -12,4 +12,8 @@
     <string name="_00_00">00:00</string>
     <string name="sqc45756u">sqc45756u</string>
     <string name="_07">07*******</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="reports">Reports</string>
+    <string name="users">Users</string>
+    <string name="profile">Profile</string>
 </resources>
