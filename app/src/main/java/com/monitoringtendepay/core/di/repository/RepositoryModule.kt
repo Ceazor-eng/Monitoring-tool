@@ -6,11 +6,13 @@ import com.monitoringtendepay.data.repository.AllUssdSessionsRepositoryImpl
 import com.monitoringtendepay.data.repository.CompleteMonthlyTransactionsImpl
 import com.monitoringtendepay.data.repository.FailedTransactionsRepositoryImpl
 import com.monitoringtendepay.data.repository.FilterPaymentsRepositoryImpl
+import com.monitoringtendepay.data.repository.MissingPaymentsRepositoryImpl
 import com.monitoringtendepay.data.repository.PendingMonthlyTransactionsRepositoryImpl
 import com.monitoringtendepay.domain.repository.AllPaymentsRepository
 import com.monitoringtendepay.domain.repository.CompleteMonthlyTransactionsRepository
 import com.monitoringtendepay.domain.repository.FailedTransactionsRepository
 import com.monitoringtendepay.domain.repository.FilterPaymentsRepository
+import com.monitoringtendepay.domain.repository.MissingPaymentsRepository
 import com.monitoringtendepay.domain.repository.PendingMonthlyTransactionsRepository
 import com.monitoringtendepay.domain.repository.UssdSessionsRepository
 import dagger.Module
@@ -57,5 +59,11 @@ object RepositoryModule {
     @Provides
     fun provideFailedTransactionsRepository(api: AllPaymentsApi): FailedTransactionsRepository {
         return FailedTransactionsRepositoryImpl(api)
+    }
+
+    @Singleton
+    @Provides
+    fun provideMissingPaymentsRepository(api: AllPaymentsApi): MissingPaymentsRepository {
+        return MissingPaymentsRepositoryImpl(api)
     }
 }

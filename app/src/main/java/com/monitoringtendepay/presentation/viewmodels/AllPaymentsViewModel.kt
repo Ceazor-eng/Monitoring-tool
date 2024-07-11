@@ -6,10 +6,12 @@ import com.monitoringtendepay.core.common.Resource
 import com.monitoringtendepay.domain.usecase.GetAllPaymentsUseCase
 import com.monitoringtendepay.domain.usecase.GetCompleteMonthlyTransactionsUseCase
 import com.monitoringtendepay.domain.usecase.GetFailedTransactionsUseCase
+import com.monitoringtendepay.domain.usecase.GetMissingPaymentsUseCase
 import com.monitoringtendepay.domain.usecase.GetPendingMonthlyTransactionsUseCase
 import com.monitoringtendepay.presentation.states.AllPaymentsState
 import com.monitoringtendepay.presentation.states.CompleteTransactionsState
 import com.monitoringtendepay.presentation.states.FailedTransactionState
+import com.monitoringtendepay.presentation.states.MissingPaymentsState
 import com.monitoringtendepay.presentation.states.PendingTransactionsState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -23,7 +25,8 @@ class AllPaymentsViewModel @Inject constructor(
     private val getAllPaymentsUseCase: GetAllPaymentsUseCase,
     private val getCompleteMonthlyTransactionsUseCase: GetCompleteMonthlyTransactionsUseCase,
     private val getPendingMonthlyTransactionsUseCase: GetPendingMonthlyTransactionsUseCase,
-    private val getFailedTransactionsUseCase: GetFailedTransactionsUseCase
+    private val getFailedTransactionsUseCase: GetFailedTransactionsUseCase,
+    private val getMissingPaymentsUseCase: GetMissingPaymentsUseCase
 ) : ViewModel() {
 
     private val _allPaymentsState = Channel<AllPaymentsState>()
@@ -37,6 +40,9 @@ class AllPaymentsViewModel @Inject constructor(
 
     private val _failedTransactionsState = Channel<FailedTransactionState>()
     val failedTransactionState = _failedTransactionsState.receiveAsFlow()
+
+    private val _missingPaymentsState = Channel<MissingPaymentsState>()
+    val missingPaymentsState = _missingPaymentsState.receiveAsFlow()
 
     fun fetchAllPayments(action: String) {
         getAllPaymentsUseCase(action).onEach { result ->
@@ -109,6 +115,26 @@ class AllPaymentsViewModel @Inject constructor(
                 is Resource.Error -> {
                     _failedTransactionsState.send(
                         FailedTransactionState(error = result.message ?: "An unexpected error occurred")
+                    )
+                }
+            }
+        }.launchIn(viewModelScope)
+    }
+
+    fun fetchMissingPayments(action: String) {
+        getMissingPaymentsUseCase(action).onEach { result ->
+            when (result) {
+                is Resource.Success -> {
+                    _missingPaymentsState.send(
+                        MissingPaymentsState(missingPayments = result.data)
+                    )
+                }
+                is Resource.Loading -> {
+                    _missingPaymentsState.send(MissingPaymentsState(isLoading = true))
+                }
+                is Resource.Error -> {
+                    _missingPaymentsState.send(
+                        MissingPaymentsState(error = result.message ?: "An unexpected error occurred")
                     )
                 }
             }

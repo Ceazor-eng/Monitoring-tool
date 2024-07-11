@@ -29,6 +29,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var completeMonthlyTransactions: TextView
     private lateinit var pendingMonthlyTransactions: TextView
     private lateinit var failedMonthlyTransactions: TextView
+    private lateinit var missingPayments: TextView
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,15 +50,38 @@ class MainActivity : AppCompatActivity() {
         completeMonthlyTransactions = findViewById(R.id.total_transactions_number_txt)
         pendingMonthlyTransactions = findViewById(R.id.pending_transactions_number_txt)
         failedMonthlyTransactions = findViewById(R.id.failed_Transactions_number_txt)
+        missingPayments = findViewById(R.id.missing_transactions_number_txt)
 
         observePayments()
         observeCompleteTransactions()
         observePendingTransactions()
         observeFailedTransactions()
+        observeMissingPayments()
         viewModel.fetchAllPayments("fetchAllPayments")
         viewModel.fetchCompleteMonthlyTransactions("fetchTotalCompletedPayments")
         viewModel.fetchPendingMonthlyTransactions("fetchTotalPendingPayments")
         viewModel.fetchFailedMonthlyTransactions("fetchTotalFailedPayments")
+        viewModel.fetchMissingPayments("fetchTotalMissingPayments")
+    }
+
+    private fun observeMissingPayments() {
+        viewModel.missingPaymentsState.onEach { state ->
+            when {
+                state.isLoading -> {
+                    Log.d("MainActivity", "Loading...")
+                    // Toast.makeText(this, "Loading", Toast.LENGTH_SHORT).show()
+                }
+                state.error.isNotEmpty() -> {
+                    Log.d("MainActivity", "Error: ${state.error}")
+                    Toast.makeText(this, state.error, Toast.LENGTH_SHORT).show()
+                }
+                state.missingPayments != null -> {
+                    Log.d("MainActivity", "Success: ${state.missingPayments.missingPayments}")
+                    missingPayments.text = state.missingPayments.missingPayments
+                    // Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }.launchIn(lifecycleScope)
     }
 
     private fun observeFailedTransactions() {

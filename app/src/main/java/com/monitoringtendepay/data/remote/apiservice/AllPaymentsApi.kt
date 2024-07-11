@@ -2,6 +2,7 @@ package com.monitoringtendepay.data.remote.apiservice
 
 import com.monitoringtendepay.data.remote.dto.filterpayments.FilteredPayments
 import com.monitoringtendepay.data.remote.dto.monthlytransactions.FailedMonthlyTransactionsDto
+import com.monitoringtendepay.data.remote.dto.monthlytransactions.MissingPaymentsDto
 import com.monitoringtendepay.data.remote.dto.monthlytransactions.PendingMonthlyTransactionsDto
 import com.monitoringtendepay.data.remote.dto.monthlytransactions.TotalMonthlyTransactionsDto
 import com.monitoringtendepay.data.remote.dto.payments.Paymentss
@@ -30,6 +31,9 @@ interface AllPaymentsApi {
 
     @GET("Tende_monitoring_tool-main/fetch_payments_monitoring_tool.php")
     suspend fun getFailedMonthlyTransactions(@Query("action") action: String): FailedMonthlyTransactionsDto
+
+    @GET("Tende_monitoring_tool-main/fetch_payments_monitoring_tool.php")
+    suspend fun getMissingPayments(@Query("action") action: String): MissingPaymentsDto
 
     @GET("Tende_monitoring_tool-main/fetch_sessions_monitoring_tool.php")
     suspend fun getAllUssdSessions(@Query("action") action: String): FetchUssdSessions
