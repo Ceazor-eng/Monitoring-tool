@@ -137,7 +137,7 @@
                 android:background="@drawable/tc">
 
                 <TextView
-                    android:id="@+id/pendingtransactionsnumber_txt"
+                    android:id="@+id/pending_transactions_number_txt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
@@ -150,7 +150,7 @@
                     android:textSize="20dp" />
 
                 <TextView
-                    android:id="@+id/pendingtransaction_txt"
+                    android:id="@+id/pending_transaction_txt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
@@ -186,7 +186,7 @@
                 android:background="@drawable/tc">
 
                 <TextView
-                    android:id="@+id/missingtransactionsnumber_txt"
+                    android:id="@+id/missing_transactions_number_txt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
@@ -234,7 +234,7 @@
                 android:background="@drawable/tc">
 
                 <TextView
-                    android:id="@+id/failestransactionsnumber_txt"
+                    android:id="@+id/failed_transactions_number_txt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
@@ -247,7 +247,7 @@
                     android:textSize="20dp" />
 
                 <TextView
-                    android:id="@+id/failestransaction_txt"
+                    android:id="@+id/failed_transaction_txt"
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
@@ -352,14 +352,14 @@
 
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:orientation="vertical">
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerView"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="40dp"
                     tools:listitem="@layout/item_payment" />
