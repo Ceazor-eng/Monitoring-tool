@@ -3,48 +3,78 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
+    android:weightSum="4"
     android:padding="10dp">
 
-    <TextView
-        android:id="@+id/initiatorPhoneTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Phone"
-        android:textSize="11sp"
-        android:textColor="@color/black"
-        android:fontFamily="@font/josefinsansregular" />
 
-    <TextView
-        android:id="@+id/mpesaRefSessionIdTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Reference"
-        android:textSize="11sp"
-        android:textColor="@color/black"
-        android:layout_marginStart="10dp"
-        android:fontFamily="@font/josefinsansregular" />
 
-    <TextView
-        android:id="@+id/paymentStatusTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Status"
-        android:textSize="11sp"
-        android:textColor="@color/black"
-        android:layout_marginStart="10dp"
-        android:fontFamily="@font/josefinsansregular" />
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
 
-    <TextView
-        android:id="@+id/dateTimeTextView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Time"
-        android:textSize="11sp"
-        android:textColor="@color/black"
-        android:layout_marginStart="10dp"
-        android:fontFamily="@font/josefinsansregular" />
+            <TextView
+                android:id="@+id/initiatorPhoneTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/josefinsansregular"
+                android:text="Phone"
+                android:textColor="@color/black"
+                android:textSize="11.5sp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/mpesaRefSessionIdTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/josefinsansregular"
+                android:text="Reference"
+                android:textColor="@color/black"
+                android:textSize="11.5sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+
+            <TextView
+                android:id="@+id/paymentStatusTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/josefinsansregular"
+                android:text="Status"
+                android:textColor="@color/black"
+                android:textSize="11.5sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/dateTimeTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/josefinsansregular"
+                android:text="Time"
+                android:textColor="@color/black"
+                android:textSize="11.5sp" />
+        </RelativeLayout>
+
+
+
+
 </LinearLayout>
