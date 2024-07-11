@@ -11,7 +11,7 @@ import com.monitoringtendepay.domain.models.AllPayments
 class PaymentsAdapter(private var payments: List<AllPayments>) : RecyclerView.Adapter<PaymentsAdapter.PaymentViewHolder>() {
 
     fun updateData(newPayments: List<AllPayments>) {
-        payments = newPayments
+        payments = newPayments.sortedByDescending { it.transactionDate }.take(3)
         notifyDataSetChanged()
     }
 
@@ -38,8 +38,29 @@ class PaymentsAdapter(private var payments: List<AllPayments>) : RecyclerView.Ad
         fun bind(payment: AllPayments) {
             initiatorPhoneTextView.text = payment.initiatorPhone
             mpesaRefSessionIdTextView.text = payment.mpesaRef
-            paymentStatusTextView.text = payment.paymentStatus
+            paymentStatusTextView.text = getStatusText(payment.paymentStatus)
+            paymentStatusTextView.setTextColor(getStatusColor(payment.paymentStatus))
             dateTimeTextView.text = payment.transactionDate
+        }
+
+        private fun getStatusText(status: String): String {
+            return when (status.toIntOrNull()) {
+                1 -> "Success"
+                2 -> "Pending"
+                3 -> "Missing"
+                4 -> "Failed"
+                else -> "Unknown"
+            }
+        }
+
+        private fun getStatusColor(status: String): Int {
+            return when (status.toIntOrNull()) {
+                1 -> itemView.context.getColor(R.color.green)
+                2 -> itemView.context.getColor(R.color.orange)
+                3 -> itemView.context.getColor(R.color.yellow)
+                4 -> itemView.context.getColor(R.color.red)
+                else -> itemView.context.getColor(R.color.black)
+            }
         }
     }
 }

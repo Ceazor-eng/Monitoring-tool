@@ -137,7 +137,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 state.payments.isNotEmpty() -> {
                     Log.d("MainActivity", "Success: ${state.payments}")
-                    paymentsAdapter.updateData(state.payments)
+                    paymentsAdapter.updateData(state.payments.sortedByDescending { it.transactionDate }.take(3))
                     Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show()
                 }
             }

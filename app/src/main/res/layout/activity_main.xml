@@ -296,8 +296,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:weightSum="4"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:weightSum="4">
 
                 <RelativeLayout
                     android:layout_width="0dp"
@@ -313,6 +313,7 @@
                         android:text="Phonenumber"
                         android:textSize="11.5sp" />
                 </RelativeLayout>
+
                 <RelativeLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -327,6 +328,7 @@
                         android:text="Reference Id"
                         android:textSize="11.5sp" />
                 </RelativeLayout>
+
                 <RelativeLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -359,10 +361,6 @@
                 </RelativeLayout>
 
             </LinearLayout>
-
-
-
-
 
 
             <LinearLayout
