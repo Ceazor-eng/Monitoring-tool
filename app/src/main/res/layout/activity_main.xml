@@ -294,6 +294,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:textColor="@color/black"
         android:fontFamily="@font/josefinsansregular"
         android:paddingHorizontal="40dp"
         android:text="@string/recent_transactions"
@@ -351,8 +352,9 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_centerInParent="true"
+                                android:textColor="@color/black"
                                 android:fontFamily="@font/josefinsansregular"
-                                android:text="Phonenumber"
+                                android:text="@string/phoneNumber"
                                 android:textSize="11.5sp" />
                         </RelativeLayout>
 
@@ -366,8 +368,9 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_centerInParent="true"
+                                android:textColor="@color/black"
                                 android:fontFamily="@font/josefinsansregular"
-                                android:text="Reference Id"
+                                android:text="@string/reference_id"
                                 android:textSize="11.5sp" />
                         </RelativeLayout>
 
@@ -381,8 +384,9 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_centerInParent="true"
+                                android:textColor="@color/black"
                                 android:fontFamily="@font/josefinsansregular"
-                                android:text="Status"
+                                android:text="@string/status"
                                 android:textSize="11.5sp" />
                         </RelativeLayout>
 
@@ -397,8 +401,9 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_centerInParent="true"
+                                android:textColor="@color/black"
                                 android:fontFamily="@font/josefinsansregular"
-                                android:text="Date And Time"
+                                android:text="@string/date_and_time"
                                 android:textSize="11.5sp" />
                         </RelativeLayout>
 
@@ -413,7 +418,7 @@
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/recyclerView"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_marginTop="40dp"
                             tools:listitem="@layout/item_payment" />
                     </LinearLayout>

@@ -7,6 +7,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.monitoringtendepay.R
 import com.monitoringtendepay.domain.models.AllPayments
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 class PaymentsAdapter(private var payments: List<AllPayments>) : RecyclerView.Adapter<PaymentsAdapter.PaymentViewHolder>() {
 
@@ -40,7 +42,7 @@ class PaymentsAdapter(private var payments: List<AllPayments>) : RecyclerView.Ad
             mpesaRefSessionIdTextView.text = payment.mpesaRef
             paymentStatusTextView.text = getStatusText(payment.paymentStatus)
             paymentStatusTextView.setTextColor(getStatusColor(payment.paymentStatus))
-            dateTimeTextView.text = payment.transactionDate
+            dateTimeTextView.text = formatDate(payment.transactionDate)
         }
 
         private fun getStatusText(status: String): String {
@@ -60,6 +62,18 @@ class PaymentsAdapter(private var payments: List<AllPayments>) : RecyclerView.Ad
                 3 -> itemView.context.getColor(R.color.yellow)
                 4 -> itemView.context.getColor(R.color.red)
                 else -> itemView.context.getColor(R.color.black)
+            }
+        }
+
+        // Utility function to format the date
+        private fun formatDate(dateString: String): String {
+            return try {
+                val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
+                val date = sdf.parse(dateString)
+                val formattedSdf = SimpleDateFormat("dd MMM yyyy h:mm a", Locale.getDefault())
+                formattedSdf.format(date!!)
+            } catch (e: Exception) {
+                dateString
             }
         }
     }

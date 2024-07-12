@@ -17,4 +17,8 @@
     <string name="users">Users</string>
     <string name="profile">Profile</string>
     <string name="recent_transactions">Recent Transactions</string>
+    <string name="phoneNumber">Phonenumber</string>
+    <string name="status">Status</string>
+    <string name="reference_id">MpesaReference</string>
+    <string name="date_and_time">Date And Time</string>
 </resources>
