@@ -13,13 +13,14 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.github.mikephil.charting.charts.LineChart
+import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.components.AxisBase
 import com.github.mikephil.charting.components.XAxis
-import com.github.mikephil.charting.data.Entry
-import com.github.mikephil.charting.data.LineData
-import com.github.mikephil.charting.data.LineDataSet
+import com.github.mikephil.charting.data.BarData
+import com.github.mikephil.charting.data.BarDataSet
+import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.formatter.IAxisValueFormatter
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.monitoringtendepay.R
 import com.monitoringtendepay.domain.models.AllPayments
 import com.monitoringtendepay.presentation.adapters.PaymentsAdapter
@@ -41,7 +42,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var pendingMonthlyTransactions: TextView
     private lateinit var failedMonthlyTransactions: TextView
     private lateinit var missingPayments: TextView
-    private lateinit var lineChart: LineChart
+    private lateinit var barChart: BarChart
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,7 +59,7 @@ class MainActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
         paymentsAdapter = PaymentsAdapter(emptyList())
         recyclerView.adapter = paymentsAdapter
-        lineChart = findViewById(R.id.barChart)
+        barChart = findViewById(R.id.barChart)
 
         completeMonthlyTransactions = findViewById(R.id.total_transactions_number_txt)
         pendingMonthlyTransactions = findViewById(R.id.pending_transactions_number_txt)
@@ -81,7 +82,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setUpChart() {
         // Configure chart settings
-        lineChart.apply {
+        barChart.apply {
             xAxis.position = XAxis.XAxisPosition.BOTTOM
             xAxis.valueFormatter = object : IAxisValueFormatter {
                 private val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
@@ -95,7 +96,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun fetchDataAndPopulateChart() {
-        // Replace with actual API action as needed
         val action = "fetchAllPayments"
 
         viewModel.fetchAllPayments(action)
@@ -104,7 +104,7 @@ class MainActivity : AppCompatActivity() {
             viewModel.paymentState.collect { state ->
                 when (state.isLoading) {
                     true -> {
-                        // Handle loading state if needed
+                        Log.d("MainActivity", "Loading...")
                     }
                     false -> {
                         state.payments?.let { payments ->
@@ -112,7 +112,7 @@ class MainActivity : AppCompatActivity() {
                             updateChartWithData(payments)
                         }
                         state.error?.let { errorMessage ->
-                            // Handle error state if needed
+                            Log.d("MainActivity", "Error: ${state.error}")
                         }
                     }
                 }
@@ -122,21 +122,44 @@ class MainActivity : AppCompatActivity() {
 
     private fun updateChartWithData(payments: List<AllPayments>?) {
         payments?.let { data ->
-            val totalTransactions = data.size.toFloat()
+            // Calculate the counts for each status
             val totalSuccessfulPayments = data.count { it.paymentStatus.toIntOrNull() == 1 }.toFloat()
+            val totalFailedPayments = data.count { it.paymentStatus.toIntOrNull() == 4 }.toFloat()
+            val totalPendingPayments = data.count { it.paymentStatus.toIntOrNull() == 2 }.toFloat()
+            val totalMissingPayments = data.count { it.paymentStatus.toIntOrNull() == 3 }.toFloat()
 
+            // Create entries for the bar chart
             val entries = listOf(
-                Entry(0f, totalSuccessfulPayments)
+                BarEntry(0f, totalSuccessfulPayments),
+                BarEntry(1f, totalFailedPayments),
+                BarEntry(2f, totalPendingPayments),
+                BarEntry(3f, totalMissingPayments)
             )
-            val dataSet = LineDataSet(entries, "Successful Payments")
-            dataSet.color = getColor(R.color.green)
+
+            // Create a BarDataSet with the entries
+            val dataSet = BarDataSet(entries, "Payment Status")
+            dataSet.colors = listOf(
+                getColor(R.color.green), // Successful Payments
+                getColor(R.color.red), // Failed Payments
+                getColor(R.color.orange), // Pending Payments
+                getColor(R.color.yellow) // Missing Payments
+            )
             dataSet.valueTextColor = getColor(R.color.black)
 
-            val lineData = LineData(dataSet)
+            // Create BarData object with the dataset
+            val barData = BarData(dataSet)
 
-            lineChart.data = lineData
+            // Set the data to your BarChart
+            barChart.data = barData
 
-            lineChart.invalidate()
+            // Customize the X-axis to display labels
+            val xAxis = barChart.xAxis
+            xAxis.valueFormatter = IndexAxisValueFormatter(listOf("Success", "Failed", "Pending", "Missing"))
+            xAxis.granularity = 1f
+            xAxis.setDrawLabels(true)
+
+            // Refresh the chart
+            barChart.invalidate()
         } ?: run {
             Log.d("MainActivity", "Payments data is null.")
         }
