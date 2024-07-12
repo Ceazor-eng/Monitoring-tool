@@ -108,6 +108,9 @@ class MainActivity : AppCompatActivity() {
                     }
                     false -> {
                         state.payments?.let { payments ->
+                            // Log the entire response for debugging
+                            Log.d("MainActivity", "Payments response: $payments")
+
                             // Update chart with fetched data
                             updateChartWithData(payments)
                         }
@@ -122,11 +125,22 @@ class MainActivity : AppCompatActivity() {
 
     private fun updateChartWithData(payments: List<AllPayments>?) {
         payments?.let { data ->
+            // Log each payment status for debugging
+            data.forEach { payment ->
+                Log.d("MainActivity", "Payment status: ${payment.paymentStatus}")
+            }
+
             // Calculate the counts for each status
-            val totalSuccessfulPayments = data.count { it.paymentStatus.toIntOrNull() == 1 }.toFloat()
-            val totalFailedPayments = data.count { it.paymentStatus.toIntOrNull() == 4 }.toFloat()
-            val totalPendingPayments = data.count { it.paymentStatus.toIntOrNull() == 2 }.toFloat()
-            val totalMissingPayments = data.count { it.paymentStatus.toIntOrNull() == 3 }.toFloat()
+            val totalSuccessfulPayments = data.count { it.paymentStatus == "1" }.toFloat()
+            val totalFailedPayments = data.count { it.paymentStatus == "4" }.toFloat()
+            val totalPendingPayments = data.count { it.paymentStatus == "2" }.toFloat()
+            val totalMissingPayments = data.count { it.paymentStatus == "3" }.toFloat()
+
+            // Log the counts for debugging
+            Log.d("MainActivity", "Total Successful Payments: $totalSuccessfulPayments")
+            Log.d("MainActivity", "Total Failed Payments: $totalFailedPayments")
+            Log.d("MainActivity", "Total Pending Payments: $totalPendingPayments")
+            Log.d("MainActivity", "Total Missing Payments: $totalMissingPayments")
 
             // Create entries for the bar chart
             val entries = listOf(
@@ -139,10 +153,10 @@ class MainActivity : AppCompatActivity() {
             // Create a BarDataSet with the entries
             val dataSet = BarDataSet(entries, "Payment Status")
             dataSet.colors = listOf(
-                getColor(R.color.green), // Successful Payments
-                getColor(R.color.red), // Failed Payments
-                getColor(R.color.orange), // Pending Payments
-                getColor(R.color.yellow) // Missing Payments
+                getColor(R.color.green),
+                getColor(R.color.red),
+                getColor(R.color.orange),
+                getColor(R.color.yellow)
             )
             dataSet.valueTextColor = getColor(R.color.black)
 
