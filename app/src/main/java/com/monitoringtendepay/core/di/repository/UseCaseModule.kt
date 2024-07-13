@@ -4,6 +4,7 @@ import com.monitoringtendepay.domain.repository.AllPaymentsRepository
 import com.monitoringtendepay.domain.repository.CompleteMonthlyTransactionsRepository
 import com.monitoringtendepay.domain.repository.FailedTransactionsRepository
 import com.monitoringtendepay.domain.repository.FilterPaymentsRepository
+import com.monitoringtendepay.domain.repository.FilterUssdSessionsRepository
 import com.monitoringtendepay.domain.repository.MissingPaymentsRepository
 import com.monitoringtendepay.domain.repository.PendingMonthlyTransactionsRepository
 import com.monitoringtendepay.domain.repository.UssdSessionsRepository
@@ -12,6 +13,7 @@ import com.monitoringtendepay.domain.usecase.GetAllUssdSessionsUseCase
 import com.monitoringtendepay.domain.usecase.GetCompleteMonthlyTransactionsUseCase
 import com.monitoringtendepay.domain.usecase.GetFailedTransactionsUseCase
 import com.monitoringtendepay.domain.usecase.GetFilteredPaymentsUseCase
+import com.monitoringtendepay.domain.usecase.GetFilteredUssdSessionsUseCase
 import com.monitoringtendepay.domain.usecase.GetMissingPaymentsUseCase
 import com.monitoringtendepay.domain.usecase.GetPendingMonthlyTransactionsUseCase
 import dagger.Module
@@ -40,6 +42,12 @@ object UseCaseModule {
     @Provides
     fun provideGetFilteredPaymentsUseCase(repository: FilterPaymentsRepository): GetFilteredPaymentsUseCase {
         return GetFilteredPaymentsUseCase(repository)
+    }
+
+    @Singleton
+    @Provides
+    fun provideGetFilteredUssdSessionsUseCase(repository: FilterUssdSessionsRepository): GetFilteredUssdSessionsUseCase {
+        return GetFilteredUssdSessionsUseCase(repository)
     }
 
     @Singleton
