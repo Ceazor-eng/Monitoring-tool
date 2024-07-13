@@ -78,10 +78,12 @@ class FilterUssdSessions : AppCompatActivity() {
                 state.isLoading -> {
                     Log.d("FilterUssdSessionsActivity", "Error: ${state.error}")
                 }
+
                 state.error.isNotEmpty() -> {
                     Log.d("FilterUssdSessionsActivity", "Error: ${state.error}")
                     Toast.makeText(this, state.error, Toast.LENGTH_SHORT).show()
                 }
+
                 state.filterUssdSessions != null -> {
                     Log.d("FilterUssdSessionsActivity", "Success: ${state.filterUssdSessions}")
                     // Generate PDF report here
@@ -160,7 +162,7 @@ class FilterUssdSessions : AppCompatActivity() {
     }
 
     // Changed method signature to include view parameter
-    private fun generateReport(view: View) {
+    fun generateReport(view: View) {
         val phoneNumber = phoneNumberEditText.text.toString()
         val sessionId = sessionIdEditText.text.toString()
 
