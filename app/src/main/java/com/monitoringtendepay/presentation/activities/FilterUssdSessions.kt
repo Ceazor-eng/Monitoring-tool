@@ -6,7 +6,7 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Environment
 import android.util.Log
-import android.view.View
+import android.view.View // <-- Added import for View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -65,14 +65,8 @@ class FilterUssdSessions : AppCompatActivity() {
         startDateTextView.setOnClickListener { showDatePickerDialog(true) }
         endDateTextView.setOnClickListener { showDatePickerDialog(false) }
 
-        generateReportButton.setOnClickListener {
-            val action = "filterSessions"
-            val phoneNumber = phoneNumberEditText.text.toString()
-            val sessionId = sessionIdEditText.text.toString()
-            val startDate = startDate
-            val endDate = endDate
-
-            viewModel.filterUssdSessions(action, phoneNumber, sessionId, startDate, endDate)
+        generateReportButton.setOnClickListener { view ->
+            generateReport(view) // <-- Updated to include view parameter
         }
 
         observeFilteredSessions()
@@ -163,6 +157,19 @@ class FilterUssdSessions : AppCompatActivity() {
             e.printStackTrace()
             Toast.makeText(this, "Error generating PDF: ${e.localizedMessage}", Toast.LENGTH_LONG).show()
         }
+    }
+
+    // Changed method signature to include view parameter
+    private fun generateReport(view: View) {
+        val phoneNumber = phoneNumberEditText.text.toString()
+        val sessionId = sessionIdEditText.text.toString()
+
+        if (phoneNumber.isEmpty() || sessionId.isEmpty() || startDate.isEmpty() || endDate.isEmpty()) {
+            Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        viewModel.filterUssdSessions("filterSessions", phoneNumber, sessionId, startDate, endDate)
     }
 
     private fun showDatePickerDialog(isStartDate: Boolean) {

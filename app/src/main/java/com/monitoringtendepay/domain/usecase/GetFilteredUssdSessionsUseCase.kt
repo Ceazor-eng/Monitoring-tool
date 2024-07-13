@@ -19,8 +19,17 @@ class GetFilteredUssdSessionsUseCase @Inject constructor(
             emit(Resource.Loading())
             Log.d("GetFilteredUssdSessionsUseCase", "Fetching filtered ussd sessions...")
             val filteredUssdSessionsDto = repository.filterUssdSessions(action, phoneNumber, sessionId, startDate, endDate)
-            Log.d("GetFilteredUssdSessionsUseCase", "Fetched payments DTO: $filteredUssdSessionsDto")
-            val filteredUssdSessions = filteredUssdSessionsDto.map { it.toFilteredUssdSessions() }
+            Log.d("GetFilteredUssdSessionsUseCase", "Fetched sessions DTO: $filteredUssdSessionsDto")
+
+            // Null check before mapping
+            val filteredUssdSessions = filteredUssdSessionsDto?.let {
+                if (it.isNotEmpty()) {
+                    it.map { dto -> dto.toFilteredUssdSessions() }
+                } else {
+                    emptyList()
+                }
+            } ?: emptyList()
+
             Log.d("GetFilteredUssdSessionsUseCase", "Mapped ussd sessions: $filteredUssdSessions")
             emit(Resource.Success(filteredUssdSessions))
         } catch (e: HttpException) {
