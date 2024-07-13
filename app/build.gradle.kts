@@ -63,6 +63,9 @@ dependencies {
 //    implementation ("com.github.PhilJay:MPAndroidChart:v3.1.0")
     implementation("com.github.PhilJay:MPAndroidChart:v3.0.3")
 
+    // pdf generation
+    implementation("com.itextpdf:itext7-core:7.1.14")
+
     // Test dependencies
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

@@ -7,7 +7,6 @@ import com.monitoringtendepay.data.remote.dto.monthlytransactions.PendingMonthly
 import com.monitoringtendepay.data.remote.dto.monthlytransactions.TotalMonthlyTransactionsDto
 import com.monitoringtendepay.data.remote.dto.payments.Paymentss
 import com.monitoringtendepay.data.remote.dto.ussd.FetchUssdSessions
-import com.monitoringtendepay.domain.models.PaymentsFilterParams
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -19,7 +18,10 @@ interface AllPaymentsApi {
     @GET("Tende_monitoring_tool-main/fetch_payments_monitoring_tool.php")
     suspend fun filterPayments(
         @Query("action") action: String,
-        @Query("params") params: PaymentsFilterParams
+        @Query("serviceCode") serviceCode: String?,
+        @Query("paymentStatus") paymentStatus: String?,
+        @Query("startDate") startDate: String?,
+        @Query("endDate") endDate: String?
     ): FilteredPayments
 
     @GET("Tende_monitoring_tool-main/fetch_payments_monitoring_tool.php")

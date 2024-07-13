@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".presentation.activities.FilterPayments">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+                <!-- Service Type Dropdown -->
+                <Spinner
+                    android:id="@+id/spinnerServiceType"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:spinnerMode="dropdown"/>
+
+                <!-- Status Dropdown -->
+                <Spinner
+                    android:id="@+id/spinnerStatus"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:spinnerMode="dropdown"/>
+
+                <!-- Start Date Picker -->
+                <EditText
+                    android:id="@+id/editTextStartDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Start date"
+                    android:focusable="false"/>
+
+                <!-- End Date Picker -->
+                <EditText
+                    android:id="@+id/editTextEndDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="End date"
+                    android:focusable="false"/>
+
+                <!-- Generate Report Button -->
+                <Button
+                    android:id="@+id/buttonGenerateReport"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Generate Report"/>
+        </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

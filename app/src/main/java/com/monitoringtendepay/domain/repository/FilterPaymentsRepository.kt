@@ -1,8 +1,7 @@
 package com.monitoringtendepay.domain.repository
 
 import com.monitoringtendepay.data.remote.dto.filterpayments.FilterPaymentsDto
-import com.monitoringtendepay.domain.models.PaymentsFilterParams
 
 interface FilterPaymentsRepository {
-    suspend fun filterPayments(action: String, params: PaymentsFilterParams): List<FilterPaymentsDto>
+    suspend fun filterPayments(action: String, serviceType: String, status: String, startDate: String, endDate: String): List<FilterPaymentsDto>
 }

@@ -14,15 +14,15 @@ import retrofit2.HttpException
 class GetFilteredPaymentsUseCase @Inject constructor(
     private val repository: FilterPaymentsRepository
 ) {
-    operator fun invoke(action: String, params: PaymentsFilterParams): Flow<Resource<List<PaymentsFilterParams>>> = flow {
+    operator fun invoke(action: String, serviceType: String, status: String, startDate: String, endDate: String): Flow<Resource<List<PaymentsFilterParams>>> = flow {
         try {
             emit(Resource.Loading())
             Log.d("GetFilteredPaymentsUseCase", "Fetching filtered payments...")
-            val filteredPaymentsDto = repository.filterPayments(action, params)
+            val filteredPaymentsDto = repository.filterPayments(action, serviceType, status, startDate, endDate)
             Log.d("GetFilteredPaymentsUseCase", "Fetched payments DTO: $filteredPaymentsDto")
-            val payments = filteredPaymentsDto.map { it.toFilteredPayments() }
-            Log.d("GetFilteredPaymentsUseCase", "Mapped payments: $payments")
-            emit(Resource.Success(payments))
+            val filteredPayments = filteredPaymentsDto.map { it.toFilteredPayments() }
+            Log.d("GetFilteredPaymentsUseCase", "Mapped payments: $filteredPayments")
+            emit(Resource.Success(filteredPayments))
         } catch (e: HttpException) {
             Log.e("GetFilteredPaymentsUseCase", "HttpException: ${e.localizedMessage}")
             emit(
