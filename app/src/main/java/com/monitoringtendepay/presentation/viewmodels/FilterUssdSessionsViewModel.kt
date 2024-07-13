@@ -1,0 +1,3 @@
+package com.monitoringtendepay.presentation.viewmodels
+
+class FilterUssdSessionsViewModel

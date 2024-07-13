@@ -6,12 +6,14 @@ import com.monitoringtendepay.data.repository.AllUssdSessionsRepositoryImpl
 import com.monitoringtendepay.data.repository.CompleteMonthlyTransactionsImpl
 import com.monitoringtendepay.data.repository.FailedTransactionsRepositoryImpl
 import com.monitoringtendepay.data.repository.FilterPaymentsRepositoryImpl
+import com.monitoringtendepay.data.repository.FilterUssdSessionsRepositoryImpl
 import com.monitoringtendepay.data.repository.MissingPaymentsRepositoryImpl
 import com.monitoringtendepay.data.repository.PendingMonthlyTransactionsRepositoryImpl
 import com.monitoringtendepay.domain.repository.AllPaymentsRepository
 import com.monitoringtendepay.domain.repository.CompleteMonthlyTransactionsRepository
 import com.monitoringtendepay.domain.repository.FailedTransactionsRepository
 import com.monitoringtendepay.domain.repository.FilterPaymentsRepository
+import com.monitoringtendepay.domain.repository.FilterUssdSessionsRepository
 import com.monitoringtendepay.domain.repository.MissingPaymentsRepository
 import com.monitoringtendepay.domain.repository.PendingMonthlyTransactionsRepository
 import com.monitoringtendepay.domain.repository.UssdSessionsRepository
@@ -41,6 +43,12 @@ object RepositoryModule {
     @Provides
     fun provideFilteredPaymentsRepository(api: AllPaymentsApi): FilterPaymentsRepository {
         return FilterPaymentsRepositoryImpl(api)
+    }
+
+    @Singleton
+    @Provides
+    fun provideFilteredUssdSessionsRepository(api: AllPaymentsApi): FilterUssdSessionsRepository {
+        return FilterUssdSessionsRepositoryImpl(api)
     }
 
     @Singleton
