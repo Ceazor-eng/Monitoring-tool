@@ -3,6 +3,7 @@ package com.monitoringtendepay.core.di.repository
 import com.monitoringtendepay.data.remote.apiservice.AllPaymentsApi
 import com.monitoringtendepay.data.repository.AllPaymentsRepositoryImpl
 import com.monitoringtendepay.data.repository.AllUssdSessionsRepositoryImpl
+import com.monitoringtendepay.data.repository.AuthRepositoryImpl
 import com.monitoringtendepay.data.repository.CompleteMonthlyTransactionsImpl
 import com.monitoringtendepay.data.repository.FailedTransactionsRepositoryImpl
 import com.monitoringtendepay.data.repository.FilterPaymentsRepositoryImpl
@@ -10,6 +11,7 @@ import com.monitoringtendepay.data.repository.FilterUssdSessionsRepositoryImpl
 import com.monitoringtendepay.data.repository.MissingPaymentsRepositoryImpl
 import com.monitoringtendepay.data.repository.PendingMonthlyTransactionsRepositoryImpl
 import com.monitoringtendepay.domain.repository.AllPaymentsRepository
+import com.monitoringtendepay.domain.repository.AuthRepository
 import com.monitoringtendepay.domain.repository.CompleteMonthlyTransactionsRepository
 import com.monitoringtendepay.domain.repository.FailedTransactionsRepository
 import com.monitoringtendepay.domain.repository.FilterPaymentsRepository
@@ -73,5 +75,11 @@ object RepositoryModule {
     @Provides
     fun provideMissingPaymentsRepository(api: AllPaymentsApi): MissingPaymentsRepository {
         return MissingPaymentsRepositoryImpl(api)
+    }
+
+    @Singleton
+    @Provides
+    fun provideAuthRepository(api: AllPaymentsApi): AuthRepository {
+        return AuthRepositoryImpl(api)
     }
 }
