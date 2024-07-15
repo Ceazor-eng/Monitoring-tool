@@ -22,6 +22,15 @@ fun FilterPaymentsDto.toFilteredPayments(): PaymentsFilterParams {
     return PaymentsFilterParams(
         paymentStatus,
         serviceCode,
+        paymentStatusMessage,
+        initiatorName,
+        groupId,
+        initiatorPhone,
+        salesforcePhone,
+        sessionId,
+        mpesaRef,
+        internalRef,
+        amount,
         transactionDate
     )
 }

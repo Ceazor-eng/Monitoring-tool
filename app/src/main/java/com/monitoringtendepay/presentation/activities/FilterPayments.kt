@@ -22,6 +22,7 @@ import androidx.lifecycle.lifecycleScope
 import com.itextpdf.kernel.pdf.PdfWriter
 import com.itextpdf.layout.Document
 import com.itextpdf.layout.element.Paragraph
+import com.itextpdf.layout.element.Table
 import com.monitoringtendepay.R
 import com.monitoringtendepay.domain.models.PaymentsFilterParams
 import com.monitoringtendepay.presentation.viewmodels.FilterPaymentsViewModel
@@ -172,40 +173,50 @@ class FilterPayments : AppCompatActivity() {
             val pdfDoc = com.itextpdf.kernel.pdf.PdfDocument(writer)
             val document = Document(pdfDoc)
 
-            document.add(Paragraph("Filtered Payments Report"))
+            document.add(Paragraph("Payments Report"))
 
-            filterPayments.forEach { payment ->
-                document.add(Paragraph("Service Code: ${payment.serviceCode}"))
-                document.add(Paragraph("Payment Status: ${payment.paymentStatus}"))
-                document.add(Paragraph("Transaction Date: ${payment.transactionDate}"))
-                document.add(Paragraph("-----"))
+            // Adjust column widths
+            val columnWidths = floatArrayOf(2f, 2f, 2f, 2f, 2f, 2f, 2f, 2f, 2f, 2f, 2f, 2f)
+            val table = Table(columnWidths)
+            table.setWidth(100f)
+
+            val headerFont = com.itextpdf.kernel.font.PdfFontFactory.createFont(com.itextpdf.io.font.constants.StandardFonts.HELVETICA_BOLD)
+            val cellFont = com.itextpdf.kernel.font.PdfFontFactory.createFont(com.itextpdf.io.font.constants.StandardFonts.HELVETICA)
+
+            // Adding header
+            val headers = listOf(
+                "Service Code", "Initiator Phone", "Amount", "Internal Ref", "Mpesa Ref",
+                "SalesForce Phone", "Group ID", "Recipient Name", "Session ID",
+                "Payment Status", "Payment Status Message", "Transaction Date"
+            )
+
+            headers.forEach { header ->
+                val cell = com.itextpdf.layout.element.Cell()
+                cell.add(Paragraph(header).setFont(headerFont).setFontSize(10f))
+                table.addHeaderCell(cell)
             }
+
+            filterPayments.forEach { item ->
+                table.addCell(Paragraph(item.serviceCode).setFont(cellFont).setFontSize(8f))
+                table.addCell(Paragraph(item.initiatorPhone).setFont(cellFont).setFontSize(8f))
+                table.addCell(Paragraph(item.amount).setFont(cellFont).setFontSize(8f))
+                table.addCell(Paragraph(item.internalRef).setFont(cellFont).setFontSize(8f))
+                table.addCell(Paragraph(item.mpesaRef).setFont(cellFont).setFontSize(8f))
+                table.addCell(Paragraph(item.salesforcePhone).setFont(cellFont).setFontSize(8f))
+                table.addCell(Paragraph(item.groupId).setFont(cellFont).setFontSize(8f))
+                table.addCell(Paragraph(item.initiatorName).setFont(cellFont).setFontSize(8f))
+                table.addCell(Paragraph(item.sessionId).setFont(cellFont).setFontSize(8f))
+                table.addCell(Paragraph(item.paymentStatus).setFont(cellFont).setFontSize(8f))
+                table.addCell(Paragraph(item.paymentStatusMessage).setFont(cellFont).setFontSize(8f))
+                table.addCell(Paragraph(item.transactionDate).setFont(cellFont).setFontSize(8f))
+            }
+
+            document.add(table)
             document.close()
             Toast.makeText(this, "PDF Report Generated at $filePath", Toast.LENGTH_LONG).show()
         } catch (e: Exception) {
             e.printStackTrace()
             Toast.makeText(this, "Error generating PDF: ${e.localizedMessage}", Toast.LENGTH_LONG).show()
         }
-
-        /*
-                val path = getExternalFilesDir(null)?.absolutePath + "/report.pdf"
-        val writer = PdfWriter(path)
-        val pdfDoc = com.itextpdf.kernel.pdf.PdfDocument(writer)
-        val document = Document(pdfDoc)
-
-        document.add(Paragraph("Filtered Payments Report"))
-
-        filterPayments.forEach { payment ->
-            document.add(Paragraph("Service Code: ${payment.serviceCode}"))
-            document.add(Paragraph("Payment Status: ${payment.paymentStatus}"))
-            document.add(Paragraph("Transaction Date: ${payment.transactionDate}"))
-            document.add(Paragraph("-----"))
-        }
-
-        document.close()
-
-        Toast.makeText(this, "PDF Report Generated at $path", Toast.LENGTH_LONG).show()
-
-         */
     }
 }

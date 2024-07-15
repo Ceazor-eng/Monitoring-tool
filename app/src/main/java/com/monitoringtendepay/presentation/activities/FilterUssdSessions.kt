@@ -139,7 +139,7 @@ class FilterUssdSessions : AppCompatActivity() {
             val pdfDoc = com.itextpdf.kernel.pdf.PdfDocument(writer)
             val document = Document(pdfDoc)
 
-            document.add(Paragraph("Filtered Ussd Sessions Report"))
+            document.add(Paragraph("Ussd Sessions Report"))
 
             val table = Table(floatArrayOf(4f, 4f, 4f))
             table.addCell("Phone Number")

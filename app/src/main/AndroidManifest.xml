@@ -20,13 +20,13 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".presentation.activities.FilterPayments"
+            android:name=".presentation.activities.FilterUssdSessions"
             android:exported="false" />
         <activity
             android:name=".presentation.activities.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.activities.FilterUssdSessions"
+            android:name=".presentation.activities.FilterPayments"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
