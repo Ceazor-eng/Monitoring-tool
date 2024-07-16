@@ -26,6 +26,7 @@ import com.monitoringtendepay.presentation.adapters.PaymentsAdapter
 import com.monitoringtendepay.presentation.viewmodels.AllPaymentsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
+import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 import kotlinx.coroutines.flow.launchIn
@@ -43,6 +44,7 @@ class Dashboard : Fragment() {
     private lateinit var failedMonthlyTransactions: TextView
     private lateinit var missingPayments: TextView
     private lateinit var barChart: BarChart
+    private lateinit var welcomeText: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,6 +63,7 @@ class Dashboard : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setUpViews(view)
+        updateGreetingMessage()
 
         observePayments()
         observeCompleteTransactions()
@@ -72,12 +75,24 @@ class Dashboard : Fragment() {
         fetchData()
     }
 
+    private fun updateGreetingMessage() {
+        val calendar = Calendar.getInstance()
+        val hourOfDay = calendar.get(Calendar.HOUR_OF_DAY)
+        val greeting = when (hourOfDay) {
+            in 0..11 -> "Good morning"
+            in 12..17 -> "Good afternoon"
+            else -> "Good evening"
+        }
+        welcomeText.text = "$greeting!"
+    }
+
     private fun setUpViews(view: View) {
         recyclerView = view.findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         paymentsAdapter = PaymentsAdapter(emptyList())
         recyclerView.adapter = paymentsAdapter
         barChart = view.findViewById(R.id.barChart)
+        welcomeText = view.findViewById(R.id.welcome_ian)
 
         completeMonthlyTransactions = view.findViewById(R.id.total_transactions_number_txt)
         pendingMonthlyTransactions = view.findViewById(R.id.pending_transactions_number_txt)
