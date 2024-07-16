@@ -20,6 +20,7 @@ gson ="2.9.0"
 viewModel = "2.8.3"
 interceptor ="4.12.0"
 bcrypt ="0.4"
+fragments ="1.8.1"
 
 
 
@@ -45,6 +46,7 @@ dagger-hilt = { module = "com.google.dagger:hilt-android", version.ref ="hilt" }
 kapt = { module ="com.google.dagger:hilt-android-compiler", version.ref ="kapt" }
 gson-converter ={module ="com.squareup.retrofit2:converter-gson", version.ref = "gson"}
 view-model-scope ={module = "androidx.lifecycle:lifecycle-viewmodel-ktx",version.ref = "viewModel"}
+fragments ={module = "androidx.fragment:fragment-ktx",version.ref ="fragments"}
 live-data ={module = "androidx.lifecycle:lifecycle-livedata-ktx",version.ref = "viewModel"}
 logging-interceptor ={module ="com.squareup.okhttp3:logging-interceptor",version.ref ="interceptor"}
 bcrypt-hash ={module = "org.mindrot:jbcrypt",version.ref = "bcrypt"}
@@ -56,6 +58,8 @@ jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = 
 [bundles]
 networking = ["retrofit", "retrofit-serialization", "serialization-json", "coroutines", "coroutines-android","gson-converter","okhttp3","logging-interceptor"]
 dagger = ["dagger-hilt","kapt"]
-viewModel =["view-model-scope","live-data"]
+viewModel =["view-model-scope","live-data","fragments"]
 hashing = ["bcrypt-hash"]
+
+
 

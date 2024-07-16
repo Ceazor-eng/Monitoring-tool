@@ -1,5 +1,6 @@
 package com.monitoringtendepay.presentation.viewmodels
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.monitoringtendepay.core.common.Resource
@@ -26,7 +27,8 @@ class AllPaymentsViewModel @Inject constructor(
     private val getCompleteMonthlyTransactionsUseCase: GetCompleteMonthlyTransactionsUseCase,
     private val getPendingMonthlyTransactionsUseCase: GetPendingMonthlyTransactionsUseCase,
     private val getFailedTransactionsUseCase: GetFailedTransactionsUseCase,
-    private val getMissingPaymentsUseCase: GetMissingPaymentsUseCase
+    private val getMissingPaymentsUseCase: GetMissingPaymentsUseCase,
+    private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
     private val _allPaymentsState = Channel<AllPaymentsState>()
