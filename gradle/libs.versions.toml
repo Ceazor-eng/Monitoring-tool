@@ -19,7 +19,7 @@ hilt = "2.49"
 gson ="2.9.0"
 viewModel = "2.8.3"
 interceptor ="4.12.0"
-
+bcrypt ="0.4"
 
 
 
@@ -47,7 +47,7 @@ gson-converter ={module ="com.squareup.retrofit2:converter-gson", version.ref = 
 view-model-scope ={module = "androidx.lifecycle:lifecycle-viewmodel-ktx",version.ref = "viewModel"}
 live-data ={module = "androidx.lifecycle:lifecycle-livedata-ktx",version.ref = "viewModel"}
 logging-interceptor ={module ="com.squareup.okhttp3:logging-interceptor",version.ref ="interceptor"}
-
+bcrypt-hash ={module = "org.mindrot:jbcrypt",version.ref = "bcrypt"}
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -57,4 +57,5 @@ jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = 
 networking = ["retrofit", "retrofit-serialization", "serialization-json", "coroutines", "coroutines-android","gson-converter","okhttp3","logging-interceptor"]
 dagger = ["dagger-hilt","kapt"]
 viewModel =["view-model-scope","live-data"]
+hashing = ["bcrypt-hash"]
 

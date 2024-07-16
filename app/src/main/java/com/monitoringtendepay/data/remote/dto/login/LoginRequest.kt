@@ -1,6 +1,6 @@
 package com.monitoringtendepay.data.remote.dto.login
 
-data class LoginRequestDto(
-    val username: String,
+data class LoginRequest(
+    val email: String,
     val password: String
 )

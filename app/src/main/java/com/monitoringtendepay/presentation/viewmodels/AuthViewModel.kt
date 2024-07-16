@@ -4,44 +4,45 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.monitoringtendepay.core.common.Resource
-import com.monitoringtendepay.domain.usecase.GetLoginUseCase
-import com.monitoringtendepay.presentation.states.LoginState
+import com.monitoringtendepay.domain.repository.AuthRepository
+import com.monitoringtendepay.presentation.states.AuthState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 
 @HiltViewModel
-class AuthViewModel @Inject constructor(
-    private val getLoginUseCase: GetLoginUseCase
-) : ViewModel() {
+class AuthViewModel @Inject constructor(private val authRepository: AuthRepository) : ViewModel() {
 
-    private val _loginState = Channel<LoginState>()
-    val loginState: Flow<LoginState> = _loginState.receiveAsFlow()
+    private val TAG = "AuthViewModel"
 
-    fun loginUser(username: String, password: String, action: String) {
-        Log.d("AuthViewModel", "Initiating login with username: $username, action: $action")
+    private val _loginState = Channel<AuthState>()
+    val loginState = _loginState.receiveAsFlow()
+
+    fun login(email: String, password: String) {
         viewModelScope.launch {
-            getLoginUseCase(username, password, action).onEach { result ->
+            authRepository.login(email, password).collect { result ->
                 when (result) {
                     is Resource.Success -> {
-                        Log.d("AuthViewModel", "Login successful: ${result.data}")
-                        _loginState.send(LoginState(success = result.data))
+                        Log.d(TAG, "Login successful")
+                        _loginState.send(AuthState(data = "LogIn Successfully"))
                     }
                     is Resource.Loading -> {
-                        Log.d("AuthViewModel", "Loading...")
-                        _loginState.send(LoginState(isLoading = true))
+                        Log.d(TAG, "Logging in...")
+                        _loginState.send(AuthState(isLoading = true))
                     }
                     is Resource.Error -> {
-                        Log.e("AuthViewModel", "Error: ${result.message}")
-                        _loginState.send(LoginState(error = result.message ?: "An unexpected error occurred"))
+                        val errorMessage = when (result.message) {
+                            "Incorrect password" -> "Incorrect password"
+                            "Email not found" -> "Email not found"
+                            else -> "Login Failed!!"
+                        }
+                        Log.d(TAG, "Login error: $errorMessage")
+                        _loginState.send(AuthState(error = errorMessage))
                     }
                 }
-            }.catch { e ->
-                Log.e("AuthViewModel", "Exception: ${e.localizedMessage}")
-                _loginState.send(LoginState(error = e.localizedMessage ?: "An unexpected error occurred"))
-            }.collect()
+            }
         }
     }
 }

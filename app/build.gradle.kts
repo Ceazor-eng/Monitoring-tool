@@ -59,8 +59,10 @@ dependencies {
     // viewModel
     implementation(libs.bundles.viewModel)
 
+    // bcrypt
+    implementation(libs.bundles.hashing)
+
     // Charts
-//    implementation ("com.github.PhilJay:MPAndroidChart:v3.1.0")
     implementation("com.github.PhilJay:MPAndroidChart:v3.0.3")
 
     // pdf generation

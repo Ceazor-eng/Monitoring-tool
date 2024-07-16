@@ -2,27 +2,16 @@ package com.monitoringtendepay.data.remote.apiservice
 
 import com.monitoringtendepay.data.remote.dto.filterpayments.FilteredPayments
 import com.monitoringtendepay.data.remote.dto.filterussdsessions.FilteredUssdSessions
-import com.monitoringtendepay.data.remote.dto.login.LoginRequestDto
-import com.monitoringtendepay.data.remote.dto.login.LoginResponse
 import com.monitoringtendepay.data.remote.dto.monthlytransactions.FailedMonthlyTransactionsDto
 import com.monitoringtendepay.data.remote.dto.monthlytransactions.MissingPaymentsDto
 import com.monitoringtendepay.data.remote.dto.monthlytransactions.PendingMonthlyTransactionsDto
 import com.monitoringtendepay.data.remote.dto.monthlytransactions.TotalMonthlyTransactionsDto
 import com.monitoringtendepay.data.remote.dto.payments.Paymentss
 import com.monitoringtendepay.data.remote.dto.ussd.FetchUssdSessions
-import retrofit2.http.Body
 import retrofit2.http.GET
-import retrofit2.http.POST
 import retrofit2.http.Query
 
 interface AllPaymentsApi {
-
-    // login user
-    @POST("Tende_monitoring_tool-main/login_users_operations_monitoring_tool.php")
-    suspend fun loginUser(
-        @Body request: LoginRequestDto,
-        @Query("action") action: String
-    ): LoginResponse
 
     // all payments
     @GET("Tende_monitoring_tool-main/fetch_payments_monitoring_tool.php")

@@ -1,7 +1,9 @@
 package com.monitoringtendepay.domain.repository
 
-import com.monitoringtendepay.data.remote.dto.login.LoginResponseDto
+import com.monitoringtendepay.core.common.Resource
+import com.monitoringtendepay.domain.models.LoginUser
+import kotlinx.coroutines.flow.Flow
 
 interface AuthRepository {
-    suspend fun loginUser(username: String, password: String, action: String): List<LoginResponseDto>
+    suspend fun login(email: String, password: String): Flow<Resource<Result<LoginUser>>>
 }

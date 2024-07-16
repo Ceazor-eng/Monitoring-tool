@@ -1,10 +1,7 @@
 package com.monitoringtendepay.core.common
 
-import java.security.MessageDigest
+import org.mindrot.jbcrypt.BCrypt
 
 fun hashPassword(password: String): String {
-    val bytes = password.toByteArray()
-    val md = MessageDigest.getInstance("SHA-256")
-    val digest = md.digest(bytes)
-    return digest.fold("") { str, it -> str + "%02x".format(it) }
+    return BCrypt.hashpw(password, BCrypt.gensalt())
 }

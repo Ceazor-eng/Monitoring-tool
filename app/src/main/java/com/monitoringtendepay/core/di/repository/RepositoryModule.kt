@@ -1,6 +1,7 @@
 package com.monitoringtendepay.core.di.repository
 
 import com.monitoringtendepay.data.remote.apiservice.AllPaymentsApi
+import com.monitoringtendepay.data.remote.apiservice.AuthService
 import com.monitoringtendepay.data.repository.AllPaymentsRepositoryImpl
 import com.monitoringtendepay.data.repository.AllUssdSessionsRepositoryImpl
 import com.monitoringtendepay.data.repository.AuthRepositoryImpl
@@ -77,9 +78,9 @@ object RepositoryModule {
         return MissingPaymentsRepositoryImpl(api)
     }
 
-    @Singleton
     @Provides
-    fun provideAuthRepository(api: AllPaymentsApi): AuthRepository {
-        return AuthRepositoryImpl(api)
+    @Singleton
+    fun provideAuthRepository(authService: AuthService): AuthRepository {
+        return AuthRepositoryImpl(authService)
     }
 }

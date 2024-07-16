@@ -1,5 +1,6 @@
 package com.monitoringtendepay.presentation.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -13,8 +14,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import com.monitoringtendepay.R
-import com.monitoringtendepay.core.common.hashPassword
-import com.monitoringtendepay.presentation.states.LoginState
+import com.monitoringtendepay.presentation.states.AuthState
 import com.monitoringtendepay.presentation.viewmodels.AuthViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -43,50 +43,46 @@ class Login : AppCompatActivity() {
         btnLogin = findViewById(R.id.btnLogin)
         progressBar = findViewById(R.id.progressBar)
 
+        lifecycleScope.launchWhenStarted {
+            authViewModel.loginState.collect { authState ->
+                handleAuthState(authState)
+            }
+        }
+
         btnLogin.setOnClickListener {
             val username = etUsername.text.toString()
             val password = etPassword.text.toString()
-            val hashedPassword = hashPassword(password)
-            val action = "userLogin"
-            Log.d("LoginActivity", "Login button clicked with username: $username, hashed password: $hashedPassword, action: $action")
+//            val hashedPassword = hashPassword(password)
+            // val action = "userLogin"
+            Log.d("LoginActivity", "Login button clicked with username: $username,hashed password: $password")
             if (username.isNotEmpty() && password.isNotEmpty()) {
-                authViewModel.loginUser(username, hashedPassword, action)
+                authViewModel.login(username, password)
             } else {
                 Toast.makeText(this, "Please enter both username and password", Toast.LENGTH_SHORT).show()
             }
         }
-
-        observeViewModel()
     }
 
-    private fun observeViewModel() {
-        lifecycleScope.launchWhenStarted {
-            authViewModel.loginState.collect { state ->
-                handleLoginState(state)
+    private fun handleAuthState(authState: AuthState) {
+        if (authState.isLoading) {
+            progressBar.visibility = ProgressBar.VISIBLE
+        } else {
+            progressBar.visibility = ProgressBar.GONE
+            authState.error?.let { error ->
+                Toast.makeText(this, error, Toast.LENGTH_SHORT).show()
+            }
+            authState.data?.let { data ->
+                Toast.makeText(this, data, Toast.LENGTH_SHORT).show()
+                if (data == "LogIn Successfully") {
+                    navigateToHomeScreen()
+                }
             }
         }
     }
 
-    private fun handleLoginState(state: LoginState) {
-        when {
-            state.isLoading -> {
-                Log.d("LoginActivity", "Loading...")
-                progressBar.visibility = ProgressBar.VISIBLE
-                btnLogin.isEnabled = false
-            }
-            state.success != null -> {
-                Log.d("LoginActivity", "Login successful: ${state.success}")
-                progressBar.visibility = ProgressBar.GONE
-                btnLogin.isEnabled = true
-                Toast.makeText(this, "Login successful: ${state.success}", Toast.LENGTH_LONG).show()
-                // Navigate to next screen
-            }
-            state.error.isNotEmpty() -> {
-                Log.e("LoginActivity", "Error: ${state.error}")
-                progressBar.visibility = ProgressBar.GONE
-                btnLogin.isEnabled = true
-                Toast.makeText(this, "Error: ${state.error}", Toast.LENGTH_LONG).show()
-            }
-        }
+    private fun navigateToHomeScreen() {
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 }
