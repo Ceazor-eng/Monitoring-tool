@@ -20,9 +20,9 @@ class AuthViewModel @Inject constructor(private val authRepository: AuthReposito
     private val _loginState = Channel<AuthState>()
     val loginState = _loginState.receiveAsFlow()
 
-    fun login(email: String, password: String) {
+    fun login(action: String, username: String, password: String) {
         viewModelScope.launch {
-            authRepository.login(email, password).collect { result ->
+            authRepository.login(action, username, password).collect { result ->
                 when (result) {
                     is Resource.Success -> {
                         Log.d(TAG, "Login successful")

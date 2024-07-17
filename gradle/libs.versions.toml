@@ -21,7 +21,8 @@ viewModel = "2.8.3"
 interceptor ="4.12.0"
 bcrypt ="0.4"
 fragments ="1.8.1"
-
+chucker ="4.0.0"
+chucker-no-op = "4.0.0"
 
 
 
@@ -50,6 +51,8 @@ fragments ={module = "androidx.fragment:fragment-ktx",version.ref ="fragments"}
 live-data ={module = "androidx.lifecycle:lifecycle-livedata-ktx",version.ref = "viewModel"}
 logging-interceptor ={module ="com.squareup.okhttp3:logging-interceptor",version.ref ="interceptor"}
 bcrypt-hash ={module = "org.mindrot:jbcrypt",version.ref = "bcrypt"}
+chuker-interceptor = {module = "com.github.chuckerteam.chucker:library",version.ref = "chucker"}
+chucker-no={module ="com.github.chuckerteam.chucker:library-no-op",version.ref = "chucker-no-op"}
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -60,6 +63,8 @@ networking = ["retrofit", "retrofit-serialization", "serialization-json", "corou
 dagger = ["dagger-hilt","kapt"]
 viewModel =["view-model-scope","live-data","fragments"]
 hashing = ["bcrypt-hash"]
+networkChucker = ["chuker-interceptor"]
+networkChuckerOp =["chucker-no"]
 
 
 

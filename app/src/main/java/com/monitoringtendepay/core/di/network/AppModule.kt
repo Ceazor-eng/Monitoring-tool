@@ -48,7 +48,7 @@ object AppModule {
             .build()
 
         return Retrofit.Builder()
-            .baseUrl("https://ca43-197-248-191-101.ngrok-free.app/")
+            .baseUrl(BASE_URL)
             .client(httpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()

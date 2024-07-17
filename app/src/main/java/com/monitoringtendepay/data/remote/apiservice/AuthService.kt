@@ -7,6 +7,6 @@ import retrofit2.http.Body
 import retrofit2.http.POST
 
 interface AuthService {
-    @POST("/login")
+    @POST("Tende_monitoring_tool-main/login_users_operations_monitoring_tool.php")
     suspend fun login(@Body loginRequest: LoginRequest): Response<LoginResponse>
 }

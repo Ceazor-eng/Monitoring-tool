@@ -53,10 +53,10 @@ class Login : AppCompatActivity() {
             val username = etUsername.text.toString()
             val password = etPassword.text.toString()
 //            val hashedPassword = hashPassword(password)
-            // val action = "userLogin"
-            Log.d("LoginActivity", "Login button clicked with username: $username,hashed password: $password")
+            val action = "userLogin"
+            Log.d("LoginActivity", "Login button clicked with username: $username, password: $password")
             if (username.isNotEmpty() && password.isNotEmpty()) {
-                authViewModel.login(username, password)
+                authViewModel.login(action, username, password)
             } else {
                 Toast.makeText(this, "Please enter both username and password", Toast.LENGTH_SHORT).show()
             }

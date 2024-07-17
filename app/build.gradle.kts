@@ -56,6 +56,10 @@ dependencies {
     // network manager with retrofit
     implementation(libs.bundles.networking)
 
+    // network with chucker
+    debugImplementation(libs.bundles.networkChucker)
+    releaseImplementation(libs.bundles.networkChuckerOp)
+
     // viewModel
     implementation(libs.bundles.viewModel)
 

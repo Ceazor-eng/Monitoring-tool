@@ -1,8 +1,10 @@
 package com.monitoringtendepay.domain.models
 
 data class LoginUser(
-    val id: String,
-    val email: String,
-    val name: String,
-    val token: String
+    val status: String,
+    val message: String,
+    val role: String,
+    val username: String,
+    val salutation: String,
+    val sessionToken: String
 )

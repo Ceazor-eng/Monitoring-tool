@@ -16,17 +16,19 @@ class AuthRepositoryImpl @Inject constructor(
     private val authService: AuthService
 ) : AuthRepository {
 
-    override suspend fun login(email: String, password: String): Flow<Resource<Result<LoginUser>>> = flow {
+    override suspend fun login(action: String, username: String, password: String): Flow<Resource<Result<LoginUser>>> = flow {
         emit(Resource.Loading())
         try {
-            val response = authService.login(LoginRequest(email, password))
+            val response = authService.login(LoginRequest(action, username, password))
             if (response.isSuccessful) {
                 response.body()?.let { loginResponse ->
                     val user = LoginUser(
-                        id = "", // Set appropriately if there's an id in response
-                        email = email,
-                        name = loginResponse.name, // Set appropriately if there's a name in response
-                        token = loginResponse.token
+                        message = loginResponse.message,
+                        status = loginResponse.status,
+                        role = loginResponse.role,
+                        username = loginResponse.username,
+                        sessionToken = loginResponse.sessionToken,
+                        salutation = loginResponse.salutation
                     )
                     emit(Resource.Success(Result.success(user)))
                 } ?: emit(Resource.Error("Unexpected error"))
