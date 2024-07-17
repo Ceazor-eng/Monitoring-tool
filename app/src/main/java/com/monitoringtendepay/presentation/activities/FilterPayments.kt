@@ -1,6 +1,7 @@
 package com.monitoringtendepay.presentation.activities
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.content.pm.PackageManager
 import android.os.Bundle
@@ -8,8 +9,8 @@ import android.os.Environment
 import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.Button
-import android.widget.EditText
 import android.widget.Spinner
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
@@ -41,6 +42,7 @@ class FilterPayments : AppCompatActivity() {
     private val viewModel: FilterPaymentsViewModel by viewModels()
     private val STORAGE_PERMISSION_CODE = 100
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -53,8 +55,8 @@ class FilterPayments : AppCompatActivity() {
 
         val spinnerServiceType: Spinner = findViewById(R.id.spinnerServiceType)
         val spinnerStatus: Spinner = findViewById(R.id.spinnerStatus)
-        val editTextStartDate: EditText = findViewById(R.id.editTextStartDate)
-        val editTextEndDate: EditText = findViewById(R.id.editTextEndDate)
+        val editTextStartDate: TextView = findViewById(R.id.startDateTextView)
+        val editTextEndDate: TextView = findViewById(R.id.endDateTextView)
         val buttonGenerateReport: Button = findViewById(R.id.buttonGenerateReport)
 
         // Populate Service Type Spinner
