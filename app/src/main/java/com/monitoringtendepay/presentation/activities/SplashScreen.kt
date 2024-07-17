@@ -52,5 +52,4 @@ class SplashScreen : AppCompatActivity() {
     private fun clearPreferences() {
         preferences.edit().clear().apply()
     }
-
 }
