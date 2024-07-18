@@ -39,7 +39,7 @@ class Login : AppCompatActivity() {
         }
 
         etUsername = findViewById(R.id.etUsername)
-        etPassword = findViewById(R.id.etPassword)
+        etPassword = findViewById(R.id.password)
         btnLogin = findViewById(R.id.btnLogin)
         progressBar = findViewById(R.id.progressBar)
 
@@ -73,7 +73,7 @@ class Login : AppCompatActivity() {
             }
             authState.data?.let { data ->
                 Toast.makeText(this, data, Toast.LENGTH_SHORT).show()
-                if (data == "LogIn Successfully") {
+                if (data == authState.data.toString()) {
                     navigateToHomeScreen()
                 }
             }

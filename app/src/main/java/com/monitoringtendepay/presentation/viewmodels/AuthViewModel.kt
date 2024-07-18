@@ -20,26 +20,48 @@ class AuthViewModel @Inject constructor(private val authRepository: AuthReposito
     private val _loginState = Channel<AuthState>()
     val loginState = _loginState.receiveAsFlow()
 
+    private val _registerState = Channel<AuthState>()
+    val registerState = _registerState.receiveAsFlow()
+
     fun login(action: String, username: String, password: String) {
         viewModelScope.launch {
             authRepository.login(action, username, password).collect { result ->
                 when (result) {
                     is Resource.Success -> {
-                        Log.d(TAG, "Login successful")
-                        _loginState.send(AuthState(data = "LogIn Successfully"))
+                        Log.d(TAG, "result: ${result.data}")
+                        _loginState.send(AuthState(data = result.data.toString()))
                     }
+
                     is Resource.Loading -> {
                         Log.d(TAG, "Logging in...")
                         _loginState.send(AuthState(isLoading = true))
                     }
+
                     is Resource.Error -> {
-                        val errorMessage = when (result.message) {
-                            "Incorrect password" -> "Incorrect password"
-                            "Email not found" -> "Email not found"
-                            else -> "Login Failed!!"
-                        }
-                        Log.d(TAG, "Login error: $errorMessage")
-                        _loginState.send(AuthState(error = errorMessage))
+                        Log.d(TAG, "Login error: ${result.message}")
+                        _loginState.send(AuthState(error = result.message))
+                    }
+                }
+            }
+        }
+    }
+
+    fun registerUser(action: String, email: String, firstName: String, lastName: String, phoneNumber: String, roleID: String, username: String) {
+        viewModelScope.launch {
+            authRepository.registerUser(action, email, firstName, lastName, phoneNumber, roleID, username).collect { result ->
+                when (result) {
+                    is Resource.Success -> {
+                        Log.d(TAG, "result: ${result.data}")
+                        _registerState.send(AuthState(data = result.data.toString()))
+                    }
+
+                    is Resource.Loading -> {
+                        Log.d(TAG, "Registering user...")
+                        _registerState.send(AuthState(isLoading = true))
+                    }
+                    is Resource.Error -> {
+                        Log.d(TAG, "Login error: ${result.message}")
+                        _loginState.send(AuthState(error = result.message))
                     }
                 }
             }
