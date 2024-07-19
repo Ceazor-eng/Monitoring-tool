@@ -24,15 +24,19 @@ class AuthRepositoryImpl @Inject constructor(
             val response = authService.login(LoginRequest(action, username, password))
             if (response.isSuccessful) {
                 response.body()?.let { loginResponse ->
-                    val user = LoginUser(
-                        message = loginResponse.message,
-                        status = loginResponse.status,
-                        role = loginResponse.role,
-                        username = loginResponse.username,
-                        sessionToken = loginResponse.sessionToken,
-                        salutation = loginResponse.salutation
-                    )
-                    emit(Resource.Success(Result.success(user)))
+                    if (loginResponse.status == "success") {
+                        val user = LoginUser(
+                            message = loginResponse.message,
+                            status = loginResponse.status,
+                            role = loginResponse.role,
+                            username = loginResponse.username,
+                            sessionToken = loginResponse.sessionToken,
+                            salutation = loginResponse.salutation
+                        )
+                        emit(Resource.Success(Result.success(user)))
+                    } else {
+                        emit(Resource.Error(loginResponse.message ?: "Unexpected error"))
+                    }
                 } ?: emit(Resource.Error("Unexpected error"))
             } else {
                 val errorMessage = response.message() ?: "Unknown error"
@@ -57,14 +61,18 @@ class AuthRepositoryImpl @Inject constructor(
             val response = authService.register(RegisterRequest(action, email, firstName, lastName, phoneNumber, roleID, username))
             if (response.isSuccessful) {
                 response.body()?.let { registerResponse ->
-                    val user = RegisterUser(
-                        message = registerResponse.message,
-                        status = registerResponse.status,
-                        username = registerResponse.username,
-                        salutation = registerResponse.salutation,
-                        otp = registerResponse.otp
-                    )
-                    emit(Resource.Success(Result.success(user)))
+                    if (registerResponse.data.status == "success") {
+                        val user = RegisterUser(
+                            message = registerResponse.data.message,
+                            status = registerResponse.data.status,
+                            username = registerResponse.data.username,
+                            salutation = registerResponse.data.salutation,
+                            otp = registerResponse.data.otp
+                        )
+                        emit(Resource.Success(Result.success(user)))
+                    } else {
+                        emit(Resource.Error(registerResponse.data.message ?: "Unexpected error"))
+                    }
                 } ?: emit(Resource.Error("Unexpected error"))
             } else {
                 val errorMessage = response.message() ?: "Unknown error"

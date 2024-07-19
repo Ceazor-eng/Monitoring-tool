@@ -46,6 +46,8 @@ class Users : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        progressBar = view.findViewById(R.id.progressBar)
+
         setUpViews(view)
 
         registerBtn.setOnClickListener {
@@ -81,20 +83,27 @@ class Users : Fragment() {
         email = view.findViewById(R.id.email)
         roleId = view.findViewById(R.id.roleID)
         registerBtn = view.findViewById(R.id.btnRegister)
-        progressBar = view.findViewById(R.id.progressBar)
     }
 
     private fun handleAuthState(authState: AuthState) {
-        if (authState.isLoading) {
-            progressBar.visibility = ProgressBar.VISIBLE
-        } else {
-            progressBar.visibility = ProgressBar.GONE
-            authState.error?.let { error ->
-                Toast.makeText(requireContext(), error, Toast.LENGTH_SHORT).show()
-            }
-            authState.data?.let { data ->
-                Toast.makeText(requireContext(), data, Toast.LENGTH_SHORT).show()
+        progressBar.visibility = if (authState.isLoading) View.VISIBLE else View.GONE
+        authState.data?.let { data ->
+            if (isRegisterSuccessful(data)) {
+                Log.d("RegisterUser", "Register successful")
+                Toast.makeText(requireContext(), "Register successful", Toast.LENGTH_SHORT).show()
+                // navigateToHomeScreen()
+            } else {
+                Log.d("RegisterUser", "Register failed")
+                // Toast.makeText(requireContext(), "Register failed", Toast.LENGTH_SHORT).show()
             }
         }
+        authState.error?.let { error ->
+            Log.d("RegisterUser", "Register error: $error")
+            Toast.makeText(requireContext(), error, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun isRegisterSuccessful(data: String): Boolean {
+        return data.contains("success")
     }
 }

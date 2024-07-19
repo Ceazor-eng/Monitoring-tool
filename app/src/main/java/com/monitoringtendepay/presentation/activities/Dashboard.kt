@@ -258,7 +258,7 @@ class Dashboard : Fragment() {
             when {
                 state.isLoading -> {
                     Log.d("DashboardFragment", "Loading...")
-                    Toast.makeText(requireContext(), "Loading", Toast.LENGTH_SHORT).show()
+                    // Toast.makeText(requireContext(), "Loading", Toast.LENGTH_SHORT).show()
                 }
                 state.error.isNotEmpty() -> {
                     Log.d("DashboardFragment", "Error: ${state.error}")
@@ -267,7 +267,7 @@ class Dashboard : Fragment() {
                 state.payments.isNotEmpty() -> {
                     Log.d("DashboardFragment", "Success: ${state.payments}")
                     paymentsAdapter.updateData(state.payments.sortedByDescending { it.transactionDate }.take(3))
-                    Toast.makeText(requireContext(), "Success", Toast.LENGTH_SHORT).show()
+                    // Toast.makeText(requireContext(), "Success", Toast.LENGTH_SHORT).show()
                 }
             }
         }.launchIn(viewLifecycleOwner.lifecycleScope)

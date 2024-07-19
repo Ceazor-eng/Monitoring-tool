@@ -3,6 +3,7 @@ package com.monitoringtendepay.presentation.activities
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
@@ -64,20 +65,25 @@ class Login : AppCompatActivity() {
     }
 
     private fun handleAuthState(authState: AuthState) {
-        if (authState.isLoading) {
-            progressBar.visibility = ProgressBar.VISIBLE
-        } else {
-            progressBar.visibility = ProgressBar.GONE
-            authState.error?.let { error ->
-                Toast.makeText(this, error, Toast.LENGTH_SHORT).show()
-            }
-            authState.data?.let { data ->
-                Toast.makeText(this, data, Toast.LENGTH_SHORT).show()
-                if (data == authState.data.toString()) {
-                    navigateToHomeScreen()
-                }
+        progressBar.visibility = if (authState.isLoading) View.VISIBLE else View.GONE
+        authState.data?.let { data ->
+            if (isLoginSuccessful(data)) {
+                Log.d("LoginActivity", "Login successful")
+                // Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show()
+                navigateToHomeScreen()
+            } else {
+                Log.d("LoginActivity", "Login failed")
+                // Toast.makeText(this, "Login failed", Toast.LENGTH_SHORT).show()
             }
         }
+        authState.error?.let { error ->
+            Log.d("LoginActivity", "Error: $error")
+            Toast.makeText(this, error, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun isLoginSuccessful(data: String): Boolean {
+        return data.contains("success")
     }
 
     private fun navigateToHomeScreen() {
