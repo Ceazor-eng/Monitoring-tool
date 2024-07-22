@@ -13,7 +13,7 @@
         android:layout_weight="1">
 
         <TextView
-            android:id="@+id/username"
+            android:id="@+id/username_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
@@ -29,7 +29,7 @@
         android:layout_weight="1">
 
         <TextView
-            android:id="@+id/createdAt"
+            android:id="@+id/createdAt_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
@@ -45,7 +45,7 @@
         android:layout_weight="1">
 
         <TextView
-            android:id="@+id/role"
+            android:id="@+id/role_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
@@ -61,7 +61,7 @@
         android:layout_weight="1">
 
         <TextView
-            android:id="@+id/status_txt"
+            android:id="@+id/status_txt_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
@@ -78,7 +78,7 @@
 
 
         <TextView
-            android:id="@+id/createdBy"
+            android:id="@+id/createdBy_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
@@ -95,6 +95,7 @@
 
         <ImageView
             android:layout_width="wrap_content"
+            android:id="@+id/actions_Image_View"
             android:layout_height="20dp"
             android:src="@drawable/actions"/>
 
