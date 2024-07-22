@@ -4,22 +4,22 @@
     <item
         android:id="@+id/menu_dashboard"
         android:title="@string/dashboard"
-        android:icon="@drawable/dash"
+        android:icon="@drawable/dassh"
         />
 
     <item
         android:id="@+id/menu_reports"
         android:title="@string/reports"
-        android:icon="@drawable/rps"/>
+        android:icon="@drawable/rreport"/>
 
     <item
         android:id="@+id/menu_users"
         android:title="@string/users"
-        android:icon="@drawable/uss"/>
+        android:icon="@drawable/userrs"/>
 
     <item
         android:id="@+id/menu_profile"
-        android:title="@string/profile"
-        android:icon="@drawable/acc"/>
+        android:title="@string/history"
+        android:icon="@drawable/historyy"/>
 
 </menu>
