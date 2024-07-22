@@ -2,14 +2,15 @@ package com.monitoringtendepay.presentation.activities
 
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
-import androidx.fragment.app.Fragment
+import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.monitoringtendepay.R
@@ -18,7 +19,7 @@ import com.monitoringtendepay.presentation.viewmodels.AuthViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class AddUser : Fragment() {
+class AddUser : AppCompatActivity() {
 
     private val viewModel: AuthViewModel by viewModels()
     private lateinit var etUsername: EditText
@@ -32,21 +33,22 @@ class AddUser : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-    }
+        enableEdgeToEdge()
+        setContentView(R.layout.activity_add_user)
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.activity_add_user, container, false)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        setUpViews(view)
+        fName = findViewById(R.id.fName)
+        etUsername = findViewById(R.id.username)
+        lName = findViewById(R.id.lName)
+        phoneNumber = findViewById(R.id.phoneNumber)
+        email = findViewById(R.id.email)
+        roleId = findViewById(R.id.roleID)
+        registerBtn = findViewById(R.id.btnRegister)
+        progressBar = findViewById(R.id.progressBar)
 
         registerBtn.setOnClickListener {
             val username = etUsername.text.toString()
@@ -62,7 +64,7 @@ class AddUser : Fragment() {
             if (username.isNotEmpty() && fName.isNotEmpty() && lname.isNotEmpty() && phoneNumber.isNotEmpty() && email.isNotEmpty() && roleId.isNotEmpty()) {
                 viewModel.registerUser(action, email, fName, lname, phoneNumber, roleId, username)
             } else {
-                Toast.makeText(requireContext(), "Please fill in all the fields", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Please fill in all the fields", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -73,27 +75,16 @@ class AddUser : Fragment() {
         }
     }
 
-    private fun setUpViews(view: View) {
-        fName = view.findViewById(R.id.fName)
-        etUsername = view.findViewById(R.id.username)
-        lName = view.findViewById(R.id.lName)
-        phoneNumber = view.findViewById(R.id.phoneNumber)
-        email = view.findViewById(R.id.email)
-        roleId = view.findViewById(R.id.roleID)
-        registerBtn = view.findViewById(R.id.btnRegister)
-        progressBar = view.findViewById(R.id.progressBar)
-    }
-
     private fun handleAuthState(authState: AuthState) {
         if (authState.isLoading) {
             progressBar.visibility = ProgressBar.VISIBLE
         } else {
             progressBar.visibility = ProgressBar.GONE
             authState.error?.let { error ->
-                Toast.makeText(requireContext(), error, Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, error, Toast.LENGTH_SHORT).show()
             }
             authState.data?.let { data ->
-                Toast.makeText(requireContext(), data, Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, data, Toast.LENGTH_SHORT).show()
             }
         }
     }
