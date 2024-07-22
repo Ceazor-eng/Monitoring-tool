@@ -56,7 +56,7 @@
         android:background="@color/white"
         android:id="@+id/recyclercard"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="match_parent"
         android:layout_marginTop="40dp"
         app:cardElevation="0dp"
         android:layout_below="@+id/AddUserBtn"
@@ -192,7 +192,7 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:background="@color/white"
-                    android:id="@+id/recyclerView"
+                    android:id="@+id/usersRecyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="40dp"
