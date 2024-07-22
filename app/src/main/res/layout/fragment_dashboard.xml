@@ -129,7 +129,7 @@
                     android:layout_alignParentTop="true"
                     android:layout_centerInParent="true"
                     android:layout_marginTop="10dp"
-                    android:src="@drawable/time" />
+                    android:src="@drawable/history" />
 
                 <TextView
                     android:id="@+id/pending_transactions_number_txt"
@@ -184,7 +184,7 @@
                     android:layout_alignParentTop="true"
                     android:layout_centerInParent="true"
                     android:layout_marginTop="10dp"
-                    android:src="@drawable/remove" />
+                    android:src="@drawable/close" />
 
                 <TextView
                     android:id="@+id/failed_Transactions_number_txt"
@@ -241,7 +241,7 @@
                     android:layout_alignParentTop="true"
                     android:layout_centerInParent="true"
                     android:layout_marginTop="10dp"
-                    android:src="@drawable/deletefile" />
+                    android:src="@drawable/questionmark" />
 
                 <TextView
                     android:id="@+id/missing_transactions_number_txt"
