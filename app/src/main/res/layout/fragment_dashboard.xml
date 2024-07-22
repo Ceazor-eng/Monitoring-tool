@@ -300,6 +300,7 @@
             android:layout_height="wrap_content">
 
             <androidx.cardview.widget.CardView
+                android:background="@color/white"
                 android:id="@+id/recyclercard"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
@@ -312,6 +313,7 @@
                 <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:background="@color/white"
                     >
 
                     <View
@@ -328,6 +330,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
+                        android:background="@color/white"
                         android:weightSum="4">
 
                         <RelativeLayout
@@ -404,6 +407,7 @@
                         android:orientation="vertical">
 
                         <androidx.recyclerview.widget.RecyclerView
+                            android:background="@color/white"
                             android:id="@+id/recyclerView"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"

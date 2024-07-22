@@ -28,15 +28,18 @@ class AuthViewModel @Inject constructor(private val authRepository: AuthReposito
             authRepository.login(action, username, password).collect { result ->
                 when (result) {
                     is Resource.Success -> {
-                        Log.d(TAG, "result: ${result.data}")
-                        _loginState.send(AuthState(data = result.data.toString()))
+                        Log.d(TAG, "Login successful: ${result.data}")
+                        val loginUser = result.data?.getOrNull()
+                        if (loginUser != null && loginUser.status == "success") {
+                            _loginState.send(AuthState(data = loginUser.toString()))
+                        } else {
+                            _loginState.send(AuthState(error = "Login failed"))
+                        }
                     }
-
                     is Resource.Loading -> {
                         Log.d(TAG, "Logging in...")
                         _loginState.send(AuthState(isLoading = true))
                     }
-
                     is Resource.Error -> {
                         Log.d(TAG, "Login error: ${result.message}")
                         _loginState.send(AuthState(error = result.message))

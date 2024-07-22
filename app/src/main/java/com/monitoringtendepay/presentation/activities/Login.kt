@@ -67,13 +67,14 @@ class Login : AppCompatActivity() {
     private fun handleAuthState(authState: AuthState) {
         progressBar.visibility = if (authState.isLoading) View.VISIBLE else View.GONE
         authState.data?.let { data ->
+            Log.d("LoginActivity", "AuthState data: $data")
             if (isLoginSuccessful(data)) {
                 Log.d("LoginActivity", "Login successful")
-                // Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show()
                 navigateToHomeScreen()
             } else {
                 Log.d("LoginActivity", "Login failed")
-                // Toast.makeText(this, "Login failed", Toast.LENGTH_SHORT).show()
+                //  Toast.makeText(this, "Login failed", Toast.LENGTH_SHORT).show()
             }
         }
         authState.error?.let { error ->
@@ -83,7 +84,7 @@ class Login : AppCompatActivity() {
     }
 
     private fun isLoginSuccessful(data: String): Boolean {
-        return data.contains("success")
+        return data.contains("status=success")
     }
 
     private fun navigateToHomeScreen() {

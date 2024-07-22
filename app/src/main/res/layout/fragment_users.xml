@@ -14,10 +14,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
         android:fontFamily="@font/josefinsansbold"
-        android:text="Users"
+        android:text="@string/users"
+        android:textColor="@color/black"
         android:textSize="28sp" />
 
     <EditText
@@ -29,7 +30,7 @@
         android:layout_marginBottom="30dp"
         android:background="@drawable/rectangle_2"
         android:fontFamily="@font/josefinsansregular"
-        android:hint="Search"
+        android:hint="@string/search_users"
         android:inputType="text"
         android:paddingStart="16dp" />
 
@@ -52,6 +53,7 @@
 
 
     <androidx.cardview.widget.CardView
+        android:background="@color/white"
         android:id="@+id/recyclercard"
         android:layout_width="match_parent"
         android:layout_height="150dp"
@@ -64,6 +66,7 @@
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@color/white"
             >
 
             <View
@@ -80,7 +83,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:weightSum="4">
+                android:weightSum="6">
 
                 <RelativeLayout
                     android:layout_width="0dp"
@@ -88,12 +91,12 @@
                     android:layout_weight="1">
 
                     <TextView
-                        android:id="@+id/phonenumbertxt"
+                        android:id="@+id/username"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
                         android:fontFamily="@font/josefinsansregular"
-                        android:text="@string/phoneNumber"
+                        android:text="@string/username"
                         android:textColor="@color/black"
                         android:textSize="11.5sp" />
                 </RelativeLayout>
@@ -104,12 +107,28 @@
                     android:layout_weight="1">
 
                     <TextView
-                        android:id="@+id/reference_id_txt"
+                        android:id="@+id/createdAt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
                         android:fontFamily="@font/josefinsansregular"
-                        android:text="@string/reference_id"
+                        android:text="@string/createdat"
+                        android:textColor="@color/black"
+                        android:textSize="11.5sp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/role"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:fontFamily="@font/josefinsansregular"
+                        android:text="@string/Role"
                         android:textColor="@color/black"
                         android:textSize="11.5sp" />
                 </RelativeLayout>
@@ -137,12 +156,28 @@
 
 
                     <TextView
-                        android:id="@+id/time_txt"
+                        android:id="@+id/createdBy"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
                         android:fontFamily="@font/josefinsansregular"
-                        android:text="@string/date_and_time"
+                        android:text="@string/createdBy"
+                        android:textColor="@color/black"
+                        android:textSize="11.5sp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/actions"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:fontFamily="@font/josefinsansregular"
+                        android:text="@string/Actions"
                         android:textColor="@color/black"
                         android:textSize="11.5sp" />
                 </RelativeLayout>
@@ -156,11 +191,12 @@
                 android:orientation="vertical">
 
                 <androidx.recyclerview.widget.RecyclerView
+                    android:background="@color/white"
                     android:id="@+id/recyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="40dp"
-                    tools:listitem="@layout/item_payment" />
+                    tools:listitem="@layout/item_added_users" />
             </LinearLayout>
 
 
