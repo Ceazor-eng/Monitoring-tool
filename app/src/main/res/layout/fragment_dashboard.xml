@@ -27,15 +27,7 @@
                 android:elevation="40dp"
                 />
 
-            <View
-                android:id="@+id/vector"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="34dp"
-                android:layout_marginEnd="23dp"
-                android:background="@drawable/notification"
-                android:elevation="40dp" />
+
 
             <TextView
                 android:id="@+id/welcome_ian"
@@ -137,7 +129,7 @@
                     android:layout_alignParentTop="true"
                     android:layout_centerInParent="true"
                     android:layout_marginTop="10dp"
-                    android:src="@drawable/pending" />
+                    android:src="@drawable/time" />
 
                 <TextView
                     android:id="@+id/pending_transactions_number_txt"
@@ -249,7 +241,7 @@
                     android:layout_alignParentTop="true"
                     android:layout_centerInParent="true"
                     android:layout_marginTop="10dp"
-                    android:src="@drawable/missing" />
+                    android:src="@drawable/deletefile" />
 
                 <TextView
                     android:id="@+id/missing_transactions_number_txt"

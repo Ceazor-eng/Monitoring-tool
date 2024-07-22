@@ -1,137 +1,183 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
+    android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    android:orientation="vertical"
-    android:padding="16dp"
-    tools:context=".presentation.activities.Users">
+    tools:context=".presentation.activities.Users"
+    >
 
-
-    <View
-        android:layout_width="200dp"
-        android:layout_height="90dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="90dp"
-        android:background="@drawable/kocela" />
-
-
-    <RelativeLayout
+    <TextView
+        android:id="@+id/UsersTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center">
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="20dp"
+        android:fontFamily="@font/josefinsansbold"
+        android:text="Users"
+        android:textSize="28sp" />
+
+    <EditText
+        android:id="@+id/searchUser"
+        android:layout_width="292dp"
+        android:layout_height="42dp"
+        android:layout_below="@+id/UsersTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/rectangle_2"
+        android:fontFamily="@font/josefinsansregular"
+        android:hint="Search"
+        android:inputType="text"
+        android:paddingStart="16dp" />
 
 
-        <TextView
-            android:id="@+id/register"
+    <Button
+        android:id="@+id/AddUserBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/searchUser"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/josefinsansbold"
+        android:gravity="center_horizontal"
+        android:text="@string/add_user">
+
+    </Button>
+
+
+
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/recyclercard"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginTop="40dp"
+        app:cardElevation="0dp"
+        android:layout_below="@+id/AddUserBtn"
+        android:layout_centerHorizontal="true"
+        >
+
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="20dp"
-            android:fontFamily="@font/josefinsansbold"
-            android:text="Register"
-            android:textSize="28sp" />
+            >
+
+            <View
+                android:id="@+id/rectangle_7"
+                android:layout_width="295dp"
+                android:layout_height="304dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="66dp"
+                android:layout_marginTop="462dp"
+                android:elevation="4dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="4">
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/phonenumbertxt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:fontFamily="@font/josefinsansregular"
+                        android:text="@string/phoneNumber"
+                        android:textColor="@color/black"
+                        android:textSize="11.5sp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/reference_id_txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:fontFamily="@font/josefinsansregular"
+                        android:text="@string/reference_id"
+                        android:textColor="@color/black"
+                        android:textSize="11.5sp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/status_txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:fontFamily="@font/josefinsansregular"
+                        android:text="@string/status"
+                        android:textColor="@color/black"
+                        android:textSize="11.5sp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
 
 
-        <EditText
-            android:id="@+id/email"
-            android:layout_width="292dp"
-            android:layout_height="42dp"
-            android:layout_below="@id/register"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="30dp"
-            android:background="@drawable/rectangle_2"
-            android:fontFamily="@font/josefinsansregular"
-            android:hint="Email"
-            android:inputType="text"
-            android:paddingStart="16dp" />
+                    <TextView
+                        android:id="@+id/time_txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:fontFamily="@font/josefinsansregular"
+                        android:text="@string/date_and_time"
+                        android:textColor="@color/black"
+                        android:textSize="11.5sp" />
+                </RelativeLayout>
+
+            </LinearLayout>
 
 
-        <EditText
-            android:id="@+id/fName"
-            android:layout_width="292dp"
-            android:layout_height="42dp"
-            android:layout_below="@id/email"
-            android:layout_centerHorizontal="true"
-            android:background="@drawable/rectangle_2"
-            android:fontFamily="@font/josefinsansregular"
-            android:hint="Firstname"
-            android:paddingStart="16dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/lName"
-            android:layout_width="292dp"
-            android:layout_height="42dp"
-            android:layout_below="@id/fName"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/rectangle_2"
-            android:fontFamily="@font/josefinsansregular"
-            android:hint="Lastname"
-            android:paddingStart="16dp" />
-
-        <EditText
-            android:id="@+id/phoneNumber"
-            android:layout_width="292dp"
-            android:layout_height="42dp"
-            android:layout_below="@id/lName"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/rectangle_2"
-            android:fontFamily="@font/josefinsansregular"
-            android:hint="Phonenumber"
-            android:paddingStart="16dp" />
-
-        <EditText
-            android:id="@+id/roleID"
-            android:layout_width="292dp"
-            android:layout_height="42dp"
-            android:layout_below="@id/phoneNumber"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/rectangle_2"
-            android:fontFamily="@font/josefinsansregular"
-            android:hint="Role Id"
-            android:paddingStart="16dp" />
-
-        <EditText
-            android:id="@+id/username"
-            android:layout_width="292dp"
-            android:layout_height="42dp"
-            android:layout_below="@id/roleID"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/rectangle_2"
-            android:fontFamily="@font/josefinsansregular"
-            android:hint="Username"
-            android:inputType="text"
-            android:paddingStart="16dp" />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp"
+                    tools:listitem="@layout/item_payment" />
+            </LinearLayout>
 
 
-        <Button
-            android:id="@+id/btnRegister"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/username"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="16dp"
-            android:fontFamily="@font/josefinsansbold"
-            android:gravity="center_horizontal"
-            android:text="Register" />
+        </RelativeLayout>
 
-        <ProgressBar
-            android:id="@+id/progressBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_gravity="center"
-            android:layout_marginTop="0dp"
-            android:visibility="gone" />
+    </androidx.cardview.widget.CardView>
 
 
-    </RelativeLayout>
+
+    <include
+        android:id="@+id/bottom_navigation"
+        layout="@layout/activity_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        />
 
 
-</LinearLayout>
+
+</RelativeLayout>
