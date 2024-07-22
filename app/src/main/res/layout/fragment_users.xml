@@ -17,7 +17,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
         android:fontFamily="@font/josefinsansbold"
-        android:text="@string/users"
+        android:text="@string/manage_users"
         android:textColor="@color/black"
         android:textSize="28sp" />
 
@@ -56,7 +56,7 @@
         android:background="@color/white"
         android:id="@+id/recyclercard"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         app:cardElevation="0dp"
         android:layout_below="@+id/AddUserBtn"

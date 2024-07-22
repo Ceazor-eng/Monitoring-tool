@@ -22,25 +22,48 @@ class AllUsersAdapter(private var users: List<UserDetails>) : RecyclerView.Adapt
     }
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
-        val user = users[position]
-        holder.username.text = user.username
-        holder.createdAt.text = user.createdAt
-        holder.role.text = user.role
-        holder.status.text = user.status
-        holder.createdBy.text = user.createdBy
-        holder.actions.setImageResource(R.drawable.actions)
+        holder.bind(users[position])
     }
 
     override fun getItemCount(): Int {
         return users.size
     }
 
-    inner class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val username: TextView = itemView.findViewById(R.id.username_item)
-        val createdAt: TextView = itemView.findViewById(R.id.createdAt_item)
-        val role: TextView = itemView.findViewById(R.id.role_item)
-        val status: TextView = itemView.findViewById(R.id.status_txt_item)
-        val createdBy: TextView = itemView.findViewById(R.id.createdBy_item)
-        val actions: ImageView = itemView.findViewById(R.id.actions_Image_View)
+    class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+        private val username: TextView = itemView.findViewById(R.id.username_item)
+        private val createdAt: TextView = itemView.findViewById(R.id.createdAt_item)
+        private val role: TextView = itemView.findViewById(R.id.role_item)
+        private val status: TextView = itemView.findViewById(R.id.status_txt_item)
+        private val createdBy: TextView = itemView.findViewById(R.id.createdBy_item)
+        private val actions: ImageView = itemView.findViewById(R.id.actions_Image_View)
+
+        fun bind(user: UserDetails) {
+            username.text = user.username
+            createdAt.text = user.createdAt
+            role.text = user.role
+            status.text = getStatusText(user.status)
+            status.setTextColor(getStatusColor(user.status))
+            createdBy.text = user.createdBy
+            actions.setImageResource(R.drawable.actions)
+        }
+
+        private fun getStatusText(status: String): String {
+            return when (status.lowercase()) {
+                "active" -> "Active"
+                "otp" -> "OTP"
+                "inactive" -> "Deactivated"
+                else -> "Unknown"
+            }
+        }
+
+        private fun getStatusColor(status: String): Int {
+            return when (status.lowercase()) {
+                "active" -> itemView.context.getColor(R.color.green)
+                "otp" -> itemView.context.getColor(R.color.light_blue)
+                "inactive" -> itemView.context.getColor(R.color.red)
+                else -> itemView.context.getColor(R.color.black)
+            }
+        }
     }
 }

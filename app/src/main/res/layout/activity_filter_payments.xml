@@ -30,7 +30,7 @@
         android:fontFamily="@font/josefinsansregular"
         android:gravity="center_horizontal"
         android:paddingHorizontal="40dp"
-        android:text="Generate sessions report and export for further analysis"
+        android:text="@string/payments_report"
         android:textColor="#6C2671"
         android:textSize="18dp" />
 
