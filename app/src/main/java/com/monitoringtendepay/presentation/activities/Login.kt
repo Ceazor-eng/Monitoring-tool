@@ -16,9 +16,10 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import com.monitoringtendepay.R
 import com.monitoringtendepay.core.common.hashPassword
-import com.monitoringtendepay.presentation.states.AuthState
+import com.monitoringtendepay.presentation.states.LoginState
 import com.monitoringtendepay.presentation.viewmodels.AuthViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class Login : AppCompatActivity() {
@@ -45,9 +46,9 @@ class Login : AppCompatActivity() {
         btnLogin = findViewById(R.id.btnLogin)
         progressBar = findViewById(R.id.progressBar)
 
-        lifecycleScope.launchWhenStarted {
+        lifecycleScope.launch {
             authViewModel.loginState.collect { authState ->
-                handleAuthState(authState)
+                handleLoginState(authState)
             }
         }
 
@@ -65,31 +66,41 @@ class Login : AppCompatActivity() {
         }
     }
 
-    private fun handleAuthState(authState: AuthState) {
-        progressBar.visibility = if (authState.isLoading) View.VISIBLE else View.GONE
-        authState.data?.let { data ->
-            Log.d("LoginActivity", "AuthState data: $data")
-            if (isLoginSuccessful(data)) {
+    private fun handleLoginState(loginState: LoginState) {
+        progressBar.visibility = if (loginState.isLoading) View.VISIBLE else View.GONE
+        loginState.data?.let { data ->
+            Log.d("LoginActivity", "LoginState data: $data")
+            if (loginState.changePasswordRequired) {
+                Log.d("LoginActivity", "Redirecting to change password screen")
+                navigateToChangePasswordScreen(data.username)
+            } else if (isLoginSuccessful(data.status)) {
                 Log.d("LoginActivity", "Login successful")
                 Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show()
                 navigateToHomeScreen()
             } else {
                 Log.d("LoginActivity", "Login failed")
-                //  Toast.makeText(this, "Login failed", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Login failed", Toast.LENGTH_SHORT).show()
             }
         }
-        authState.error?.let { error ->
+        loginState.error?.let { error ->
             Log.d("LoginActivity", "Error: $error")
             Toast.makeText(this, error, Toast.LENGTH_SHORT).show()
         }
     }
 
-    private fun isLoginSuccessful(data: String): Boolean {
-        return data.contains("status=success")
+    private fun isLoginSuccessful(status: String): Boolean {
+        return status == "success"
     }
 
     private fun navigateToHomeScreen() {
         val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+
+    private fun navigateToChangePasswordScreen(username: String?) {
+        val intent = Intent(this, UpdatePassword::class.java)
+        intent.putExtra("username", username)
         startActivity(intent)
         finish()
     }

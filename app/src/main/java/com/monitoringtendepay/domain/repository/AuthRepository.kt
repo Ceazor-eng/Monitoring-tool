@@ -3,6 +3,7 @@ package com.monitoringtendepay.domain.repository
 import com.monitoringtendepay.core.common.Resource
 import com.monitoringtendepay.domain.models.LoginUser
 import com.monitoringtendepay.domain.models.RegisterUser
+import com.monitoringtendepay.domain.models.UpdatePassword
 import kotlinx.coroutines.flow.Flow
 
 interface AuthRepository {
@@ -17,4 +18,6 @@ interface AuthRepository {
         roleID: String,
         username: String
     ): Flow<Resource<Result<RegisterUser>>>
+
+    suspend fun updatePassword(action: String, username: String, password: String): Flow<Resource<Result<UpdatePassword>>>
 }
