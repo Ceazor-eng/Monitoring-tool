@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.monitoringtendepay.core.common.Resource
 import com.monitoringtendepay.domain.repository.AuthRepository
 import com.monitoringtendepay.presentation.states.AuthState
+import com.monitoringtendepay.presentation.states.LoginState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.channels.Channel
@@ -17,32 +18,47 @@ class AuthViewModel @Inject constructor(private val authRepository: AuthReposito
 
     private val TAG = "AuthViewModel"
 
-    private val _loginState = Channel<AuthState>()
+    private val _loginState = Channel<LoginState>()
     val loginState = _loginState.receiveAsFlow()
 
     private val _registerState = Channel<AuthState>()
     val registerState = _registerState.receiveAsFlow()
+
+    private val _updatePasswordState = Channel<AuthState>()
+    val updatePasswordState = _updatePasswordState.receiveAsFlow()
 
     fun login(action: String, username: String, password: String) {
         viewModelScope.launch {
             authRepository.login(action, username, password).collect { result ->
                 when (result) {
                     is Resource.Success -> {
-                        Log.d(TAG, "Login successful: ${result.data}")
-                        val loginUser = result.data?.getOrNull()
-                        if (loginUser != null && loginUser.status == "success") {
-                            _loginState.send(AuthState(data = loginUser.toString()))
+                        val loginResponse = result.data?.getOrNull()
+                        if (loginResponse != null) {
+                            Log.d(TAG, "LoginResponse received: $loginResponse")
+
+                            // Check the status to set changePasswordRequired flag
+                            val changePasswordRequired = loginResponse.status == "changePassword"
+                            Log.d(TAG, "Login status: ${loginResponse.status}")
+                            Log.d(TAG, "Change password required: $changePasswordRequired")
+
+                            _loginState.send(
+                                LoginState(
+                                    data = loginResponse,
+                                    changePasswordRequired = changePasswordRequired
+                                )
+                            )
                         } else {
-                            _loginState.send(AuthState(error = "Login failed"))
+                            Log.d(TAG, "LoginResponse is null")
+                            _loginState.send(LoginState(error = "Login failed"))
                         }
                     }
                     is Resource.Loading -> {
                         Log.d(TAG, "Logging in...")
-                        _loginState.send(AuthState(isLoading = true))
+                        _loginState.send(LoginState(isLoading = true))
                     }
                     is Resource.Error -> {
                         Log.d(TAG, "Login error: ${result.message}")
-                        _loginState.send(AuthState(error = result.message))
+                        _loginState.send(LoginState(error = result.message))
                     }
                 }
             }
@@ -62,9 +78,38 @@ class AuthViewModel @Inject constructor(private val authRepository: AuthReposito
                         Log.d(TAG, "Registering user...")
                         _registerState.send(AuthState(isLoading = true))
                     }
+
                     is Resource.Error -> {
                         Log.d(TAG, "Login error: ${result.message}")
-                        _loginState.send(AuthState(error = result.message))
+                        _registerState.send(AuthState(error = result.message))
+                    }
+                }
+            }
+        }
+    }
+
+    fun updatePassword(action: String, username: String, password: String) {
+        viewModelScope.launch {
+            authRepository.updatePassword(action, username, password).collect { result ->
+                when (result) {
+                    is Resource.Success -> {
+                        Log.d(TAG, "Update password successful: ${result.data}")
+                        val newPassword = result.data?.getOrNull()
+                        if (newPassword != null && newPassword.status == "success") {
+                            _updatePasswordState.send(AuthState(data = newPassword.toString()))
+                        } else {
+                            _updatePasswordState.send(AuthState(error = "Update password failed"))
+                        }
+                    }
+
+                    is Resource.Loading -> {
+                        Log.d(TAG, "Updating password...")
+                        _updatePasswordState.send(AuthState(isLoading = true))
+                    }
+
+                    is Resource.Error -> {
+                        Log.d(TAG, "Update password error: ${result.message}")
+                        _updatePasswordState.send(AuthState(error = result.message))
                     }
                 }
             }
