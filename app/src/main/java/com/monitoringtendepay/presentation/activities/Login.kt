@@ -15,6 +15,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import com.monitoringtendepay.R
+import com.monitoringtendepay.core.common.hashPassword
 import com.monitoringtendepay.presentation.states.AuthState
 import com.monitoringtendepay.presentation.viewmodels.AuthViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -53,11 +54,11 @@ class Login : AppCompatActivity() {
         btnLogin.setOnClickListener {
             val username = etUsername.text.toString()
             val password = etPassword.text.toString()
-//            val hashedPassword = hashPassword(password)
+            val hashedPassword = hashPassword(password)
             val action = "userLogin"
-            Log.d("LoginActivity", "Login button clicked with username: $username, password: $password")
-            if (username.isNotEmpty() && password.isNotEmpty()) {
-                authViewModel.login(action, username, password)
+            Log.d("LoginActivity", "Login button clicked with username: $username, hashedPassword: $hashedPassword")
+            if (username.isNotEmpty() && hashedPassword.isNotEmpty()) {
+                authViewModel.login(action, username, hashedPassword)
             } else {
                 Toast.makeText(this, "Please enter both username and password", Toast.LENGTH_SHORT).show()
             }
