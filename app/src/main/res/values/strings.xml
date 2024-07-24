@@ -39,4 +39,6 @@
     <string name="history_title">History</string>
     <string name="reporthistory">Reports</string>
     <string name="paymentshistory">Payments</string>
+    <string name="payments_report">Generate payments report and export for further analysis</string>
+    <string name="manage_users">Manage Users</string>
 </resources>
