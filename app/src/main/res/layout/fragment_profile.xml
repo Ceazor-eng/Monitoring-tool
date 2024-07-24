@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="91dp"
         android:fontFamily="@font/josefinsansregular"
         android:gravity="top"
         android:text="@string/history"
@@ -27,6 +27,7 @@
         android:id="@+id/toggle_switch"
         android:layout_width="match_parent"
         android:layout_height="150dp"
+        android:layout_marginTop="20dp"
         android:paddingHorizontal="20dp"
         android:layout_below="@id/history_title"
         >
@@ -103,23 +104,17 @@
         android:layout_marginTop="20dp"
         android:fontFamily="@font/josefinsansregular"
         android:paddingHorizontal="40dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="30dp"
         android:text="@string/all_transactions"
         android:textColor="@color/black"
         android:layout_below="@id/toggle_switch" />
-
-
-
-
-
-
 
 
     <androidx.cardview.widget.CardView
         android:background="@color/white"
         android:id="@+id/recyclercard"
         android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_height="340dp"
         android:layout_marginTop="0dp"
         app:cardElevation="0dp"
         android:elevation="40dp"

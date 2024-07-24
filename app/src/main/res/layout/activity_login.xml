@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/white"
+    android:background="@drawable/bg5"
     android:padding="16dp"
     tools:context=".presentation.activities.Login">
 
@@ -34,8 +34,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Login"
-            android:fontFamily="@font/josefinsansbold"
+            android:fontFamily="@font/josefinsansregular"
             android:layout_marginBottom="20dp"
+            android:textColor="#6D2088"
             android:layout_centerHorizontal="true"
             android:textSize="28sp"
             />

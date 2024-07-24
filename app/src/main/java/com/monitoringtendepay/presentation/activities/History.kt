@@ -10,8 +10,10 @@ import androidx.fragment.app.Fragment
 import com.monitoringtendepay.R
 
 class History : Fragment() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
     }
 
     override fun onCreateView(
@@ -28,5 +30,15 @@ class History : Fragment() {
         }
 
         return view
+    }
+
+    private fun enableEdgeToEdge() {
+        activity?.window?.apply {
+            decorView.systemUiVisibility = (
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                    or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                    or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                )
+        }
     }
 }

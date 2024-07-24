@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="92dp"
         android:layout_alignParentTop="true"
         android:text="@string/reports"
         android:textColor="#6D2088"
@@ -38,6 +38,7 @@
             android:focusable="true">
 
             <TextView
+                android:id="@+id/text_generate_payments_report"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
@@ -68,6 +69,7 @@
             android:focusable="true">
 
             <TextView
+                android:id="@+id/text_generate_sessions_report"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"

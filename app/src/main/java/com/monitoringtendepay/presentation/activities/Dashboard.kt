@@ -48,6 +48,7 @@ class Dashboard : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
     }
 
     override fun onCreateView(
@@ -116,26 +117,19 @@ class Dashboard : Fragment() {
     }
 
     private fun fetchDataAndPopulateChart() {
-        val action = "fetchAllPayments"
-
-        viewModel.fetchAllPayments(action)
+        viewModel.fetchAllPayments("fetchAllPayments")
 
         lifecycleScope.launchWhenStarted {
             viewModel.paymentState.collect { state ->
                 when (state.isLoading) {
-                    true -> {
-                        Log.d("MainActivity", "Loading...")
-                    }
+                    true -> Log.d("Dashboard", "Loading...")
                     false -> {
                         state.payments?.let { payments ->
-                            // Log the entire response for debugging
-                            Log.d("MainActivity", "Payments response: $payments")
-
-                            // Update chart with fetched data
+                            Log.d("Dashboard", "Payments response: $payments")
                             updateChartWithData(payments)
                         }
                         state.error?.let { errorMessage ->
-                            Log.d("MainActivity", "Error: ${state.error}")
+                            Log.d("Dashboard", "Error: $errorMessage")
                         }
                     }
                 }
@@ -145,24 +139,20 @@ class Dashboard : Fragment() {
 
     private fun updateChartWithData(payments: List<AllPayments>?) {
         payments?.let { data ->
-            // Log each payment status for debugging
             data.forEach { payment ->
-                Log.d("MainActivity", "Payment status: ${payment.paymentStatus}")
+                Log.d("Dashboard", "Payment status: ${payment.paymentStatus}")
             }
 
-            // Calculate the counts for each status
             val totalSuccessfulPayments = data.count { it.paymentStatus == "1" }.toFloat()
             val totalFailedPayments = data.count { it.paymentStatus == "4" }.toFloat()
             val totalPendingPayments = data.count { it.paymentStatus == "2" }.toFloat()
             val totalMissingPayments = data.count { it.paymentStatus == "3" }.toFloat()
 
-            // Log the counts for debugging
-            Log.d("MainActivity", "Total Successful Payments: $totalSuccessfulPayments")
-            Log.d("MainActivity", "Total Failed Payments: $totalFailedPayments")
-            Log.d("MainActivity", "Total Pending Payments: $totalPendingPayments")
-            Log.d("MainActivity", "Total Missing Payments: $totalMissingPayments")
+            Log.d("Dashboard", "Total Successful Payments: $totalSuccessfulPayments")
+            Log.d("Dashboard", "Total Failed Payments: $totalFailedPayments")
+            Log.d("Dashboard", "Total Pending Payments: $totalPendingPayments")
+            Log.d("Dashboard", "Total Missing Payments: $totalMissingPayments")
 
-            // Create entries for the bar chart
             val entries = listOf(
                 BarEntry(0f, totalSuccessfulPayments),
                 BarEntry(1f, totalFailedPayments),
@@ -170,47 +160,41 @@ class Dashboard : Fragment() {
                 BarEntry(3f, totalMissingPayments)
             )
 
-            // Create a BarDataSet with the entries
-            val dataSet = BarDataSet(entries, "Payment Status")
-            dataSet.colors = listOf(
-                requireContext().getColor(R.color.green),
-                requireContext().getColor(R.color.red),
-                requireContext().getColor(R.color.orange),
-                requireContext().getColor(R.color.yellow)
-            )
-            dataSet.valueTextColor = requireContext().getColor(R.color.black)
+            val dataSet = BarDataSet(entries, "Payment Status").apply {
+                colors = listOf(
+                    requireContext().getColor(R.color.green),
+                    requireContext().getColor(R.color.red),
+                    requireContext().getColor(R.color.orange),
+                    requireContext().getColor(R.color.yellow)
+                )
+                valueTextColor = requireContext().getColor(R.color.black)
+            }
 
-            // Create BarData object with the dataset
             val barData = BarData(dataSet)
-
-            // Set the data to your BarChart
             barChart.data = barData
 
-            // Customize the X-axis to display labels
-            val xAxis = barChart.xAxis
-            xAxis.valueFormatter = IndexAxisValueFormatter(listOf("Success", "Failed", "Pending", "Missing"))
-            xAxis.granularity = 1f
-            xAxis.setDrawLabels(true)
+            barChart.xAxis.apply {
+                valueFormatter = IndexAxisValueFormatter(listOf("Success", "Failed", "Pending", "Missing"))
+                granularity = 1f
+                setDrawLabels(true)
+            }
 
-            // Refresh the chart
             barChart.invalidate()
         } ?: run {
-            Log.d("DashboardFragment", "Payments data is null.")
+            Log.d("Dashboard", "Payments data is null.")
         }
     }
 
     private fun observeMissingPayments() {
         viewModel.missingPaymentsState.onEach { state ->
             when {
-                state.isLoading -> {
-                    Log.d("DashboardFragment", "Loading...")
-                }
+                state.isLoading -> Log.d("Dashboard", "Loading...")
                 state.error.isNotEmpty() -> {
-                    Log.d("DashboardFragment", "Error: ${state.error}")
+                    Log.d("Dashboard", "Error: ${state.error}")
                     Toast.makeText(requireContext(), state.error, Toast.LENGTH_SHORT).show()
                 }
                 state.missingPayments != null -> {
-                    Log.d("DashboardFragment", "Success: ${state.missingPayments.missingPayments}")
+                    Log.d("Dashboard", "Success: ${state.missingPayments.missingPayments}")
                     missingPayments.text = state.missingPayments.missingPayments
                 }
             }
@@ -220,15 +204,13 @@ class Dashboard : Fragment() {
     private fun observeFailedTransactions() {
         viewModel.failedTransactionState.onEach { state ->
             when {
-                state.isLoading -> {
-                    Log.d("DashboardFragment", "Loading...")
-                }
+                state.isLoading -> Log.d("Dashboard", "Loading...")
                 state.error.isNotEmpty() -> {
-                    Log.d("DashboardFragment", "Error: ${state.error}")
+                    Log.d("Dashboard", "Error: ${state.error}")
                     Toast.makeText(requireContext(), state.error, Toast.LENGTH_SHORT).show()
                 }
                 state.failedTransactions != null -> {
-                    Log.d("DashboardFragment", "Success: ${state.failedTransactions.failedPayments}")
+                    Log.d("Dashboard", "Success: ${state.failedTransactions.failedPayments}")
                     failedMonthlyTransactions.text = state.failedTransactions.failedPayments
                 }
             }
@@ -238,15 +220,13 @@ class Dashboard : Fragment() {
     private fun observePendingTransactions() {
         viewModel.pendingTransactionsState.onEach { state ->
             when {
-                state.isLoading -> {
-                    Log.d("DashboardFragment", "Loading...")
-                }
+                state.isLoading -> Log.d("Dashboard", "Loading...")
                 state.error.isNotEmpty() -> {
-                    Log.d("DashboardFragment", "Error: ${state.error}")
+                    Log.d("Dashboard", "Error: ${state.error}")
                     Toast.makeText(requireContext(), state.error, Toast.LENGTH_SHORT).show()
                 }
                 state.pendingTransactions != null -> {
-                    Log.d("DashboardFragment", "Success: ${state.pendingTransactions.pendingPayments}")
+                    Log.d("Dashboard", "Success: ${state.pendingTransactions.pendingPayments}")
                     pendingMonthlyTransactions.text = state.pendingTransactions.pendingPayments
                 }
             }
@@ -256,18 +236,14 @@ class Dashboard : Fragment() {
     private fun observePayments() {
         viewModel.paymentState.onEach { state ->
             when {
-                state.isLoading -> {
-                    Log.d("DashboardFragment", "Loading...")
-                    // Toast.makeText(requireContext(), "Loading", Toast.LENGTH_SHORT).show()
-                }
+                state.isLoading -> Log.d("Dashboard", "Loading...")
                 state.error.isNotEmpty() -> {
-                    Log.d("DashboardFragment", "Error: ${state.error}")
+                    Log.d("Dashboard", "Error: ${state.error}")
                     Toast.makeText(requireContext(), state.error, Toast.LENGTH_SHORT).show()
                 }
                 state.payments.isNotEmpty() -> {
-                    Log.d("DashboardFragment", "Success: ${state.payments}")
+                    Log.d("Dashboard", "Success: ${state.payments}")
                     paymentsAdapter.updateData(state.payments.sortedByDescending { it.transactionDate }.take(3))
-                    // Toast.makeText(requireContext(), "Success", Toast.LENGTH_SHORT).show()
                 }
             }
         }.launchIn(viewLifecycleOwner.lifecycleScope)
@@ -276,15 +252,13 @@ class Dashboard : Fragment() {
     private fun observeCompleteTransactions() {
         viewModel.completeTransactionsState.onEach { state ->
             when {
-                state.isLoading -> {
-                    Log.d("DashboardFragment", "Loading...")
-                }
+                state.isLoading -> Log.d("Dashboard", "Loading...")
                 state.error.isNotEmpty() -> {
-                    Log.d("DashboardFragment", "Error: ${state.error}")
+                    Log.d("Dashboard", "Error: ${state.error}")
                     Toast.makeText(requireContext(), state.error, Toast.LENGTH_SHORT).show()
                 }
                 state.completeTransactions != null -> {
-                    Log.d("MainFragment", "Success: ${state.completeTransactions.completePayments}")
+                    Log.d("Dashboard", "Success: ${state.completeTransactions.completePayments}")
                     completeMonthlyTransactions.text = state.completeTransactions.completePayments
                 }
             }
@@ -297,5 +271,15 @@ class Dashboard : Fragment() {
         viewModel.fetchPendingMonthlyTransactions("fetchTotalPendingPayments")
         viewModel.fetchFailedMonthlyTransactions("fetchTotalFailedPayments")
         viewModel.fetchMissingPayments("fetchTotalMissingPayments")
+    }
+
+    private fun enableEdgeToEdge() {
+        activity?.window?.apply {
+            decorView.systemUiVisibility = (
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                    or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                    or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                )
+        }
     }
 }
