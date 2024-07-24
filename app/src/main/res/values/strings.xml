@@ -26,9 +26,9 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="add_user">Add User</string>
     <string name="search_users">Search users</string>
-    <string name="username">UserName</string>
-    <string name="createdat">createdAt</string>
-    <string name="createdBy">CreatedBy</string>
+    <string name="username">Username</string>
+    <string name="createdat">created At</string>
+    <string name="createdBy">Created By</string>
     <string name="Role">Role</string>
     <string name="Actions">Actions</string>
     <string name="history">Transactions History</string>
@@ -41,4 +41,5 @@
     <string name="paymentshistory">Payments</string>
     <string name="payments_report">Generate payments report and export for further analysis</string>
     <string name="manage_users">Manage Users</string>
+    <string name="hhistory">History</string>
 </resources>

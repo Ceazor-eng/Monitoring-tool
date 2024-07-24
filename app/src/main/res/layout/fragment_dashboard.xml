@@ -42,6 +42,17 @@
                 android:text="Welcome Ian!"
                 android:textColor="@android:color/white"
                 android:textSize="18sp" />
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/logout"
+                android:elevation="40dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="33dp"/>
+
+
         </RelativeLayout>
 
     </androidx.cardview.widget.CardView>
