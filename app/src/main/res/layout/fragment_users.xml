@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
-    android:background="@color/white"
+    android:background="@drawable/bg5"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".presentation.activities.Users"
@@ -16,7 +16,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="51dp"
         android:layout_marginBottom="20dp"
-        android:fontFamily="@font/josefinsansbold"
+        android:fontFamily="@font/josefinsansregular"
         android:text="@string/manage_users"
         android:textColor="#6C2671"
         android:textSize="28sp" />
@@ -205,14 +205,14 @@
     </androidx.cardview.widget.CardView>
 
 
-
-    <include
-        android:id="@+id/bottom_navigation"
-        layout="@layout/activity_main"
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_nav_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:foregroundGravity="bottom"
         android:layout_alignParentBottom="true"
-        />
+        app:menu="@menu/bottom_navigation_menu" />
 
 
 

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@drawable/bg5"
     tools:context=".presentation.activities.Reports">
 
     <TextView
@@ -22,7 +22,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardGeneratePaymentsReport"
         android:layout_width="300dp"
-        android:layout_height="150dp"
+        android:layout_height="100dp"
         android:layout_below="@id/reportsTitle"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="32dp"
@@ -52,7 +52,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardGenerateSessionsReport"
         android:layout_width="300dp"
-        android:layout_height="150dp"
+        android:layout_height="100dp"
         android:layout_below="@id/cardGeneratePaymentsReport"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="32dp"
@@ -79,12 +79,12 @@
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 
-    <include
-        android:id="@+id/bottom_navigation"
-        layout="@layout/activity_main"
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_nav_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:foregroundGravity="bottom"
         android:layout_alignParentBottom="true"
-        />
-
+        app:menu="@menu/bottom_navigation_menu" />
 </RelativeLayout>
