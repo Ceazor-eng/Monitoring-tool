@@ -56,6 +56,6 @@ class Reports : Fragment() {
         Handler(Looper.getMainLooper()).postDelayed({
             view.setBackgroundResource(originalBackground)
             textView.setTextColor(ContextCompat.getColor(requireContext(), originalTextColor))
-        }, 200) // Adjust the delay as needed
+        }, 200)
     }
 }
