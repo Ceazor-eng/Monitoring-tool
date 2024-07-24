@@ -66,7 +66,7 @@ class FilterPayments : AppCompatActivity() {
         spinnerServiceType.adapter = serviceTypeAdapter
 
         // Populate Status Spinner
-        val statuses = listOf("1", "2", "3", "4")
+        val statuses = listOf("success", "pending", "missing", "failed")
         val statusAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, statuses)
         statusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinnerStatus.adapter = statusAdapter
@@ -100,10 +100,19 @@ class FilterPayments : AppCompatActivity() {
             val action = "filterPayments"
             val serviceType = spinnerServiceType.selectedItem.toString()
             val status = spinnerStatus.selectedItem.toString()
+
+            // Convert selectedStatus to corresponding code
+            val statusCode = when (status) {
+                "success" -> 1
+                "pending" -> 2
+                "missing" -> 3
+                "failed" -> 4
+                else -> -1
+            }
             val startDate = editTextStartDate.text.toString()
             val endDate = editTextEndDate.text.toString()
 
-            viewModel.filterPayments(action, serviceType, status, startDate, endDate)
+            viewModel.filterPayments(action, serviceType, statusCode.toString(), startDate, endDate)
         }
 
         observeFilteredPayments()

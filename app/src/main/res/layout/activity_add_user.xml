@@ -84,8 +84,8 @@
             android:hint="Phonenumber"
             android:paddingStart="16dp" />
 
-        <EditText
-            android:id="@+id/roleID"
+        <Spinner
+            android:id="@+id/roleSpinner"
             android:layout_width="292dp"
             android:layout_height="42dp"
             android:layout_below="@id/phoneNumber"
@@ -93,14 +93,14 @@
             android:layout_marginTop="16dp"
             android:background="@drawable/rectangle_2"
             android:fontFamily="@font/josefinsansregular"
-            android:hint="Role Id"
-            android:paddingStart="16dp" />
+            android:paddingStart="16dp"
+            android:spinnerMode="dropdown"/>
 
         <EditText
             android:id="@+id/username"
             android:layout_width="292dp"
             android:layout_height="42dp"
-            android:layout_below="@id/roleID"
+            android:layout_below="@id/roleSpinner"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="16dp"
             android:background="@drawable/rectangle_2"

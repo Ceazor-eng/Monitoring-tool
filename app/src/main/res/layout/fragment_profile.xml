@@ -27,7 +27,7 @@
         android:id="@+id/toggle_switch"
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:paddingHorizontal="35dp"
+        android:paddingHorizontal="20dp"
         android:layout_below="@id/history_title"
         >
 

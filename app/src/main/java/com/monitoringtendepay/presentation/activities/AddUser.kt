@@ -2,16 +2,17 @@ package com.monitoringtendepay.presentation.activities
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
+import android.widget.Spinner
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.monitoringtendepay.R
 import com.monitoringtendepay.presentation.states.AuthState
@@ -27,9 +28,9 @@ class AddUser : AppCompatActivity() {
     private lateinit var lName: EditText
     private lateinit var phoneNumber: EditText
     private lateinit var email: EditText
-    private lateinit var roleId: EditText
     private lateinit var registerBtn: Button
     private lateinit var progressBar: ProgressBar
+    private lateinit var roleSpinner: Spinner
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,9 +47,14 @@ class AddUser : AppCompatActivity() {
         lName = findViewById(R.id.lName)
         phoneNumber = findViewById(R.id.phoneNumber)
         email = findViewById(R.id.email)
-        roleId = findViewById(R.id.roleID)
         registerBtn = findViewById(R.id.btnRegister)
         progressBar = findViewById(R.id.progressBar)
+
+        roleSpinner = findViewById(R.id.roleSpinner)
+        val roles = arrayOf("Admin", "User")
+        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, roles)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        roleSpinner.adapter = adapter
 
         registerBtn.setOnClickListener {
             val username = etUsername.text.toString()
@@ -56,7 +62,13 @@ class AddUser : AppCompatActivity() {
             val lname = lName.text.toString()
             val phoneNumber = phoneNumber.text.toString()
             val email = email.text.toString()
-            val roleId = roleId.text.toString()
+            // Get selected role
+            val selectedRole = roleSpinner.selectedItemPosition
+            val roleId = when (selectedRole) {
+                0 -> "1" // Admin
+                1 -> "2" // User
+                else -> ""
+            }
             val action = "createUser"
 
             Log.d("RegisterUser", "Register button clicked with username: $username, fName: $fName, lname: $lname, phoneNumber: $phoneNumber, email: $email, roleId: $roleId")
@@ -84,7 +96,8 @@ class AddUser : AppCompatActivity() {
                 Toast.makeText(this, error, Toast.LENGTH_SHORT).show()
             }
             authState.data?.let { data ->
-                Toast.makeText(this, data, Toast.LENGTH_SHORT).show()
+                Log.d("RegisterUser", "AuthState data: $data")
+                Toast.makeText(this, "register successfully", Toast.LENGTH_SHORT).show()
             }
         }
     }

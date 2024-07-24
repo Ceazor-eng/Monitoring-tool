@@ -10,9 +10,8 @@ import com.monitoringtendepay.presentation.states.FilteredPaymentsState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.launch
 
 @HiltViewModel
 class FilterPaymentsViewModel @Inject constructor(
@@ -25,7 +24,7 @@ class FilterPaymentsViewModel @Inject constructor(
     val serviceCodes: LiveData<List<String>> = _serviceCodes
 
     private val _statusCodes = MutableLiveData<List<String>>().apply {
-        value = listOf("1", "2", "3", "4")
+        value = listOf("success", "pending", "missing", "failed")
     }
     val statusCodes: LiveData<List<String>> = _statusCodes
 
@@ -33,22 +32,24 @@ class FilterPaymentsViewModel @Inject constructor(
     val paymentState = _filteredPaymentsState.receiveAsFlow()
 
     fun filterPayments(action: String, serviceType: String, status: String, startDate: String, endDate: String) {
-        getFilteredPaymentsUseCase(action, serviceType, status, startDate, endDate).onEach { result ->
-            when (result) {
-                is Resource.Success -> {
-                    _filteredPaymentsState.send(
-                        FilteredPaymentsState(filterPayments = result.data ?: emptyList())
-                    )
-                }
-                is Resource.Loading -> {
-                    _filteredPaymentsState.send(FilteredPaymentsState(isLoading = true))
-                }
-                is Resource.Error -> {
-                    _filteredPaymentsState.send(
-                        FilteredPaymentsState(error = result.message ?: "An unexpected error occurred")
-                    )
+        viewModelScope.launch {
+            getFilteredPaymentsUseCase(action, serviceType, status, startDate, endDate).collect { result ->
+                when (result) {
+                    is Resource.Success -> {
+                        _filteredPaymentsState.send(
+                            FilteredPaymentsState(filterPayments = result.data ?: emptyList())
+                        )
+                    }
+                    is Resource.Loading -> {
+                        _filteredPaymentsState.send(FilteredPaymentsState(isLoading = true))
+                    }
+                    is Resource.Error -> {
+                        _filteredPaymentsState.send(
+                            FilteredPaymentsState(error = result.message ?: "An unexpected error occurred")
+                        )
+                    }
                 }
             }
-        }.launchIn(viewModelScope)
+        }
     }
 }

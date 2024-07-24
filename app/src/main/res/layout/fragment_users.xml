@@ -49,9 +49,6 @@
     </Button>
 
 
-
-
-
     <androidx.cardview.widget.CardView
         android:background="@color/white"
         android:id="@+id/recyclercard"
