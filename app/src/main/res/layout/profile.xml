@@ -13,33 +13,86 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="51dp"
+        android:layout_marginTop="30dp"
         android:fontFamily="@font/josefinsansregular"
         android:gravity="top"
         android:text="@string/history"
         android:textColor="#6C2671"
         android:textSize="28dp" />
 
-
-
-
-
-    <com.google.android.material.materialswitch.MaterialSwitch
+    <RelativeLayout
         android:id="@+id/toggle_switch"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
         android:layout_below="@id/history_title"
-        android:checked="true"
-        android:clickable="true"
-        android:focusable="true"
-        android:thumb="@drawable/thumb"
-        app:track="@drawable/track"
-        android:textOn="Reports"
-        android:textOff="Payments"
-        app:switchTextAppearance="@style/TextAppearance.AppCompat.Subhead"
-        app:showText="true"/>
+        >
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardPaymentsReport"
+            android:layout_width="150dp"
+            android:layout_height="100dp"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="32dp"
+            android:layout_marginStart="20dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="8dp">
+
+
+
+            <RelativeLayout
+                android:id="@+id/payments_report"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clickable="true"
+                android:background="@drawable/bg1"
+                android:focusable="true">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="Sessions"
+                    android:textColor="#FFFFFF"
+                    android:fontFamily="@font/josefinsansregular"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardReportHistory"
+            android:layout_width="150dp"
+            android:layout_height="100dp"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="32dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="8dp">
+
+
+
+            <RelativeLayout
+                android:id="@+id/paymentsHistory"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clickable="true"
+                android:background="@drawable/bg1"
+                android:focusable="true">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="Payments"
+                    android:textColor="#FFFFFF"
+                    android:fontFamily="@font/josefinsansregular"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/transactions_label"

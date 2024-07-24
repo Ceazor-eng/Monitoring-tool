@@ -31,12 +31,12 @@
     <string name="createdBy">CreatedBy</string>
     <string name="Role">Role</string>
     <string name="Actions">Actions</string>
-    <string name="manage_users">Manage Users</string>
-    <string name="history">History</string>
+    <string name="history">Transactions History</string>
     <string name="reportss">Reports</string>
     <string name="payments">Payments</string>
     <string name="all_transactions">All Transactions</string>
     <string name="phone_number">Phonenumber\n</string>
     <string name="history_title">History</string>
-    <string name="payments_report">Generate payments report and export for further analysis</string>
+    <string name="reporthistory">Reports</string>
+    <string name="paymentshistory">Payments</string>
 </resources>

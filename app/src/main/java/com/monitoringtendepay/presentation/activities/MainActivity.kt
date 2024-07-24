@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.menu_profile -> {
-                    loadFragment(Profile())
+                    loadFragment(History())
                     true
                 }
                 else -> false
