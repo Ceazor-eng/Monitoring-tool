@@ -29,13 +29,13 @@ class UssdSessionsAdapter(private var ussdSessions: List<AllUssdSessions>) : Rec
 
     class UssdSessionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val initiatorPhoneTextView: TextView = itemView.findViewById(R.id.initiatorPhoneTextView)
-        private val mpesaRefSessionIdTextView: TextView = itemView.findViewById(R.id.mpesaRefSessionIdTextView)
+        private val SessionIdTextView: TextView = itemView.findViewById(R.id.sessions_id_txt)
         private val dateTimeTextView: TextView = itemView.findViewById(R.id.dateTimeTextView)
 
         fun bind(ussdSession: AllUssdSessions) {
-            initiatorPhoneTextView.text = "Initiator Phone: ${ussdSession.msisdn}"
-            mpesaRefSessionIdTextView.text = "Session Id: ${ussdSession.sessionId}"
-            dateTimeTextView.text = "Date and Time: ${ussdSession.sessionsDate}"
+            initiatorPhoneTextView.text = ussdSession.msisdn
+            SessionIdTextView.text = ussdSession.sessionId
+            dateTimeTextView.text = ussdSession.sessionsDate
         }
     }
 }

@@ -110,7 +110,8 @@
                     android:fontFamily="@font/josefinsansregular"
                     android:text="Complete transactions"
                     android:textColor="@android:color/black"
-                    android:textSize="14dp" />
+                    android:textSize="14dp"
+                    tools:ignore="TextSizeCheck" />
 
 
             </RelativeLayout>
@@ -426,7 +427,6 @@
                             tools:listitem="@layout/item_payment" />
                     </LinearLayout>
 
-
                 </RelativeLayout>
 
             </androidx.cardview.widget.CardView>
@@ -451,6 +451,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_nav_view"
         android:layout_width="match_parent"
@@ -459,6 +460,7 @@
         android:foregroundGravity="bottom"
         app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/bottom_navigation_menu" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

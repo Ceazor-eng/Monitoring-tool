@@ -17,6 +17,11 @@ class PaymentsAdapter(private var payments: List<AllPayments>) : RecyclerView.Ad
         notifyDataSetChanged()
     }
 
+    fun updatePayments(newPayments: List<AllPayments>) {
+        payments = newPayments.sortedByDescending { it.transactionDate }
+        notifyDataSetChanged()
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PaymentViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_payment, parent, false)
         return PaymentViewHolder(view)
