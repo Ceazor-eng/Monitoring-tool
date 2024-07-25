@@ -15,7 +15,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.monitoringtendepay.R
 import com.monitoringtendepay.presentation.adapters.AllUsersAdapter
+import com.monitoringtendepay.presentation.states.AuthState
 import com.monitoringtendepay.presentation.viewmodels.AllUsersViewModel
+import com.monitoringtendepay.presentation.viewmodels.UserActionsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -24,6 +26,7 @@ import kotlinx.coroutines.flow.onEach
 class Users : Fragment() {
 
     private val viewModel: AllUsersViewModel by viewModels()
+    private val userActionsViewModel: UserActionsViewModel by viewModels()
     private lateinit var adapter: AllUsersAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,7 +47,7 @@ class Users : Fragment() {
         val addUserBtn = view.findViewById<Button>(R.id.AddUserBtn)
         val recyclerView = view.findViewById<RecyclerView>(R.id.usersRecyclerView)
 
-        adapter = AllUsersAdapter(emptyList()) // Initialize the adapter
+        adapter = AllUsersAdapter(emptyList(), userActionsViewModel) // Initialize the adapter
 
         addUserBtn.setOnClickListener {
             val intent = Intent(requireContext(), AddUser::class.java)
@@ -55,7 +58,35 @@ class Users : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         observeUsers()
+        lifecycleScope.launchWhenStarted {
+            userActionsViewModel.makeAdminState.collect { authState ->
+                observeMakeUserAdminAction(authState)
+            }
+        }
+
         fetchData()
+    }
+
+    private fun observeMakeUserAdminAction(authState: AuthState) {
+        //  progressBar.visibility = if (authState.isLoading) View.VISIBLE else View.GONE
+        authState.data?.let { data ->
+            Log.d("UserActionsFragment", "AuthState data: $data")
+            if (isMakeUserAdminSuccessfully(data)) {
+                Log.d("UserActionsFragment", "Make user admin successful")
+                Toast.makeText(requireContext(), "Make user admin  successfully", Toast.LENGTH_SHORT).show()
+            } else {
+                Log.d("UserActionsFragment", "Make user admin  failed")
+                Toast.makeText(requireContext(), "Make user admin  failed", Toast.LENGTH_SHORT).show()
+            }
+        }
+        authState.error?.let { error ->
+            Log.d("UpdatePasswordActivity", "Error: $error")
+            Toast.makeText(requireContext(), error, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun isMakeUserAdminSuccessfully(data: String): Boolean {
+        return data.contains("status=success")
     }
 
     private fun observeUsers() {
