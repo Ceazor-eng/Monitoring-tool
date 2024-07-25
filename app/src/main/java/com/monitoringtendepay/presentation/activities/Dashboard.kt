@@ -1,10 +1,12 @@
 package com.monitoringtendepay.presentation.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -44,6 +46,7 @@ class Dashboard : Fragment() {
     private lateinit var failedMonthlyTransactions: TextView
     private lateinit var missingPayments: TextView
     private lateinit var barChart: BarChart
+    private lateinit var logOut: ImageView
     private lateinit var welcomeText: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -74,6 +77,7 @@ class Dashboard : Fragment() {
         fetchDataAndPopulateChart()
         setUpChart()
         fetchData()
+        logOut()
     }
 
     private fun updateGreetingMessage() {
@@ -87,6 +91,17 @@ class Dashboard : Fragment() {
         welcomeText.text = "$greeting!"
     }
 
+    private fun logOut() {
+        logOut.setOnClickListener {
+            Log.d("DashboardFragment", "LogOut imageView clicked")
+            val intent = Intent(requireActivity(), Login::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            }
+            startActivity(intent)
+            requireActivity().finish()
+        }
+    }
+
     private fun setUpViews(view: View) {
         recyclerView = view.findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
@@ -94,6 +109,7 @@ class Dashboard : Fragment() {
         recyclerView.adapter = paymentsAdapter
         barChart = view.findViewById(R.id.barChart)
         welcomeText = view.findViewById(R.id.welcome_ian)
+        logOut = view.findViewById(R.id.logout_image_view)
 
         completeMonthlyTransactions = view.findViewById(R.id.total_transactions_number_txt)
         pendingMonthlyTransactions = view.findViewById(R.id.pending_transactions_number_txt)
