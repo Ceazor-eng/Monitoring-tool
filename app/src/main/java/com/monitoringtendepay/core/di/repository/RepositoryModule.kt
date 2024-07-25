@@ -12,6 +12,7 @@ import com.monitoringtendepay.data.repository.FilterPaymentsRepositoryImpl
 import com.monitoringtendepay.data.repository.FilterUssdSessionsRepositoryImpl
 import com.monitoringtendepay.data.repository.MissingPaymentsRepositoryImpl
 import com.monitoringtendepay.data.repository.PendingMonthlyTransactionsRepositoryImpl
+import com.monitoringtendepay.data.repository.UserActionsRepositoryImpl
 import com.monitoringtendepay.domain.repository.AllPaymentsRepository
 import com.monitoringtendepay.domain.repository.AllUsersRepository
 import com.monitoringtendepay.domain.repository.AuthRepository
@@ -21,6 +22,7 @@ import com.monitoringtendepay.domain.repository.FilterPaymentsRepository
 import com.monitoringtendepay.domain.repository.FilterUssdSessionsRepository
 import com.monitoringtendepay.domain.repository.MissingPaymentsRepository
 import com.monitoringtendepay.domain.repository.PendingMonthlyTransactionsRepository
+import com.monitoringtendepay.domain.repository.UserActionsRepository
 import com.monitoringtendepay.domain.repository.UssdSessionsRepository
 import dagger.Module
 import dagger.Provides
@@ -90,5 +92,11 @@ object RepositoryModule {
     @Singleton
     fun provideAllUsersRepository(authService: AuthService): AllUsersRepository {
         return AllUsersRepositoryImpl(authService)
+    }
+
+    @Provides
+    @Singleton
+    fun provideUserActionsRepository(authService: AuthService): UserActionsRepository {
+        return UserActionsRepositoryImpl(authService)
     }
 }
