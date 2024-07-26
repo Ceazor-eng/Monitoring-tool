@@ -85,15 +85,15 @@ class AllUsersAdapter(
                         true
                     }
                     R.id.action_resend_otp -> {
-                        // Handle resend OTP
+                        userActionsViewModel.resendOtp("regenerateOtp", username)
                         true
                     }
                     R.id.action_activate -> {
-                        // Handle activate
+                        userActionsViewModel.activateUser("activateUser", username)
                         true
                     }
                     R.id.action_deactivate -> {
-                        // Handle deactivate
+                        userActionsViewModel.deactivateUser("disableUser", username)
                         true
                     }
                     else -> false

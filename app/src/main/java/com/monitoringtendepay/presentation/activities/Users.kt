@@ -63,15 +63,84 @@ class Users : Fragment() {
                 observeMakeUserAdminAction(authState)
             }
         }
+        lifecycleScope.launchWhenStarted {
+            userActionsViewModel.resendOtpState.collect { authState ->
+                observeResendOtpAction(authState)
+            }
+        }
+        lifecycleScope.launchWhenStarted {
+            userActionsViewModel.activateUserState.collect { authState ->
+                observeActivateUserAction(authState)
+            }
+        }
+        lifecycleScope.launchWhenStarted {
+            userActionsViewModel.deactivateUserState.collect { authState ->
+                observeDeactivateUserAction(authState)
+            }
+        }
 
         fetchData()
+    }
+
+    private fun observeDeactivateUserAction(authState: AuthState) {
+        //  progressBar.visibility = if (authState.isLoading) View.VISIBLE else View.GONE
+        authState.data?.let { data ->
+            Log.d("UserActionsFragment", "AuthState data: $data")
+            if (isActionSuccessfully(data)) {
+                Log.d("UserActionsFragment", "Deactivate User successful")
+                Toast.makeText(requireContext(), "Deactivate User  successfully", Toast.LENGTH_SHORT).show()
+            } else {
+                Log.d("UserActionsFragment", "Deactivate User  failed")
+                Toast.makeText(requireContext(), "Deactivate User failed", Toast.LENGTH_SHORT).show()
+            }
+        }
+        authState.error?.let { error ->
+            Log.d("UsersFragment", "Error: $error")
+            Toast.makeText(requireContext(), error, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun observeActivateUserAction(authState: AuthState) {
+        //  progressBar.visibility = if (authState.isLoading) View.VISIBLE else View.GONE
+        authState.data?.let { data ->
+            Log.d("UserActionsFragment", "AuthState data: $data")
+            if (isActionSuccessfully(data)) {
+                Log.d("UserActionsFragment", "Activate User successful")
+                Toast.makeText(requireContext(), "Activate User  successfully", Toast.LENGTH_SHORT).show()
+            } else {
+                Log.d("UserActionsFragment", "Activate User  failed")
+                Toast.makeText(requireContext(), "Activate User failed", Toast.LENGTH_SHORT).show()
+            }
+        }
+        authState.error?.let { error ->
+            Log.d("UsersFragment", "Error: $error")
+            Toast.makeText(requireContext(), error, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun observeResendOtpAction(authState: AuthState) {
+        //  progressBar.visibility = if (authState.isLoading) View.VISIBLE else View.GONE
+        authState.data?.let { data ->
+            Log.d("UserActionsFragment", "AuthState data: $data")
+            if (isActionSuccessfully(data)) {
+                Log.d("UserActionsFragment", "Resend otp successful")
+                Toast.makeText(requireContext(), "Resend otp  successfully", Toast.LENGTH_SHORT).show()
+            } else {
+                Log.d("UserActionsFragment", "Resend otp  failed")
+                Toast.makeText(requireContext(), "Resend otp  failed", Toast.LENGTH_SHORT).show()
+            }
+        }
+        authState.error?.let { error ->
+            Log.d("UsersFragment", "Error: $error")
+            Toast.makeText(requireContext(), error, Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun observeMakeUserAdminAction(authState: AuthState) {
         //  progressBar.visibility = if (authState.isLoading) View.VISIBLE else View.GONE
         authState.data?.let { data ->
             Log.d("UserActionsFragment", "AuthState data: $data")
-            if (isMakeUserAdminSuccessfully(data)) {
+            if (isActionSuccessfully(data)) {
                 Log.d("UserActionsFragment", "Make user admin successful")
                 Toast.makeText(requireContext(), "Make user admin  successfully", Toast.LENGTH_SHORT).show()
             } else {
@@ -80,12 +149,12 @@ class Users : Fragment() {
             }
         }
         authState.error?.let { error ->
-            Log.d("UpdatePasswordActivity", "Error: $error")
+            Log.d("UserActionsFragment", "Error: $error")
             Toast.makeText(requireContext(), error, Toast.LENGTH_SHORT).show()
         }
     }
 
-    private fun isMakeUserAdminSuccessfully(data: String): Boolean {
+    private fun isActionSuccessfully(data: String): Boolean {
         return data.contains("status=success")
     }
 
@@ -96,10 +165,12 @@ class Users : Fragment() {
                     Log.d("UsersFragment", "Loading...")
                     // Toast.makeText(requireContext(), "Loading", Toast.LENGTH_SHORT).show()
                 }
+
                 state.error.isNotEmpty() -> {
                     Log.d("UsersFragment", "Error: ${state.error}")
                     Toast.makeText(requireContext(), state.error, Toast.LENGTH_SHORT).show()
                 }
+
                 state.users.isNotEmpty() -> {
                     Log.d("UsersFragment", "Success: ${state.users}")
                     adapter.updateData(state.users)
