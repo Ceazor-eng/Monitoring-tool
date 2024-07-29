@@ -1,14 +1,11 @@
 package com.monitoringtendepay.presentation.activities
 
 import android.content.Intent
-import android.graphics.Rect
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.ViewTreeObserver.OnGlobalLayoutListener
 import android.widget.ImageView
 import android.widget.ScrollView
 import android.widget.TextView
@@ -124,7 +121,6 @@ class Dashboard : Fragment() {
         pendingMonthlyTransactions = view.findViewById(R.id.pending_transactions_number_txt)
         failedMonthlyTransactions = view.findViewById(R.id.failed_Transactions_number_txt)
         missingPayments = view.findViewById(R.id.missing_transactions_number_txt)
-
 
         swipeRefreshLayout.setOnRefreshListener {
             refreshData()
