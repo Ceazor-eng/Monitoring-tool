@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.ScrollView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -15,7 +14,6 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.components.AxisBase
 import com.github.mikephil.charting.components.XAxis
@@ -41,8 +39,6 @@ class Dashboard : Fragment() {
 
     private val viewModel: AllPaymentsViewModel by viewModels()
 
-    private lateinit var swipeRefreshLayout: SwipeRefreshLayout
-    private lateinit var scrollView: ScrollView
     private lateinit var recyclerView: RecyclerView
     private lateinit var paymentsAdapter: PaymentsAdapter
     private lateinit var completeMonthlyTransactions: TextView
@@ -107,8 +103,6 @@ class Dashboard : Fragment() {
     }
 
     private fun setUpViews(view: View) {
-        swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout)
-        scrollView = view.findViewById(R.id.scroll_view)
         recyclerView = view.findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         paymentsAdapter = PaymentsAdapter(emptyList())
@@ -121,18 +115,6 @@ class Dashboard : Fragment() {
         pendingMonthlyTransactions = view.findViewById(R.id.pending_transactions_number_txt)
         failedMonthlyTransactions = view.findViewById(R.id.failed_Transactions_number_txt)
         missingPayments = view.findViewById(R.id.missing_transactions_number_txt)
-
-        swipeRefreshLayout.setOnRefreshListener {
-            refreshData()
-        }
-
-        scrollView.setOnScrollChangeListener { v: View, scrollX: Int, scrollY: Int, _: Int, _: Int ->
-            swipeRefreshLayout.isEnabled = scrollY == 0
-        }
-    }
-
-    private fun refreshData() {
-        fetchData()
     }
 
     private fun setUpChart() {
@@ -227,7 +209,6 @@ class Dashboard : Fragment() {
                     Log.d("Dashboard", "Error: ${state.error}")
                     Toast.makeText(requireContext(), state.error, Toast.LENGTH_SHORT).show()
                 }
-
                 state.missingPayments != null -> {
                     Log.d("Dashboard", "Success: ${state.missingPayments.missingPayments}")
                     missingPayments.text = state.missingPayments.missingPayments
@@ -244,7 +225,6 @@ class Dashboard : Fragment() {
                     Log.d("Dashboard", "Error: ${state.error}")
                     Toast.makeText(requireContext(), state.error, Toast.LENGTH_SHORT).show()
                 }
-
                 state.failedTransactions != null -> {
                     Log.d("Dashboard", "Success: ${state.failedTransactions.failedPayments}")
                     failedMonthlyTransactions.text = state.failedTransactions.failedPayments
@@ -261,7 +241,6 @@ class Dashboard : Fragment() {
                     Log.d("Dashboard", "Error: ${state.error}")
                     Toast.makeText(requireContext(), state.error, Toast.LENGTH_SHORT).show()
                 }
-
                 state.pendingTransactions != null -> {
                     Log.d("Dashboard", "Success: ${state.pendingTransactions.pendingPayments}")
                     pendingMonthlyTransactions.text = state.pendingTransactions.pendingPayments
@@ -278,7 +257,6 @@ class Dashboard : Fragment() {
                     Log.d("Dashboard", "Error: ${state.error}")
                     Toast.makeText(requireContext(), state.error, Toast.LENGTH_SHORT).show()
                 }
-
                 state.payments.isNotEmpty() -> {
                     Log.d("Dashboard", "Success: ${state.payments}")
                     paymentsAdapter.updateData(state.payments.sortedByDescending { it.transactionDate }.take(3))
@@ -295,7 +273,6 @@ class Dashboard : Fragment() {
                     Log.d("Dashboard", "Error: ${state.error}")
                     Toast.makeText(requireContext(), state.error, Toast.LENGTH_SHORT).show()
                 }
-
                 state.completeTransactions != null -> {
                     Log.d("Dashboard", "Success: ${state.completeTransactions.completePayments}")
                     completeMonthlyTransactions.text = state.completeTransactions.completePayments
@@ -310,8 +287,6 @@ class Dashboard : Fragment() {
         viewModel.fetchPendingMonthlyTransactions("fetchTotalPendingPayments")
         viewModel.fetchFailedMonthlyTransactions("fetchTotalFailedPayments")
         viewModel.fetchMissingPayments("fetchTotalMissingPayments")
-
-        swipeRefreshLayout.isRefreshing = false
     }
 
     private fun enableEdgeToEdge() {

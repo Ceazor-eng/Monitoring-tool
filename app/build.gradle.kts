@@ -69,10 +69,10 @@ dependencies {
     implementation(libs.bundles.hashing)
 
     // Charts
-    implementation("com.github.PhilJay:MPAndroidChart:v3.0.3")
+    implementation(libs.mpandroidchart)
 
     // pdf generation
-    implementation("com.itextpdf:itext7-core:7.1.14")
+    implementation(libs.itext7.core)
 
     // Test dependencies
     testImplementation(libs.junit)
