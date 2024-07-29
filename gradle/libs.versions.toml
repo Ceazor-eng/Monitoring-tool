@@ -23,6 +23,7 @@ bcrypt ="0.4"
 fragments ="1.8.1"
 chucker ="4.0.0"
 chucker-no-op = "4.0.0"
+swiperefreshlayout = "1.1.0"
 
 
 
@@ -54,6 +55,7 @@ logging-interceptor ={module ="com.squareup.okhttp3:logging-interceptor",version
 bcrypt-hash ={module = "org.mindrot:jbcrypt",version.ref = "bcrypt"}
 chuker-interceptor = {module = "com.github.chuckerteam.chucker:library",version.ref = "chucker"}
 chucker-no={module ="com.github.chuckerteam.chucker:library-no-op",version.ref = "chucker-no-op"}
+androidx-swiperefreshlayout = { group = "androidx.swiperefreshlayout", name = "swiperefreshlayout", version.ref = "swiperefreshlayout" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

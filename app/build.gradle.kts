@@ -49,6 +49,7 @@ dependencies {
 
     // Hilt dependencies
     implementation(libs.dagger.hilt)
+    implementation(libs.androidx.swiperefreshlayout)
     kapt(libs.kapt)
 
     // Kotlin Serialization dependencies
