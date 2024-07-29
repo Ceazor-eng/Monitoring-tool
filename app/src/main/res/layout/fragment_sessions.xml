@@ -15,12 +15,16 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="100dp"
         android:fontFamily="@font/josefinsansregular"
         android:gravity="top"
-        android:text="@string/history"
+        android:text="Sessions History"
         android:textColor="#6C2671"
-        android:textSize="28dp" />
+        android:textSize="28dp"
+        android:shadowColor="#AA2F2F2F"
+        android:shadowDx="3"
+        android:shadowDy="3"
+        android:shadowRadius="2"/>
 
     <RelativeLayout
         android:id="@+id/toggle_switch"
@@ -78,6 +82,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:id="@+id/sessions_history_text"
                     android:layout_centerInParent="true"
                     android:fontFamily="@font/josefinsansregular"
                     android:text="Sessions"
@@ -100,6 +105,77 @@
         android:text="@string/all_transactions"
         android:textColor="@color/black" />
 
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        android:layout_below="@id/transactions_label"
+        android:elevation="40dp"
+        android:weightSum="3">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/phone_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/josefinsansregular"
+                android:text="Phone Number"
+                android:textColor="@color/black"
+                android:textSize="11.5sp"
+                android:shadowColor="#AA2F2F2F"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="1"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/session_Id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/josefinsansregular"
+                android:text="Session Id"
+                android:textColor="@color/black"
+                android:textSize="11.5sp"
+                android:shadowColor="#AA2F2F2F"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="1"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/date_and_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/josefinsansregular"
+                android:text="Date And Time"
+                android:textColor="@color/black"
+                android:textSize="11.5sp"
+                android:shadowColor="#AA2F2F2F"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="1"/>
+        </RelativeLayout>
+    </LinearLayout>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -116,68 +192,13 @@
                 android:layout_height="match_parent"
                 android:layout_margin="16dp"
                 android:background="@color/white"
-                app:cardElevation="4dp">
+                app:cardElevation="0dp">
 
                 <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@color/white">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:padding="8dp"
-                        android:weightSum="3">
-
-                        <RelativeLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1">
-
-                            <TextView
-                                android:id="@+id/phone_number"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerInParent="true"
-                                android:fontFamily="@font/josefinsansregular"
-                                android:text="Phone Number"
-                                android:textColor="@color/black"
-                                android:textSize="11.5sp" />
-                        </RelativeLayout>
-
-                        <RelativeLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1">
-
-                            <TextView
-                                android:id="@+id/session_Id"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerInParent="true"
-                                android:fontFamily="@font/josefinsansregular"
-                                android:text="Session Id"
-                                android:textColor="@color/black"
-                                android:textSize="11.5sp" />
-                        </RelativeLayout>
-
-                        <RelativeLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1">
-
-                            <TextView
-                                android:id="@+id/date_and_time"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerInParent="true"
-                                android:fontFamily="@font/josefinsansregular"
-                                android:text="Date And Time"
-                                android:textColor="@color/black"
-                                android:textSize="11.5sp" />
-                        </RelativeLayout>
-                    </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"

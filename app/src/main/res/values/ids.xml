@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <item name="fragment_container" type="id" />
+    <item name="payments_history_text" type="id" />
+    <item name="sessions_history_text" type="id" />
+    <item name="recyclercardlabel" type="id" />
 </resources>

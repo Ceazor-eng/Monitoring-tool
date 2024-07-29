@@ -19,7 +19,11 @@
         android:fontFamily="@font/josefinsansregular"
         android:text="@string/manage_users"
         android:textColor="#6C2671"
-        android:textSize="28sp" />
+        android:textSize="28sp"
+        android:shadowColor="#AA2F2F2F"
+        android:shadowDx="3"
+        android:shadowDy="3"
+        android:shadowRadius="2"/>
 
     <EditText
         android:id="@+id/searchUser"
@@ -95,7 +99,11 @@
                         android:fontFamily="@font/josefinsansregular"
                         android:text="@string/username"
                         android:textColor="@color/black"
-                        android:textSize="11.5sp" />
+                        android:textSize="11.5sp"
+                        android:shadowColor="#AA2F2F2F"
+                        android:shadowDx="2"
+                        android:shadowDy="2"
+                        android:shadowRadius="1"/>
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -111,7 +119,11 @@
                         android:fontFamily="@font/josefinsansregular"
                         android:text="@string/createdat"
                         android:textColor="@color/black"
-                        android:textSize="11.5sp" />
+                        android:textSize="11.5sp"
+                        android:shadowColor="#AA2F2F2F"
+                        android:shadowDx="2"
+                        android:shadowDy="2"
+                        android:shadowRadius="1"/>
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -127,7 +139,11 @@
                         android:fontFamily="@font/josefinsansregular"
                         android:text="@string/Role"
                         android:textColor="@color/black"
-                        android:textSize="11.5sp" />
+                        android:textSize="11.5sp"
+                        android:shadowColor="#AA2F2F2F"
+                        android:shadowDx="2"
+                        android:shadowDy="2"
+                        android:shadowRadius="1"/>
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -143,7 +159,11 @@
                         android:fontFamily="@font/josefinsansregular"
                         android:text="@string/status"
                         android:textColor="@color/black"
-                        android:textSize="11.5sp" />
+                        android:textSize="11.5sp"
+                        android:shadowColor="#AA2F2F2F"
+                        android:shadowDx="2"
+                        android:shadowDy="2"
+                        android:shadowRadius="1"/>
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -160,7 +180,11 @@
                         android:fontFamily="@font/josefinsansregular"
                         android:text="@string/createdBy"
                         android:textColor="@color/black"
-                        android:textSize="11.5sp" />
+                        android:textSize="11.5sp"
+                        android:shadowColor="#AA2F2F2F"
+                        android:shadowDx="2"
+                        android:shadowDy="2"
+                        android:shadowRadius="1"/>
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -176,7 +200,11 @@
                         android:fontFamily="@font/josefinsansregular"
                         android:text="@string/Actions"
                         android:textColor="@color/black"
-                        android:textSize="11.5sp" />
+                        android:textSize="11.5sp"
+                        android:shadowColor="#AA2F2F2F"
+                        android:shadowDx="2"
+                        android:shadowDy="2"
+                        android:shadowRadius="1"/>
                 </RelativeLayout>
 
             </LinearLayout>

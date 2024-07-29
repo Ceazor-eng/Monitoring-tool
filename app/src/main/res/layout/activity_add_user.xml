@@ -32,9 +32,13 @@
             android:gravity="center_horizontal"
             android:layout_marginBottom="20dp"
             android:fontFamily="@font/josefinsansregular"
-            android:text="Register"
+            android:text="Register User"
             android:textColor="#6D2088"
-            android:textSize="28sp" />
+            android:textSize="28sp"
+            android:shadowColor="#AA2F2F2F"
+            android:shadowDx="3"
+            android:shadowDy="3"
+            android:shadowRadius="5"/>
 
 
         <EditText

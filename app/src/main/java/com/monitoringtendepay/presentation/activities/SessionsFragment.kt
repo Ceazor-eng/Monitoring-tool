@@ -1,12 +1,16 @@
 package com.monitoringtendepay.presentation.activities
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RelativeLayout
+import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -47,8 +51,10 @@ class SessionsFragment : Fragment() {
         fetchData()
 
         val cardPayments: RelativeLayout = view.findViewById(R.id.payments_card)
+        val textSessions: TextView = view.findViewById(R.id.sessions_history_text)
         cardPayments.setOnClickListener {
             Log.d("SessionsFragment", "Payments card clicked")
+            changeBackgroundAndTextColorTemporarily(cardPayments, textSessions, R.drawable.bg_white, R.drawable.bg1, R.color.purple_500, R.color.white)
             // Replace the fragment
             parentFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, History())
@@ -86,5 +92,14 @@ class SessionsFragment : Fragment() {
 
     private fun fetchData() {
         sessionsViewModel.fetchAllUssdSessions("fetchSessionMonitoring")
+    }
+
+    private fun changeBackgroundAndTextColorTemporarily(view: View, textView: TextView, newBackground: Int, originalBackground: Int, newTextColor: Int, originalTextColor: Int) {
+        view.setBackgroundResource(newBackground)
+        textView.setTextColor(ContextCompat.getColor(requireContext(), newTextColor))
+        Handler(Looper.getMainLooper()).postDelayed({
+            view.setBackgroundResource(originalBackground)
+            textView.setTextColor(ContextCompat.getColor(requireContext(), originalTextColor))
+        }, 400)
     }
 }

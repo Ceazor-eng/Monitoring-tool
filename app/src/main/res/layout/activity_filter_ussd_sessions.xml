@@ -19,7 +19,11 @@
         android:gravity="top"
         android:text="Sessions report"
         android:textColor="#6C2671"
-        android:textSize="28dp" />
+        android:textSize="28dp"
+        android:shadowColor="#AA2F2F2F"
+        android:shadowDx="3"
+        android:shadowDy="3"
+        android:shadowRadius="2"/>
 
     <TextView
         android:id="@+id/sessions_re2"
@@ -32,7 +36,11 @@
         android:paddingHorizontal="40dp"
         android:text="Generate sessions report and export for further analysis"
         android:textColor="#6C2671"
-        android:textSize="18dp" />
+        android:textSize="18dp"
+        android:shadowColor="#AA2F2F2F"
+        android:shadowDx="3"
+        android:shadowDy="3"
+        android:shadowRadius="2"/>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardGeneratePaymentsReport"
@@ -51,7 +59,7 @@
 
             <EditText
                 android:id="@+id/phoneNumberEditText"
-                android:layout_width="292dp"
+                android:layout_width="262dp"
                 android:layout_height="42dp"
                 android:background="@drawable/rectangle_2"
                 android:layout_centerHorizontal="true"
@@ -62,7 +70,7 @@
 
             <EditText
                 android:id="@+id/sessionIdEditText"
-                android:layout_width="292dp"
+                android:layout_width="262dp"
                 android:layout_height="42dp"
                 android:background="@drawable/rectangle_2"
                 android:layout_centerHorizontal="true"

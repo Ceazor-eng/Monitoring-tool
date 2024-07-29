@@ -19,7 +19,11 @@
         android:gravity="top"
         android:text="Payments report"
         android:textColor="#6C2671"
-        android:textSize="28dp" />
+        android:textSize="28dp"
+        android:shadowColor="#AA2F2F2F"
+        android:shadowDx="3"
+        android:shadowDy="3"
+        android:shadowRadius="2"/>
 
     <TextView
         android:id="@+id/payments_re2"
@@ -32,7 +36,11 @@
         android:paddingHorizontal="40dp"
         android:text="@string/payments_report"
         android:textColor="#6C2671"
-        android:textSize="18dp" />
+        android:textSize="18dp"
+        android:shadowColor="#AA2F2F2F"
+        android:shadowDx="3"
+        android:shadowDy="3"
+        android:shadowRadius="2"/>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardGeneratePaymentsReport"

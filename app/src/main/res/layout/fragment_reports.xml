@@ -17,7 +17,11 @@
         android:textColor="#6D2088"
         android:fontFamily="@font/josefinsansregular"
         android:textSize="24sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:shadowColor="#AA2F2F2F"
+        android:shadowDx="3"
+        android:shadowDy="3"
+        android:shadowRadius="2"/>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardGeneratePaymentsReport"
