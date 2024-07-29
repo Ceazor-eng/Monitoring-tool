@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.ViewTreeObserver.OnGlobalLayoutListener
 import android.widget.ImageView
+import android.widget.ScrollView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -44,6 +45,7 @@ class Dashboard : Fragment() {
     private val viewModel: AllPaymentsViewModel by viewModels()
 
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
+    private lateinit var scrollView: ScrollView
     private lateinit var recyclerView: RecyclerView
     private lateinit var paymentsAdapter: PaymentsAdapter
     private lateinit var completeMonthlyTransactions: TextView
@@ -109,6 +111,7 @@ class Dashboard : Fragment() {
 
     private fun setUpViews(view: View) {
         swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout)
+        scrollView = view.findViewById(R.id.scroll_view)
         recyclerView = view.findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         paymentsAdapter = PaymentsAdapter(emptyList())
@@ -122,23 +125,14 @@ class Dashboard : Fragment() {
         failedMonthlyTransactions = view.findViewById(R.id.failed_Transactions_number_txt)
         missingPayments = view.findViewById(R.id.missing_transactions_number_txt)
 
+
         swipeRefreshLayout.setOnRefreshListener {
             refreshData()
         }
-        swipeRefreshLayout.viewTreeObserver.addOnGlobalLayoutListener(object : OnGlobalLayoutListener {
-            override fun onGlobalLayout() {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                    swipeRefreshLayout.viewTreeObserver.removeOnGlobalLayoutListener(this)
-                } else {
-                    swipeRefreshLayout.viewTreeObserver.removeGlobalOnLayoutListener(this)
-                }
 
-                val rect = Rect()
-                swipeRefreshLayout.getDrawingRect(rect)
-                val spinnerOffset = rect.centerY() - (swipeRefreshLayout.progressCircleDiameter / 2)
-                swipeRefreshLayout.setProgressViewOffset(false, 0, spinnerOffset)
-            }
-        })
+        scrollView.setOnScrollChangeListener { v: View, scrollX: Int, scrollY: Int, _: Int, _: Int ->
+            swipeRefreshLayout.isEnabled = scrollY == 0
+        }
     }
 
     private fun refreshData() {
