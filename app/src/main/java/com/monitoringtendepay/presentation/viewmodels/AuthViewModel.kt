@@ -3,6 +3,7 @@ package com.monitoringtendepay.presentation.viewmodels
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.monitoringtendepay.core.common.PreferenceManager
 import com.monitoringtendepay.core.common.Resource
 import com.monitoringtendepay.domain.repository.AuthRepository
 import com.monitoringtendepay.presentation.states.AuthState
@@ -14,7 +15,7 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 
 @HiltViewModel
-class AuthViewModel @Inject constructor(private val authRepository: AuthRepository) : ViewModel() {
+class AuthViewModel @Inject constructor(private val authRepository: AuthRepository, private val preferenceManager: PreferenceManager) : ViewModel() {
 
     private val TAG = "AuthViewModel"
 
@@ -47,6 +48,11 @@ class AuthViewModel @Inject constructor(private val authRepository: AuthReposito
                                     changePasswordRequired = changePasswordRequired
                                 )
                             )
+                            // Save login details in preferences
+                            preferenceManager.setLoggedIn(true)
+                            preferenceManager.setSessionToken(loginResponse.sessionToken)
+                            preferenceManager.setUsername(loginResponse.username ?: "")
+                            preferenceManager.setRole(loginResponse.role)
                         } else {
                             Log.d(TAG, "LoginResponse is null")
                             _loginState.send(LoginState(error = "Login failed"))

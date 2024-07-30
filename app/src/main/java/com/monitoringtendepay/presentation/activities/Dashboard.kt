@@ -25,6 +25,7 @@ import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.formatter.IAxisValueFormatter
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.monitoringtendepay.R
+import com.monitoringtendepay.core.common.PreferenceManager
 import com.monitoringtendepay.domain.models.AllPayments
 import com.monitoringtendepay.presentation.adapters.PaymentsAdapter
 import com.monitoringtendepay.presentation.viewmodels.AllPaymentsViewModel
@@ -52,6 +53,7 @@ class Dashboard : Fragment() {
     private lateinit var barChart: BarChart
     private lateinit var logOut: ImageView
     private lateinit var welcomeText: TextView
+    private lateinit var preferenceManager: PreferenceManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,6 +71,8 @@ class Dashboard : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        preferenceManager = PreferenceManager(requireContext())
 
         setUpViews(view)
         updateGreetingMessage()
@@ -98,6 +102,13 @@ class Dashboard : Fragment() {
     private fun logOut() {
         logOut.setOnClickListener {
             Log.d("DashboardFragment", "LogOut imageView clicked")
+
+            // Clear preferences
+            preferenceManager.clear()
+            Log.d("DashboardFragment", "Preferences cleared")
+            //
+
+            // Navigate to Login activity and clear the back stack
             val intent = Intent(requireActivity(), Login::class.java).apply {
                 flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             }

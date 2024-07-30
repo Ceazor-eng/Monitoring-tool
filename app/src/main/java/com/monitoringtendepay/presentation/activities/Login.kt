@@ -15,6 +15,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import com.monitoringtendepay.R
+import com.monitoringtendepay.core.common.PreferenceManager
 import com.monitoringtendepay.core.common.hashPassword
 import com.monitoringtendepay.presentation.states.LoginState
 import com.monitoringtendepay.presentation.viewmodels.AuthViewModel
@@ -26,6 +27,7 @@ class Login : AppCompatActivity() {
 
     private val authViewModel: AuthViewModel by viewModels()
 
+    private lateinit var preferenceManager: PreferenceManager
     private lateinit var etUsername: EditText
     private lateinit var etPassword: EditText
     private lateinit var btnLogin: Button
@@ -39,6 +41,15 @@ class Login : AppCompatActivity() {
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
+        }
+
+        // Initialize com.monitoringtendepay.core.common.PreferenceManager
+        preferenceManager = PreferenceManager(this)
+
+        // Check if user is already logged in
+        if (preferenceManager.isLoggedIn()) {
+            navigateToHomeScreen()
+            return
         }
 
         etUsername = findViewById(R.id.etUsername)
@@ -74,8 +85,15 @@ class Login : AppCompatActivity() {
                 Log.d("LoginActivity", "Redirecting to change password screen")
                 navigateToChangePasswordScreen(data.username)
             } else if (isLoginSuccessful(data.status)) {
+                // Save login state and session token to SharedPreferences
+                preferenceManager.setLoggedIn(true)
+                preferenceManager.setSessionToken(data.sessionToken)
+                preferenceManager.setUsername(data.username ?: "")
+                preferenceManager.setRole(data.role)
+                Log.d("LoginActivity", "Session token saved: ${preferenceManager.getSessionToken()}")
+
                 Log.d("LoginActivity", "Login successful")
-                Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show()
+                // Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show()
                 navigateToHomeScreen()
             } else {
                 Log.d("LoginActivity", "Login failed")
