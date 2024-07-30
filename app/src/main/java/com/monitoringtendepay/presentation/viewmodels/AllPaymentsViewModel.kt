@@ -4,7 +4,6 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.monitoringtendepay.core.common.Resource
-import com.monitoringtendepay.domain.models.AllPayments
 import com.monitoringtendepay.domain.usecase.GetAllPaymentsUseCase
 import com.monitoringtendepay.domain.usecase.GetCompleteMonthlyTransactionsUseCase
 import com.monitoringtendepay.domain.usecase.GetFailedTransactionsUseCase
@@ -47,135 +46,100 @@ class AllPaymentsViewModel @Inject constructor(
     private val _missingPaymentsState = Channel<MissingPaymentsState>()
     val missingPaymentsState = _missingPaymentsState.receiveAsFlow()
 
-    // Cached data
-    private var cachedPayments: List<AllPayments>? = null
-    private var cachedCompleteTransactions: String? = null
-    private var cachedPendingTransactions: String? = null
-    private var cachedFailedTransactions: String? = null
-    private var cachedMissingPayments: String? = null
-
-    suspend fun fetchAllPayments(action: String) {
-        if (cachedPayments == null) {
-            getAllPaymentsUseCase(action).onEach { result ->
-                when (result) {
-                    is Resource.Success -> {
-                        cachedPayments = result.data ?: emptyList()
-                        _allPaymentsState.send(
-                            AllPaymentsState(payments = cachedPayments!!)
-                        )
-                    }
-                    is Resource.Loading -> {
-                        _allPaymentsState.send(AllPaymentsState(isLoading = true))
-                    }
-                    is Resource.Error -> {
-                        _allPaymentsState.send(
-                            AllPaymentsState(error = result.message ?: "An unexpected error occurred")
-                        )
-                    }
+    fun fetchAllPayments(action: String) {
+        getAllPaymentsUseCase(action).onEach { result ->
+            when (result) {
+                is Resource.Success -> {
+                    _allPaymentsState.send(
+                        AllPaymentsState(payments = result.data ?: emptyList())
+                    )
                 }
-            }.launchIn(viewModelScope)
-        } else {
-            _allPaymentsState.send(AllPaymentsState(payments = cachedPayments!!))
-        }
+                is Resource.Loading -> { _allPaymentsState.send(AllPaymentsState(isLoading = true)) }
+                is Resource.Error -> {
+                    _allPaymentsState.send(
+                        AllPaymentsState(error = result.message ?: "An unexpected error occurred")
+                    )
+                }
+            }
+        }.launchIn(viewModelScope)
     }
 
-    suspend fun fetchCompleteMonthlyTransactions(action: String) {
-        if (cachedCompleteTransactions == null) {
-            getCompleteMonthlyTransactionsUseCase(action).onEach { result ->
-                when (result) {
-                    is Resource.Success -> {
-                        cachedCompleteTransactions = result.data.toString()
-                        _completeTransactionsState.send(
-                            CompleteTransactionsState(completeTransactions = cachedCompleteTransactions)
-                        )
-                    }
-                    is Resource.Loading -> {
-                        _completeTransactionsState.send(CompleteTransactionsState(isLoading = true))
-                    }
-                    is Resource.Error -> {
-                        _completeTransactionsState.send(
-                            CompleteTransactionsState(error = result.message ?: "An unexpected error occurred")
-                        )
-                    }
+    fun fetchCompleteMonthlyTransactions(action: String) {
+        getCompleteMonthlyTransactionsUseCase(action).onEach { result ->
+            when (result) {
+                is Resource.Success -> {
+                    _completeTransactionsState.send(
+                        CompleteTransactionsState(completeTransactions = result.data)
+                    )
                 }
-            }.launchIn(viewModelScope)
-        } else {
-            _completeTransactionsState.send(CompleteTransactionsState(completeTransactions = cachedCompleteTransactions))
-        }
+                is Resource.Loading -> {
+                    _completeTransactionsState.send(CompleteTransactionsState(isLoading = true))
+                }
+                is Resource.Error -> {
+                    _completeTransactionsState.send(
+                        CompleteTransactionsState(error = result.message ?: "An unexpected error occurred")
+                    )
+                }
+            }
+        }.launchIn(viewModelScope)
+    }
+    fun fetchPendingMonthlyTransactions(action: String) {
+        getPendingMonthlyTransactionsUseCase(action).onEach { result ->
+            when (result) {
+                is Resource.Success -> {
+                    _pendingTransactionsState.send(
+                        PendingTransactionsState(pendingTransactions = result.data)
+                    )
+                }
+                is Resource.Loading -> {
+                    _pendingTransactionsState.send(PendingTransactionsState(isLoading = true))
+                }
+                is Resource.Error -> {
+                    _pendingTransactionsState.send(
+                        PendingTransactionsState(error = result.message ?: "An unexpected error occurred")
+                    )
+                }
+            }
+        }.launchIn(viewModelScope)
     }
 
-    suspend fun fetchPendingMonthlyTransactions(action: String) {
-        if (cachedPendingTransactions == null) {
-            getPendingMonthlyTransactionsUseCase(action).onEach { result ->
-                when (result) {
-                    is Resource.Success -> {
-                        cachedPendingTransactions = result.data.toString()
-                        _pendingTransactionsState.send(
-                            PendingTransactionsState(pendingTransactions = cachedPendingTransactions)
-                        )
-                    }
-                    is Resource.Loading -> {
-                        _pendingTransactionsState.send(PendingTransactionsState(isLoading = true))
-                    }
-                    is Resource.Error -> {
-                        _pendingTransactionsState.send(
-                            PendingTransactionsState(error = result.message ?: "An unexpected error occurred")
-                        )
-                    }
+    fun fetchFailedMonthlyTransactions(action: String) {
+        getFailedTransactionsUseCase(action).onEach { result ->
+            when (result) {
+                is Resource.Success -> {
+                    _failedTransactionsState.send(
+                        FailedTransactionState(failedTransactions = result.data)
+                    )
                 }
-            }.launchIn(viewModelScope)
-        } else {
-            _pendingTransactionsState.send(PendingTransactionsState(pendingTransactions = cachedPendingTransactions))
-        }
+                is Resource.Loading -> {
+                    _failedTransactionsState.send(FailedTransactionState(isLoading = true))
+                }
+                is Resource.Error -> {
+                    _failedTransactionsState.send(
+                        FailedTransactionState(error = result.message ?: "An unexpected error occurred")
+                    )
+                }
+            }
+        }.launchIn(viewModelScope)
     }
 
-    suspend fun fetchFailedMonthlyTransactions(action: String) {
-        if (cachedFailedTransactions == null) {
-            getFailedTransactionsUseCase(action).onEach { result ->
-                when (result) {
-                    is Resource.Success -> {
-                        cachedFailedTransactions = result.data.toString()
-                        _failedTransactionsState.send(
-                            FailedTransactionState(failedTransactions = cachedFailedTransactions)
-                        )
-                    }
-                    is Resource.Loading -> {
-                        _failedTransactionsState.send(FailedTransactionState(isLoading = true))
-                    }
-                    is Resource.Error -> {
-                        _failedTransactionsState.send(
-                            FailedTransactionState(error = result.message ?: "An unexpected error occurred")
-                        )
-                    }
+    fun fetchMissingPayments(action: String) {
+        getMissingPaymentsUseCase(action).onEach { result ->
+            when (result) {
+                is Resource.Success -> {
+                    _missingPaymentsState.send(
+                        MissingPaymentsState(missingPayments = result.data)
+                    )
                 }
-            }.launchIn(viewModelScope)
-        } else {
-            _failedTransactionsState.send(FailedTransactionState(failedTransactions = cachedFailedTransactions))
-        }
-    }
-
-    suspend fun fetchMissingPayments(action: String) {
-        if (cachedMissingPayments == null) {
-            getMissingPaymentsUseCase(action).onEach { result ->
-                when (result) {
-                    is Resource.Success -> {
-                        cachedMissingPayments = result.data.toString()
-                        _missingPaymentsState.send(
-                            MissingPaymentsState(missingPayments = cachedMissingPayments)
-                        )
-                    }
-                    is Resource.Loading -> {
-                        _missingPaymentsState.send(MissingPaymentsState(isLoading = true))
-                    }
-                    is Resource.Error -> {
-                        _missingPaymentsState.send(
-                            MissingPaymentsState(error = result.message ?: "An unexpected error occurred")
-                        )
-                    }
+                is Resource.Loading -> {
+                    _missingPaymentsState.send(MissingPaymentsState(isLoading = true))
                 }
-            }.launchIn(viewModelScope)
-        } else {
-            _missingPaymentsState.send(MissingPaymentsState(missingPayments = cachedMissingPayments))
-        }
+                is Resource.Error -> {
+                    _missingPaymentsState.send(
+                        MissingPaymentsState(error = result.message ?: "An unexpected error occurred")
+                    )
+                }
+            }
+        }.launchIn(viewModelScope)
     }
 }

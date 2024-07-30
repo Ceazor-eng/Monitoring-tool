@@ -158,15 +158,31 @@
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
 
-            <Button
+
+            <LinearLayout
                 android:id="@+id/generateReportButton"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginTop="16dp"
                 android:layout_below="@id/cardCalendarEndDate"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="16dp"
-                android:text="@string/generate_report"
-                android:onClick="generateReport" />
+                android:background="@drawable/bg_linear_layout_button"
+                android:fontFamily="@font/josefinsansbold"
+                >
+
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Generate Report"
+                    android:paddingHorizontal="25dp"
+                    android:layout_gravity="center"
+                    android:textColor="@color/white"
+                    />
+
+            </LinearLayout>
+
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 </RelativeLayout>

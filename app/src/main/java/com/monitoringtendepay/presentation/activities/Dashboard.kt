@@ -241,7 +241,7 @@ class Dashboard : Fragment() {
                 }
                 state.missingPayments != null -> {
                     Log.d("Dashboard", "Success: ${state.missingPayments}")
-                    missingPayments.text = state.missingPayments
+                    missingPayments.text = state.missingPayments.missingPayments
                 }
             }
         }.launchIn(viewLifecycleOwner.lifecycleScope)
@@ -257,7 +257,7 @@ class Dashboard : Fragment() {
                 }
                 state.failedTransactions != null -> {
                     Log.d("Dashboard", "Success: ${state.failedTransactions}")
-                    failedMonthlyTransactions.text = state.failedTransactions
+                    failedMonthlyTransactions.text = state.failedTransactions.failedPayments
                 }
             }
         }.launchIn(viewLifecycleOwner.lifecycleScope)
@@ -273,7 +273,7 @@ class Dashboard : Fragment() {
                 }
                 state.pendingTransactions != null -> {
                     Log.d("Dashboard", "Success: ${state.pendingTransactions}")
-                    pendingMonthlyTransactions.text = state.pendingTransactions
+                    pendingMonthlyTransactions.text = state.pendingTransactions.pendingPayments
                 }
             }
         }.launchIn(viewLifecycleOwner.lifecycleScope)
@@ -305,7 +305,7 @@ class Dashboard : Fragment() {
                 }
                 state.completeTransactions != null -> {
                     Log.d("Dashboard", "Success: ${state.completeTransactions}")
-                    completeMonthlyTransactions.text = state.completeTransactions
+                    completeMonthlyTransactions.text = state.completeTransactions.completePayments
                 }
             }
         }.launchIn(viewLifecycleOwner.lifecycleScope)

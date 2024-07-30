@@ -39,16 +39,31 @@
         android:paddingStart="16dp" />
 
 
-    <Button
+
+    <LinearLayout
         android:id="@+id/AddUserBtn"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/searchUser"
+        android:layout_height="40dp"
+        android:layout_marginTop="16dp"
         android:layout_centerHorizontal="true"
+        android:layout_below="@id/searchUser"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/bg_linear_layout_button"
         android:fontFamily="@font/josefinsansbold"
-        android:gravity="center_horizontal"
-        android:text="@string/add_user">
-    </Button>
+        >
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add User"
+            android:paddingHorizontal="25dp"
+            android:layout_gravity="center"
+            android:textColor="@color/white"
+            />
+
+    </LinearLayout>
 
 
     <androidx.cardview.widget.CardView

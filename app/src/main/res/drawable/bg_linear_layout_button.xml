@@ -1,0 +1,8 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Pressed state -->
+    <item android:state_pressed="true" android:drawable="@drawable/bg_gradientp" />
+    <!-- Focused state -->
+    <item android:state_focused="true" android:drawable="@drawable/bg_gradient" />
+    <!-- Default state -->
+    <item android:drawable="@drawable/bg_gradient" />
+</selector>

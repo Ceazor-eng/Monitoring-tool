@@ -179,14 +179,31 @@
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
 
-            <!-- Generate Report Button -->
-            <Button
+
+
+            <LinearLayout
                 android:id="@+id/buttonGenerateReport"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginTop="16dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="60dp"
-                android:text="Generate Report" />
+                android:background="@drawable/bg_linear_layout_button"
+                android:fontFamily="@font/josefinsansbold"
+                >
+
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Generate Report"
+                    android:paddingHorizontal="25dp"
+                    android:layout_gravity="center"
+                    android:textColor="@color/white"
+                    />
+
+            </LinearLayout>
+
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 </RelativeLayout>
