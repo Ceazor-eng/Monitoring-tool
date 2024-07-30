@@ -19,7 +19,11 @@
             android:fontFamily="@font/josefinsansregular"
             android:text="Phone"
             android:textColor="@color/black"
-            android:textSize="11.5sp" />
+            android:textSize="11.5sp"
+            android:shadowColor="#AA2F2F2F"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="1"/>
 
     </RelativeLayout>
 
@@ -38,7 +42,11 @@
             android:fontFamily="@font/josefinsansregular"
             android:text="Sessions Id"
             android:textColor="@color/black"
-            android:textSize="11.5sp" />
+            android:textSize="11.5sp"
+            android:shadowColor="#AA2F2F2F"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="1"/>
     </RelativeLayout>
 
     <RelativeLayout
@@ -54,7 +62,11 @@
             android:fontFamily="@font/josefinsansregular"
             android:text="Time"
             android:textColor="@color/black"
-            android:textSize="11.5sp" />
+            android:textSize="11.5sp"
+            android:shadowColor="#AA2F2F2F"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="1"/>
     </RelativeLayout>
 
 

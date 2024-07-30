@@ -1,9 +1,7 @@
 package com.monitoringtendepay.presentation.states
 
-import com.monitoringtendepay.domain.models.CompleteTransactions
-
 data class CompleteTransactionsState(
     val isLoading: Boolean = false,
-    val completeTransactions: CompleteTransactions? = null,
+    val completeTransactions: String? = null,
     val error: String = ""
 )

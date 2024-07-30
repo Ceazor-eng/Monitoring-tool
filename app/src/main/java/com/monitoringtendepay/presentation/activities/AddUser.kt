@@ -3,8 +3,8 @@ package com.monitoringtendepay.presentation.activities
 import android.os.Bundle
 import android.util.Log
 import android.widget.ArrayAdapter
-import android.widget.Button
 import android.widget.EditText
+import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.Spinner
 import android.widget.Toast
@@ -28,7 +28,7 @@ class AddUser : AppCompatActivity() {
     private lateinit var lName: EditText
     private lateinit var phoneNumber: EditText
     private lateinit var email: EditText
-    private lateinit var registerBtn: Button
+    private lateinit var registerBtn: LinearLayout
     private lateinit var progressBar: ProgressBar
     private lateinit var roleSpinner: Spinner
 

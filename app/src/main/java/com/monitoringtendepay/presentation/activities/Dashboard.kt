@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.ScrollView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -14,6 +15,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.components.AxisBase
 import com.github.mikephil.charting.components.XAxis
@@ -34,11 +36,15 @@ import java.util.Date
 import java.util.Locale
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class Dashboard : Fragment() {
 
     private val viewModel: AllPaymentsViewModel by viewModels()
+
+    private lateinit var swipeRefreshLayout: SwipeRefreshLayout
+    private lateinit var scrollView: ScrollView
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var paymentsAdapter: PaymentsAdapter
@@ -84,6 +90,10 @@ class Dashboard : Fragment() {
         logOut()
     }
 
+    private fun refreshData() {
+        fetchData()
+    }
+
     private fun updateGreetingMessage() {
         val calendar = Calendar.getInstance()
         val hourOfDay = calendar.get(Calendar.HOUR_OF_DAY)
@@ -102,7 +112,6 @@ class Dashboard : Fragment() {
             // Clear preferences
             preferenceManager.clear()
             Log.d("DashboardFragment", "Preferences cleared")
-            //
 
             // Navigate to Login activity and clear the back stack
             val intent = Intent(requireActivity(), Login::class.java).apply {
@@ -115,6 +124,8 @@ class Dashboard : Fragment() {
 
     private fun setUpViews(view: View) {
         recyclerView = view.findViewById(R.id.recyclerView)
+        swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout)
+        scrollView = view.findViewById(R.id.Scroll)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         paymentsAdapter = PaymentsAdapter(emptyList())
         recyclerView.adapter = paymentsAdapter
@@ -126,6 +137,14 @@ class Dashboard : Fragment() {
         pendingMonthlyTransactions = view.findViewById(R.id.pending_transactions_number_txt)
         failedMonthlyTransactions = view.findViewById(R.id.failed_Transactions_number_txt)
         missingPayments = view.findViewById(R.id.missing_transactions_number_txt)
+
+        swipeRefreshLayout.setOnRefreshListener {
+            refreshData()
+        }
+
+        scrollView.setOnScrollChangeListener { v: View, scrollX: Int, scrollY: Int, _: Int, _: Int ->
+            swipeRefreshLayout.isEnabled = scrollY == 0
+        }
     }
 
     private fun setUpChart() {
@@ -144,9 +163,9 @@ class Dashboard : Fragment() {
     }
 
     private fun fetchDataAndPopulateChart() {
-        viewModel.fetchAllPayments("fetchAllPayments")
+        lifecycleScope.launch {
+            viewModel.fetchAllPayments("fetchAllPayments")
 
-        lifecycleScope.launchWhenStarted {
             viewModel.paymentState.collect { state ->
                 when (state.isLoading) {
                     true -> Log.d("Dashboard", "Loading...")
@@ -221,8 +240,8 @@ class Dashboard : Fragment() {
                     Toast.makeText(requireContext(), state.error, Toast.LENGTH_SHORT).show()
                 }
                 state.missingPayments != null -> {
-                    Log.d("Dashboard", "Success: ${state.missingPayments.missingPayments}")
-                    missingPayments.text = state.missingPayments.missingPayments
+                    Log.d("Dashboard", "Success: ${state.missingPayments}")
+                    missingPayments.text = state.missingPayments
                 }
             }
         }.launchIn(viewLifecycleOwner.lifecycleScope)
@@ -237,8 +256,8 @@ class Dashboard : Fragment() {
                     Toast.makeText(requireContext(), state.error, Toast.LENGTH_SHORT).show()
                 }
                 state.failedTransactions != null -> {
-                    Log.d("Dashboard", "Success: ${state.failedTransactions.failedPayments}")
-                    failedMonthlyTransactions.text = state.failedTransactions.failedPayments
+                    Log.d("Dashboard", "Success: ${state.failedTransactions}")
+                    failedMonthlyTransactions.text = state.failedTransactions
                 }
             }
         }.launchIn(viewLifecycleOwner.lifecycleScope)
@@ -253,8 +272,8 @@ class Dashboard : Fragment() {
                     Toast.makeText(requireContext(), state.error, Toast.LENGTH_SHORT).show()
                 }
                 state.pendingTransactions != null -> {
-                    Log.d("Dashboard", "Success: ${state.pendingTransactions.pendingPayments}")
-                    pendingMonthlyTransactions.text = state.pendingTransactions.pendingPayments
+                    Log.d("Dashboard", "Success: ${state.pendingTransactions}")
+                    pendingMonthlyTransactions.text = state.pendingTransactions
                 }
             }
         }.launchIn(viewLifecycleOwner.lifecycleScope)
@@ -285,19 +304,23 @@ class Dashboard : Fragment() {
                     Toast.makeText(requireContext(), state.error, Toast.LENGTH_SHORT).show()
                 }
                 state.completeTransactions != null -> {
-                    Log.d("Dashboard", "Success: ${state.completeTransactions.completePayments}")
-                    completeMonthlyTransactions.text = state.completeTransactions.completePayments
+                    Log.d("Dashboard", "Success: ${state.completeTransactions}")
+                    completeMonthlyTransactions.text = state.completeTransactions
                 }
             }
         }.launchIn(viewLifecycleOwner.lifecycleScope)
     }
 
     private fun fetchData() {
-        viewModel.fetchAllPayments("fetchAllPayments")
-        viewModel.fetchCompleteMonthlyTransactions("fetchTotalCompletedPayments")
-        viewModel.fetchPendingMonthlyTransactions("fetchTotalPendingPayments")
-        viewModel.fetchFailedMonthlyTransactions("fetchTotalFailedPayments")
-        viewModel.fetchMissingPayments("fetchTotalMissingPayments")
+        lifecycleScope.launch {
+            viewModel.fetchAllPayments("fetchAllPayments")
+            viewModel.fetchCompleteMonthlyTransactions("fetchTotalCompletedPayments")
+            viewModel.fetchPendingMonthlyTransactions("fetchTotalPendingPayments")
+            viewModel.fetchFailedMonthlyTransactions("fetchTotalFailedPayments")
+            viewModel.fetchMissingPayments("fetchTotalMissingPayments")
+
+            swipeRefreshLayout.isRefreshing = false
+        }
     }
 
     private fun enableEdgeToEdge() {

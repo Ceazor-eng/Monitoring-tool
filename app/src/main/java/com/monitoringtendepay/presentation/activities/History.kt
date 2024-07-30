@@ -54,7 +54,7 @@ class History : Fragment() {
         return view
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override suspend fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         setUpViews(view)
@@ -104,7 +104,7 @@ class History : Fragment() {
         }.launchIn(viewLifecycleOwner.lifecycleScope)
     }
 
-    private fun fetchData() {
+    private suspend fun fetchData() {
         viewModel.fetchAllPayments("fetchAllPayments")
     }
 
