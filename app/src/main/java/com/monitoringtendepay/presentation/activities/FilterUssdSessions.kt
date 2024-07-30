@@ -7,8 +7,8 @@ import android.os.Bundle
 import android.os.Environment
 import android.util.Log
 import android.view.View // <-- Added import for View
+import android.widget.Button
 import android.widget.EditText
-import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -58,7 +58,7 @@ class FilterUssdSessions : AppCompatActivity() {
         sessionIdEditText = findViewById(R.id.sessionIdEditText)
         startDateTextView = findViewById(R.id.startDateTextView)
         endDateTextView = findViewById(R.id.endDateTextView)
-        val generateReportButton: LinearLayout = findViewById(R.id.generateReportButton)
+        val generateReportButton: Button = findViewById(R.id.generateReportButton)
 
         startDateTextView.setOnClickListener { showDatePickerDialog(true) }
         endDateTextView.setOnClickListener { showDatePickerDialog(false) }

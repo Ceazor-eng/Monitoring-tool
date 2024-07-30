@@ -8,7 +8,7 @@ import android.os.Bundle
 import android.os.Environment
 import android.util.Log
 import android.widget.ArrayAdapter
-import android.widget.LinearLayout
+import android.widget.Button
 import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
@@ -57,7 +57,7 @@ class FilterPayments : AppCompatActivity() {
         val spinnerStatus: Spinner = findViewById(R.id.spinnerStatus)
         val editTextStartDate: TextView = findViewById(R.id.startDateTextView)
         val editTextEndDate: TextView = findViewById(R.id.endDateTextView)
-        val buttonGenerateReport: LinearLayout = findViewById(R.id.buttonGenerateReport)
+        val buttonGenerateReport: Button = findViewById(R.id.buttonGenerateReport)
 
         // Populate Service Type Spinner
         val serviceTypes = listOf("mpesa", "bank")

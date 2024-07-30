@@ -4,8 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Button
 import android.widget.EditText
-import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -30,7 +30,7 @@ class Login : AppCompatActivity() {
     private lateinit var preferenceManager: PreferenceManager
     private lateinit var etUsername: EditText
     private lateinit var etPassword: EditText
-    private lateinit var btnLogin: LinearLayout
+    private lateinit var btnLogin: Button
     private lateinit var progressBar: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,7 +43,7 @@ class Login : AppCompatActivity() {
             insets
         }
 
-        // Initialize PreferenceManager
+        // Initialize com.monitoringtendepay.core.common.PreferenceManager
         preferenceManager = PreferenceManager(this)
 
         // Check if user is already logged in
