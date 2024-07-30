@@ -20,7 +20,11 @@
             android:fontFamily="@font/josefinsansregular"
             android:text="@string/username"
             android:textColor="@color/black"
-            android:textSize="11.5sp" />
+            android:textSize="11.5sp"
+            android:shadowColor="#AA2F2F2F"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="1"/>
     </RelativeLayout>
 
     <RelativeLayout
@@ -36,7 +40,11 @@
             android:fontFamily="@font/josefinsansregular"
             android:text="@string/createdat"
             android:textColor="@color/black"
-            android:textSize="11.5sp" />
+            android:textSize="11.5sp"
+            android:shadowColor="#AA2F2F2F"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="1"/>
     </RelativeLayout>
 
     <RelativeLayout
@@ -52,7 +60,11 @@
             android:fontFamily="@font/josefinsansregular"
             android:text="@string/Role"
             android:textColor="@color/black"
-            android:textSize="11.5sp" />
+            android:textSize="11.5sp"
+            android:shadowColor="#AA2F2F2F"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="1"/>
     </RelativeLayout>
 
     <RelativeLayout
@@ -68,7 +80,11 @@
             android:fontFamily="@font/josefinsansregular"
             android:text="@string/status"
             android:textColor="@color/black"
-            android:textSize="11.5sp" />
+            android:textSize="11.5sp"
+            android:shadowColor="#AA2F2F2F"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="1"/>
     </RelativeLayout>
 
     <RelativeLayout
@@ -85,7 +101,11 @@
             android:fontFamily="@font/josefinsansregular"
             android:text="@string/createdBy"
             android:textColor="@color/black"
-            android:textSize="11.5sp" />
+            android:textSize="11.5sp"
+            android:shadowColor="#AA2F2F2F"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="1"/>
     </RelativeLayout>
 
     <RelativeLayout

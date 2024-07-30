@@ -103,7 +103,11 @@
         android:fontFamily="@font/josefinsansregular"
         android:paddingHorizontal="40dp"
         android:text="@string/all_transactions"
-        android:textColor="@color/black" />
+        android:textColor="@color/black"
+        android:shadowColor="#AA2F2F2F"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="1"/>
 
 
     <LinearLayout

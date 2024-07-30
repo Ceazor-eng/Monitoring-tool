@@ -50,7 +50,11 @@
                 android:textColor="#FFFFFF"
                 android:fontFamily="@font/josefinsansregular"
                 android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:shadowColor="#AA2F2F2F"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="1"/>
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 
@@ -81,7 +85,11 @@
                 android:textColor="#FFFFFF"
                 android:fontFamily="@font/josefinsansregular"
                 android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:shadowColor="#AA2F2F2F"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="1"/>
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 

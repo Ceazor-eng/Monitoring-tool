@@ -103,7 +103,11 @@
                     android:fontFamily="@font/josefinsansregular"
                     android:text="0"
                     android:textColor="@android:color/black"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:shadowColor="#AA2F2F2F"
+                    android:shadowDx="2"
+                    android:shadowDy="2"
+                    android:shadowRadius="1"/>
 
                 <TextView
                     android:id="@+id/totaltransaction_txt"
@@ -116,7 +120,11 @@
                     android:text="Complete transactions"
                     android:textColor="@android:color/black"
                     android:textSize="14dp"
-                    tools:ignore="TextSizeCheck" />
+                    tools:ignore="TextSizeCheck"
+                    android:shadowColor="#AA2F2F2F"
+                    android:shadowDx="2"
+                    android:shadowDy="2"
+                    android:shadowRadius="1"/>
 
 
             </RelativeLayout>
@@ -158,7 +166,11 @@
                     android:fontFamily="@font/josefinsansregular"
                     android:text="0"
                     android:textColor="@android:color/black"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:shadowColor="#AA2F2F2F"
+                    android:shadowDx="2"
+                    android:shadowDy="2"
+                    android:shadowRadius="1"/>
 
                 <TextView
                     android:id="@+id/pending_transaction_txt"
@@ -170,7 +182,11 @@
                     android:fontFamily="@font/josefinsansregular"
                     android:text="Pending transactions"
                     android:textColor="@android:color/black"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    android:shadowColor="#AA2F2F2F"
+                    android:shadowDx="2"
+                    android:shadowDy="2"
+                    android:shadowRadius="1"/>
 
             </RelativeLayout>
 
@@ -213,7 +229,11 @@
                     android:fontFamily="@font/josefinsansregular"
                     android:text="0"
                     android:textColor="@android:color/black"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:shadowColor="#AA2F2F2F"
+                    android:shadowDx="2"
+                    android:shadowDy="2"
+                    android:shadowRadius="1"/>
 
                 <TextView
                     android:id="@+id/failed_transaction_txt"
@@ -227,7 +247,11 @@
                     android:text="Failed transactions"
                     android:textColor="@android:color/black"
                     android:textSize="14sp"
-                    tools:ignore="TextSizeCheck" />
+                    tools:ignore="TextSizeCheck"
+                    android:shadowColor="#AA2F2F2F"
+                    android:shadowDx="2"
+                    android:shadowDy="2"
+                    android:shadowRadius="1"/>
 
 
             </RelativeLayout>
@@ -270,7 +294,11 @@
                     android:fontFamily="@font/josefinsansregular"
                     android:text="0"
                     android:textColor="@android:color/black"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:shadowColor="#AA2F2F2F"
+                    android:shadowDx="2"
+                    android:shadowDy="2"
+                    android:shadowRadius="1"/>
 
                 <TextView
                     android:id="@+id/missingtransaction_txt"
@@ -283,7 +311,11 @@
                     android:fontFamily="@font/josefinsansregular"
                     android:text="Missing transactions"
                     android:textColor="@android:color/black"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    android:shadowColor="#AA2F2F2F"
+                    android:shadowDx="2"
+                    android:shadowDy="2"
+                    android:shadowRadius="1"/>
 
 
             </RelativeLayout>
@@ -298,12 +330,16 @@
         android:id="@+id/recent_tran"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="20dp"
         android:fontFamily="@font/josefinsansregular"
         android:paddingHorizontal="40dp"
         android:text="@string/recent_transactions"
         android:textColor="@color/black"
-        app:layout_constraintTop_toBottomOf="@+id/transactions" />
+        app:layout_constraintTop_toBottomOf="@+id/transactions"
+        android:shadowColor="#AA2F2F2F"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="1"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -437,6 +473,7 @@
                             android:id="@+id/recyclerView"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
                             tools:listitem="@layout/item_payment" />
                     </LinearLayout>
 
