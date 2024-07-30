@@ -55,8 +55,7 @@ class SplashScreen : AppCompatActivity() {
                     startActivity(intent)
                 }
             }
-            // Finish SplashScreen activity
             finish()
-        }, 3000) // 3 seconds delay
+        }, 3000)
     }
 }
