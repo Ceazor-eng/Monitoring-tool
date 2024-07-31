@@ -26,6 +26,7 @@ bcrypt ="0.4"
 fragments ="1.8.2"
 chucker ="4.0.0"
 chucker-no-op = "4.0.0"
+junitJunit = "4.12"
 
 
 
@@ -63,6 +64,7 @@ bcrypt-hash ={module = "org.mindrot:jbcrypt",version.ref = "bcrypt"}
 chuker-interceptor = {module = "com.github.chuckerteam.chucker:library",version.ref = "chucker"}
 chucker-no={module ="com.github.chuckerteam.chucker:library-no-op",version.ref = "chucker-no-op"}
 androidx-swiperefreshlayout = { group = "androidx.swiperefreshlayout", name = "swiperefreshlayout", version.ref = "swiperefreshlayout" }
+junit-junit = { group = "junit", name = "junit", version.ref = "junitJunit" }
 
 
 
