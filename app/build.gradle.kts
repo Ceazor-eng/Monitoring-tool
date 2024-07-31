@@ -50,6 +50,7 @@ dependencies {
     // Hilt dependencies
     implementation(libs.dagger.hilt)
     implementation(libs.androidx.swiperefreshlayout)
+    testImplementation(libs.junit.junit)
     // testImplementation(libs.junit.junit)
     kapt(libs.kapt)
 
@@ -97,6 +98,8 @@ dependencies {
 
     // truth
     testImplementation("com.google.truth:truth:1.0.1")
+
+    testImplementation("com.squareup.okhttp3:mockwebserver:4.11.0")
 }
 
 // Allow references to generated code
