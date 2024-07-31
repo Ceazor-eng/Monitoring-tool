@@ -58,7 +58,7 @@ class AuthRepositoryImpl @Inject constructor(
             emit(Resource.Error("Unexpected error: ${e.localizedMessage ?: e.message}"))
         }
     }
-    override suspend fun registerUser(action: String, email: String, firstName: String, lastName: String, phoneNumber: String, roleID: String, username: String): Flow<Resource<Result<RegisterUser>>> = flow {
+    override suspend fun registerUser(action: String, email: String, firstName: String, lastName: String, phoneNumber: String, roleID: String, username: String): Flow<Resource<RegisterUser>> = flow {
         emit(Resource.Loading())
         try {
             val response = authService.register(RegisterRequest(action, email, firstName, lastName, phoneNumber, roleID, username))
@@ -72,7 +72,7 @@ class AuthRepositoryImpl @Inject constructor(
                             salutation = registerResponse.data.salutation,
                             otp = registerResponse.data.otp
                         )
-                        emit(Resource.Success(Result.success(user)))
+                        emit(Resource.Success(user))
                     } else {
                         emit(Resource.Error(registerResponse.data.message ?: "Unexpected error"))
                     }

@@ -3,6 +3,7 @@ package com.monitoringtendepay.presentation.activities
 import android.content.Intent
 import android.os.Bundle
 import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -29,6 +30,13 @@ class SuccessActivity : AppCompatActivity() {
             val intent = Intent(this, AddUser::class.java)
             startActivity(intent)
             finish()
+        }
+
+        val responseText: TextView = findViewById(R.id.responseSuccessText)
+        val message = intent.getStringExtra("responseMessage")
+
+        message?.let {
+            responseText.text = it
         }
     }
 }

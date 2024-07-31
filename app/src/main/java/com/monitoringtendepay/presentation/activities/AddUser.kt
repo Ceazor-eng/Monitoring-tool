@@ -16,7 +16,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import com.monitoringtendepay.R
-import com.monitoringtendepay.presentation.states.AuthState
+import com.monitoringtendepay.presentation.states.RegisterState
 import com.monitoringtendepay.presentation.viewmodels.AuthViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -88,17 +88,23 @@ class AddUser : AppCompatActivity() {
         }
     }
 
-    private fun handleAuthState(authState: AuthState) {
+    private fun handleAuthState(authState: RegisterState) {
         if (authState.isLoading) {
             progressBar.visibility = ProgressBar.VISIBLE
         } else {
             progressBar.visibility = ProgressBar.GONE
             authState.error?.let { error ->
-                Toast.makeText(this, error, Toast.LENGTH_SHORT).show()
+                // Toast.makeText(this, error, Toast.LENGTH_SHORT).show()
+                Log.d("RegisterUser", "AuthState data: $error")
+                val intent = Intent(this, FailedActivity::class.java)
+                intent.putExtra("responseMessage", error)
+                startActivity(intent)
+                finish()
             }
             authState.data?.let { data ->
                 Log.d("RegisterUser", "AuthState data: $data")
                 val intent = Intent(this, SuccessActivity::class.java)
+                intent.putExtra("responseMessage", data.salutation)
                 startActivity(intent)
                 finish()
 //                Toast.makeText(this, "register successfully", Toast.LENGTH_SHORT).show()

@@ -17,7 +17,7 @@ interface AuthRepository {
         phoneNumber: String,
         roleID: String,
         username: String
-    ): Flow<Resource<Result<RegisterUser>>>
+    ): Flow<Resource<RegisterUser>>
 
     suspend fun updatePassword(action: String, username: String, password: String): Flow<Resource<Result<UpdatePassword>>>
 }

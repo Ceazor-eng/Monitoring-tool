@@ -29,11 +29,12 @@
         android:textSize="18sp" />
 
     <TextView
-        android:id="@+id/responseText"
+        android:id="@+id/responseSuccessText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="8dp"
+        android:gravity="center_horizontal"
         android:fontFamily="@font/josefinsansbold"
         android:text="Response"
         android:textColor="#6C2671"

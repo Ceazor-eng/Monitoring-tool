@@ -8,6 +8,7 @@ import com.monitoringtendepay.core.common.Resource
 import com.monitoringtendepay.domain.repository.AuthRepository
 import com.monitoringtendepay.presentation.states.AuthState
 import com.monitoringtendepay.presentation.states.LoginState
+import com.monitoringtendepay.presentation.states.RegisterState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.channels.Channel
@@ -22,7 +23,7 @@ class AuthViewModel @Inject constructor(private val authRepository: AuthReposito
     private val _loginState = Channel<LoginState>()
     val loginState = _loginState.receiveAsFlow()
 
-    private val _registerState = Channel<AuthState>()
+    private val _registerState = Channel<RegisterState>()
     val registerState = _registerState.receiveAsFlow()
 
     private val _updatePasswordState = Channel<AuthState>()
@@ -77,17 +78,17 @@ class AuthViewModel @Inject constructor(private val authRepository: AuthReposito
                 when (result) {
                     is Resource.Success -> {
                         Log.d(TAG, "result: ${result.data}")
-                        _registerState.send(AuthState(data = result.data.toString()))
+                        _registerState.send(RegisterState(data = result.data))
                     }
 
                     is Resource.Loading -> {
                         Log.d(TAG, "Registering user...")
-                        _registerState.send(AuthState(isLoading = true))
+                        _registerState.send(RegisterState(isLoading = true))
                     }
 
                     is Resource.Error -> {
                         Log.d(TAG, "Login error: ${result.message}")
-                        _registerState.send(AuthState(error = result.message))
+                        _registerState.send(RegisterState(error = result.message))
                     }
                 }
             }
