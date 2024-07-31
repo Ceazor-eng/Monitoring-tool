@@ -1,5 +1,6 @@
 package com.monitoringtendepay.presentation.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.ArrayAdapter
@@ -97,7 +98,10 @@ class AddUser : AppCompatActivity() {
             }
             authState.data?.let { data ->
                 Log.d("RegisterUser", "AuthState data: $data")
-                Toast.makeText(this, "register successfully", Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, SuccessActivity::class.java)
+                startActivity(intent)
+                finish()
+//                Toast.makeText(this, "register successfully", Toast.LENGTH_SHORT).show()
             }
         }
     }

@@ -1,65 +1,70 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center"
     android:background="@drawable/bg5"
-    android:padding="16dp">
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".presentation.activities.SuccessActivity">
 
     <ImageView
         android:id="@+id/successIcon"
         android:layout_width="300dp"
         android:layout_height="300dp"
-        android:src="@drawable/success"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        android:src="@drawable/success" />
 
     <TextView
         android:id="@+id/successText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Failed"
-        android:textColor="#6C2671"
-        android:textSize="18sp"
-        android:fontFamily="@font/josefinsansbold"
+        android:layout_gravity="center"
         android:layout_marginTop="16dp"
-        android:layout_gravity="center"/>
+        android:fontFamily="@font/josefinsansbold"
+        android:text="Success"
+        android:textColor="#6C2671"
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/responseText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/josefinsansbold"
         android:text="Response"
         android:textColor="#6C2671"
-        android:textSize="18sp"
-        android:fontFamily="@font/josefinsansbold"
-        android:layout_marginTop="8dp"
-        android:layout_gravity="center"/>
+        android:textSize="18sp" />
 
     <LinearLayout
-        android:id="@+id/closeButton"
+        android:id="@+id/closeBtn"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
-        android:layout_marginTop="16dp"
         android:layout_gravity="center_horizontal"
-        android:fontFamily="@font/josefinsansbold"
+        android:layout_marginTop="16dp"
         android:background="@drawable/bg_linear_layout_button"
         android:clickable="true"
-        android:focusable="true">
+        android:focusable="true"
+        android:fontFamily="@font/josefinsansbold">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Close"
-            android:textColor="@color/white"
-            android:paddingHorizontal="15dp"
-            android:textSize="14sp"
             android:layout_gravity="center"
             android:fontFamily="@font/josefinsansregular"
+            android:paddingHorizontal="15dp"
             android:shadowColor="#AA2F2F2F"
             android:shadowDx="2"
             android:shadowDy="2"
-            android:shadowRadius="1"/>
+            android:shadowRadius="1"
+            android:text="Close"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
     </LinearLayout>
 
 </LinearLayout>
+
+
