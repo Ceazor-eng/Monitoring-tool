@@ -102,7 +102,7 @@
         android:layout_marginBottom="20dp"
         android:fontFamily="@font/josefinsansregular"
         android:paddingHorizontal="40dp"
-        android:text="@string/all_transactions"
+        android:text="@string/all_sessions"
         android:textColor="@color/black"
         android:shadowColor="#AA2F2F2F"
         android:shadowDx="2"
