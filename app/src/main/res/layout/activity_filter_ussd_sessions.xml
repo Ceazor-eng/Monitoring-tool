@@ -179,6 +179,11 @@
                     android:paddingHorizontal="25dp"
                     android:layout_gravity="center"
                     android:textColor="@color/white"
+                    android:fontFamily="@font/josefinsansregular"
+                    android:shadowColor="#AA2F2F2F"
+                    android:shadowDx="1"
+                    android:shadowDy="1"
+                    android:shadowRadius="1"
                     />
 
             </LinearLayout>

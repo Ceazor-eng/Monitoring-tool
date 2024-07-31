@@ -29,7 +29,7 @@ class AuthRepositoryImpl @Inject constructor(
                 response.body()?.let { loginResponse ->
                     if (loginResponse.status == "success" || loginResponse.status == "changePassword") {
                         val user = LoginUser(
-                            message = loginResponse.message,
+                            message = loginResponse.message ?: "",
                             status = loginResponse.status,
                             role = loginResponse.role,
                             username = loginResponse.username,
@@ -48,17 +48,16 @@ class AuthRepositoryImpl @Inject constructor(
                 emit(Resource.Error(errorMessage))
             }
         } catch (e: IOException) {
-            Log.d("AuthRepository", "Network error: ${e.localizedMessage}")
-            emit(Resource.Error("Network error: ${e.localizedMessage}"))
+            Log.d("AuthRepository", "Network error: ${e.localizedMessage ?: e.message}")
+            emit(Resource.Error("Network error: ${e.localizedMessage ?: e.message}"))
         } catch (e: HttpException) {
-            Log.d("AuthRepository", "HTTP error: ${e.localizedMessage}")
-            emit(Resource.Error("HTTP error: ${e.localizedMessage}"))
+            Log.d("AuthRepository", "HTTP error: ${e.localizedMessage ?: e.message}")
+            emit(Resource.Error("HTTP error: ${e.localizedMessage ?: e.message}"))
         } catch (e: Exception) {
-            Log.d("AuthRepository", "Unexpected error: ${e.localizedMessage}")
-            emit(Resource.Error("Unexpected error: ${e.localizedMessage}"))
+            Log.d("AuthRepository", "Unexpected error: ${e.localizedMessage ?: e.message}")
+            emit(Resource.Error("Unexpected error: ${e.localizedMessage ?: e.message}"))
         }
     }
-
     override suspend fun registerUser(action: String, email: String, firstName: String, lastName: String, phoneNumber: String, roleID: String, username: String): Flow<Resource<Result<RegisterUser>>> = flow {
         emit(Resource.Loading())
         try {
