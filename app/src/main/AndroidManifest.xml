@@ -20,6 +20,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".presentation.activities.SuccessActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.activities.UpdatePassword"
             android:exported="false" />
         <activity
