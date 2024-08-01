@@ -7,24 +7,24 @@
     android:weightSum="6">
 
     <LinearLayout
+        android:id="@+id/user"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:weightSum="2"
-        android:id="@+id/user">
+        android:weightSum="2">
 
         <ImageView
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_margin="20dp"
-            android:background="@drawable/usericon"/>
+            android:background="@drawable/usericon" />
 
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_margin="20dp"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:orientation="vertical">
 
             <RelativeLayout
                 android:layout_width="wrap_content"
@@ -58,13 +58,13 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:fontFamily="@font/josefinsansregular"
-                    android:text="Reference"
-                    android:textColor="@color/black"
-                    android:textSize="1.5sp"
                     android:shadowColor="#AA2F2F2F"
                     android:shadowDx="1"
                     android:shadowDy="1"
-                    android:shadowRadius="1"/>
+                    android:shadowRadius="1"
+                    android:text="Reference"
+                    android:textColor="@color/black"
+                    android:textSize="1.5sp" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -86,6 +86,7 @@
                     android:textColor="@color/black"
                     android:textSize="11.5sp" />
             </RelativeLayout>
+
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -98,57 +99,47 @@
                 android:layout_centerInParent="true"
                 android:layout_marginTop=""
                 android:fontFamily="@font/josefinsansregular"
-                android:text="Time"
-                android:textColor="@color/black"
-                android:textSize="11.5sp"
                 android:shadowColor="#AA2F2F2F"
                 android:shadowDx="1"
                 android:shadowDy="1"
-                android:shadowRadius="1"/>
+                android:shadowRadius="1"
+                android:text="Time"
+                android:textColor="@color/black"
+                android:textSize="11.5sp" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center_horizontal"
             android:layout_gravity="center_horizontal"
-            >
+            android:layout_weight="1"
+            android:gravity="center_horizontal">
+
             <RelativeLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                >
+                android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/AmountView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:layout_marginTop="20dp"
-                android:fontFamily="@font/josefinsansregular"
-                android:text="Amount"
-                android:textColor="@color/black"
-                android:textSize="31.5sp"
-                android:shadowColor="#AA2F2F2F"
-                android:shadowDx="1"
-                android:shadowDy="1"
-                android:shadowRadius="1"/>
+                <TextView
+                    android:id="@+id/AmountView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/josefinsansregular"
+                    android:shadowColor="#AA2F2F2F"
+                    android:shadowDx="1"
+                    android:shadowDy="1"
+                    android:shadowRadius="1"
+                    android:text="Amount"
+                    android:textColor="@color/black"
+                    android:textSize="31.5sp" />
+            </RelativeLayout>
         </LinearLayout>
 
-
-
-
-
-
-        </LinearLayout>
 
     </LinearLayout>
 
-
-
-
-
-
-
-
 </LinearLayout>
+
+
+    </LinearLayout>
