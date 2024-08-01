@@ -15,8 +15,9 @@
         <ImageView
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_margin="20dp"
-            android:background="@drawable/usericon" />
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/usericc" />
 
 
         <LinearLayout
@@ -113,28 +114,25 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
+            android:paddingTop="30dp"
             android:layout_weight="1"
-            android:gravity="center_horizontal">
+            android:gravity="center">
 
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+
 
                 <TextView
                     android:id="@+id/AmountView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:layout_marginTop="20dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="40dp"
                     android:fontFamily="@font/josefinsansregular"
                     android:shadowColor="#AA2F2F2F"
                     android:shadowDx="1"
                     android:shadowDy="1"
                     android:shadowRadius="1"
                     android:text="Amount"
-                    android:textColor="@color/black"
-                    android:textSize="31.5sp" />
-            </RelativeLayout>
+                    android:textSize="25.5sp" />
 
 
         </LinearLayout>
