@@ -28,7 +28,7 @@
     <EditText
         android:id="@+id/searchUser"
         android:layout_width="292dp"
-        android:layout_height="42dp"
+        android:layout_height="52dp"
         android:layout_below="@+id/UsersTextView"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="30dp"
@@ -51,6 +51,7 @@
         android:layout_gravity="center_horizontal"
         android:background="@drawable/bg_linear_layout_button"
         android:fontFamily="@font/josefinsansbold"
+        android:elevation="10dp"
         >
 
 
