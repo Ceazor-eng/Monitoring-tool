@@ -44,4 +44,5 @@
     <string name="hhistory">History</string>
     <string name="s">Payments</string>
     <string name="all_sessions">All Sessions</string>
+    <string name="phone">Phone</string>
 </resources>
