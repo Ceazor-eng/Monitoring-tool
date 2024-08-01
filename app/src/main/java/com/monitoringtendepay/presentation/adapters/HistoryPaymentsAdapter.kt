@@ -10,19 +10,19 @@ import com.monitoringtendepay.domain.models.AllPayments
 import java.text.SimpleDateFormat
 import java.util.Locale
 
-class PaymentsAdapter(private var payments: List<AllPayments>) : RecyclerView.Adapter<PaymentsAdapter.PaymentViewHolder>() {
+class HistoryPaymentsAdapter(private var payments: List<AllPayments>) : RecyclerView.Adapter<HistoryPaymentsAdapter.HistoryPaymentViewHolder>() {
 
-    fun updateData(newPayments: List<AllPayments>) {
-        payments = newPayments.sortedByDescending { it.transactionDate }.take(3)
+    fun updatePayments(newPayments: List<AllPayments>) {
+        payments = newPayments.sortedByDescending { it.transactionDate }
         notifyDataSetChanged()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PaymentViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.transactions, parent, false)
-        return PaymentViewHolder(view)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HistoryPaymentViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_payment, parent, false)
+        return HistoryPaymentViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: PaymentViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: HistoryPaymentViewHolder, position: Int) {
         holder.bind(payments[position])
     }
 
@@ -30,10 +30,9 @@ class PaymentsAdapter(private var payments: List<AllPayments>) : RecyclerView.Ad
         return payments.size
     }
 
-    class PaymentViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class HistoryPaymentViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         private val initiatorPhoneTextView: TextView = itemView.findViewById(R.id.initiatorPhoneTextView)
-        private val amount: TextView = itemView.findViewById(R.id.AmountView)
         private val mpesaRefSessionIdTextView: TextView = itemView.findViewById(R.id.mpesaRefSessionIdTextView)
         private val paymentStatusTextView: TextView = itemView.findViewById(R.id.paymentStatusTextView)
         private val dateTimeTextView: TextView = itemView.findViewById(R.id.dateTimeTextView)
@@ -44,7 +43,6 @@ class PaymentsAdapter(private var payments: List<AllPayments>) : RecyclerView.Ad
             paymentStatusTextView.text = getStatusText(payment.paymentStatus)
             paymentStatusTextView.setTextColor(getStatusColor(payment.paymentStatus))
             dateTimeTextView.text = formatDate(payment.transactionDate)
-            amount.text = payment.amount
         }
 
         private fun getStatusText(status: String): String {

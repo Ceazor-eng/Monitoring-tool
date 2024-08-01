@@ -7,12 +7,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.ScrollView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.monitoringtendepay.R
 import com.monitoringtendepay.presentation.adapters.AllUsersAdapter
 import com.monitoringtendepay.presentation.states.AuthState
@@ -24,6 +26,9 @@ import kotlinx.coroutines.flow.onEach
 
 @AndroidEntryPoint
 class Users : Fragment() {
+
+    private lateinit var swipeRefreshLayout: SwipeRefreshLayout
+    private lateinit var scrollView: ScrollView
 
     private val viewModel: AllUsersViewModel by viewModels()
     private val userActionsViewModel: UserActionsViewModel by viewModels()
@@ -79,6 +84,21 @@ class Users : Fragment() {
             }
         }
 
+        swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout)
+        scrollView = view.findViewById(R.id.Scroll)
+
+        swipeRefreshLayout.setOnRefreshListener {
+            refreshData()
+        }
+
+        scrollView.setOnScrollChangeListener { v: View, scrollX: Int, scrollY: Int, _: Int, _: Int ->
+            swipeRefreshLayout.isEnabled = scrollY == 0
+        }
+
+        fetchData()
+    }
+
+    private fun refreshData() {
         fetchData()
     }
 
@@ -182,5 +202,6 @@ class Users : Fragment() {
 
     private fun fetchData() {
         viewModel.fetchAllUsers("fetchAllUsers")
+        swipeRefreshLayout.isRefreshing = false
     }
 }

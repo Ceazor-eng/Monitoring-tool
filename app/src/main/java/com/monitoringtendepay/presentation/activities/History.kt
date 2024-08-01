@@ -19,7 +19,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.monitoringtendepay.R
-import com.monitoringtendepay.presentation.adapters.PaymentsAdapter
+import com.monitoringtendepay.presentation.adapters.HistoryPaymentsAdapter
 import com.monitoringtendepay.presentation.viewmodels.AllPaymentsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
@@ -31,7 +31,7 @@ class History : Fragment() {
     private val viewModel: AllPaymentsViewModel by viewModels()
 
     private lateinit var recyclerView: RecyclerView
-    private lateinit var paymentsAdapter: PaymentsAdapter
+    private lateinit var historyPaymentsAdapter: HistoryPaymentsAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -78,8 +78,8 @@ class History : Fragment() {
     private fun setUpViews(view: View) {
         recyclerView = view.findViewById(R.id.payments_rec_view)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        paymentsAdapter = PaymentsAdapter(emptyList())
-        recyclerView.adapter = paymentsAdapter
+        historyPaymentsAdapter = HistoryPaymentsAdapter(emptyList())
+        recyclerView.adapter = historyPaymentsAdapter
     }
 
     private fun observePayments() {
@@ -97,7 +97,7 @@ class History : Fragment() {
 
                 state.payments.isNotEmpty() -> {
                     Log.d("HistoryFragment", "Success: ${state.payments}")
-                    paymentsAdapter.updatePayments(state.payments.sortedByDescending { it.transactionDate })
+                    historyPaymentsAdapter.updatePayments(state.payments.sortedByDescending { it.transactionDate })
                     // Toast.makeText(requireContext(), "Success", Toast.LENGTH_SHORT).show()
                 }
             }

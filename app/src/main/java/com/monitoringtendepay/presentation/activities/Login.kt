@@ -43,7 +43,6 @@ class Login : AppCompatActivity() {
             insets
         }
 
-        // Initialize com.monitoringtendepay.core.common.PreferenceManager
         preferenceManager = PreferenceManager(this)
 
         // Check if user is already logged in
@@ -83,7 +82,7 @@ class Login : AppCompatActivity() {
             Log.d("LoginActivity", "LoginState data: $data")
             if (loginState.changePasswordRequired) {
                 Log.d("LoginActivity", "Redirecting to change password screen")
-                navigateToChangePasswordScreen(data!!.username)
+                navigateToChangePasswordScreen(data.username)
             } else if (isLoginSuccessful(data.status)) {
                 // Save login state and session token to SharedPreferences
                 preferenceManager.setLoggedIn(true)

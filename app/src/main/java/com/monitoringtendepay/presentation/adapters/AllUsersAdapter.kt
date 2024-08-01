@@ -22,7 +22,7 @@ class AllUsersAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_added_users, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.users, parent, false)
         return UserViewHolder(view, userActionsViewModel)
     }
 
