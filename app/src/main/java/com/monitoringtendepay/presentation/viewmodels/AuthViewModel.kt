@@ -16,7 +16,10 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 
 @HiltViewModel
-class AuthViewModel @Inject constructor(private val authRepository: AuthRepository, private val preferenceManager: PreferenceManager) : ViewModel() {
+class AuthViewModel @Inject constructor(
+    private val authRepository: AuthRepository,
+    private val preferenceManager: PreferenceManager
+) : ViewModel() {
 
     private val TAG = "AuthViewModel"
 
@@ -59,10 +62,12 @@ class AuthViewModel @Inject constructor(private val authRepository: AuthReposito
                             _loginState.send(LoginState(error = "Login failed"))
                         }
                     }
+
                     is Resource.Loading -> {
                         Log.d(TAG, "Logging in...")
                         _loginState.send(LoginState(isLoading = true))
                     }
+
                     is Resource.Error -> {
                         Log.d(TAG, "Login error: ${result.message}")
                         _loginState.send(LoginState(error = result.message))

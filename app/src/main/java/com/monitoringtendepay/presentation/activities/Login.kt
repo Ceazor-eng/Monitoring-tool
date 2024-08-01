@@ -83,7 +83,7 @@ class Login : AppCompatActivity() {
             Log.d("LoginActivity", "LoginState data: $data")
             if (loginState.changePasswordRequired) {
                 Log.d("LoginActivity", "Redirecting to change password screen")
-                navigateToChangePasswordScreen(data.username)
+                navigateToChangePasswordScreen(data!!.username)
             } else if (isLoginSuccessful(data.status)) {
                 // Save login state and session token to SharedPreferences
                 preferenceManager.setLoggedIn(true)
@@ -116,9 +116,9 @@ class Login : AppCompatActivity() {
         finish()
     }
 
-    private fun navigateToChangePasswordScreen(username: String?) {
+    private fun navigateToChangePasswordScreen(loginState: String?) {
         val intent = Intent(this, UpdatePassword::class.java)
-        intent.putExtra("username", username)
+        intent.putExtra("username", loginState)
         startActivity(intent)
         finish()
     }

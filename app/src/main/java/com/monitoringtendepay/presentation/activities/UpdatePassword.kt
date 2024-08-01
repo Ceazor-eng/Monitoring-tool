@@ -26,7 +26,7 @@ class UpdatePassword : AppCompatActivity() {
 
     private val authViewModel: AuthViewModel by viewModels()
 
-    private lateinit var username: EditText
+    private lateinit var username: String
     private lateinit var password: EditText
     private lateinit var confirmPassword: EditText
     private lateinit var btnUpdatePassword: Button
@@ -42,11 +42,20 @@ class UpdatePassword : AppCompatActivity() {
             insets
         }
 
-        username = findViewById(R.id.username_update_password)
+        // username = findViewById(R.id.username_update_password)
         password = findViewById(R.id.update_password)
         confirmPassword = findViewById(R.id.confirm_Password)
         btnUpdatePassword = findViewById(R.id.btnUpdatePassword)
         progressBar = findViewById(R.id.progressBar)
+
+        // Get the username from the intent extras
+        val intentUsername = intent.getStringExtra("username")
+        if (intentUsername != null) {
+            username = intentUsername
+        } else {
+            Toast.makeText(this, "Error: Username not found", Toast.LENGTH_SHORT).show()
+            finish()
+        }
 
         lifecycleScope.launchWhenStarted {
             authViewModel.updatePasswordState.collect { authState ->
@@ -57,7 +66,6 @@ class UpdatePassword : AppCompatActivity() {
         btnUpdatePassword.setOnClickListener {
             val newPassword = password.text.toString()
             val confirmPasswordText = confirmPassword.text.toString()
-            val username = username.text.toString()
 
             if (newPassword.isNotEmpty() && newPassword == confirmPasswordText) {
                 val hashedPassword = hashPassword(newPassword)

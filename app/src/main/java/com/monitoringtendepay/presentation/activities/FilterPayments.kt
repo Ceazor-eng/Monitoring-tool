@@ -41,24 +41,44 @@ class FilterPayments : AppCompatActivity() {
 
     private val viewModel: FilterPaymentsViewModel by viewModels()
     private val STORAGE_PERMISSION_CODE = 100
+    private lateinit var spinnerServiceType: Spinner
+    private lateinit var spinnerStatus: Spinner
+    private lateinit var editTextStartDate: TextView
+    private lateinit var editTextEndDate: TextView
+    private lateinit var buttonGenerateReport: LinearLayout
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_filter_payments)
+        setUpInsets()
+        initializeViews()
+        setupSpinners()
+        setupDatePickers()
+        buttonGenerateReport.setOnClickListener {
+            handleGenerateReportClick()
+        }
+        observeFilteredPayments()
+    }
+
+    private fun setUpInsets() {
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+    }
 
-        val spinnerServiceType: Spinner = findViewById(R.id.spinnerServiceType)
-        val spinnerStatus: Spinner = findViewById(R.id.spinnerStatus)
-        val editTextStartDate: TextView = findViewById(R.id.startDateTextView)
-        val editTextEndDate: TextView = findViewById(R.id.endDateTextView)
-        val buttonGenerateReport: LinearLayout = findViewById(R.id.buttonGenerateReport)
+    private fun initializeViews() {
+        spinnerServiceType = findViewById(R.id.spinnerServiceType)
+        spinnerStatus = findViewById(R.id.spinnerStatus)
+        editTextStartDate = findViewById(R.id.startDateTextView)
+        editTextEndDate = findViewById(R.id.endDateTextView)
+        buttonGenerateReport = findViewById(R.id.buttonGenerateReport)
+    }
 
+    private fun setupSpinners() {
         // Populate Service Type Spinner
         val serviceTypes = listOf("mpesa", "bank")
         val serviceTypeAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, serviceTypes)
@@ -70,22 +90,20 @@ class FilterPayments : AppCompatActivity() {
         val statusAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, statuses)
         statusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinnerStatus.adapter = statusAdapter
+    }
 
+    private fun setupDatePickers() {
         val dateFormatter = SimpleDateFormat("yyyy-MM-dd", Locale.US)
         val calendar = Calendar.getInstance()
 
-        val startDatePicker = DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
-            calendar.set(Calendar.YEAR, year)
-            calendar.set(Calendar.MONTH, month)
-            calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
-            editTextStartDate.setText(dateFormatter.format(calendar.time))
+        val startDatePicker = DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
+            calendar.set(year, month, dayOfMonth)
+            editTextStartDate.text = dateFormatter.format(calendar.time)
         }
 
-        val endDatePicker = DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
-            calendar.set(Calendar.YEAR, year)
-            calendar.set(Calendar.MONTH, month)
-            calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
-            editTextEndDate.setText(dateFormatter.format(calendar.time))
+        val endDatePicker = DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
+            calendar.set(year, month, dayOfMonth)
+            editTextEndDate.text = dateFormatter.format(calendar.time)
         }
 
         editTextStartDate.setOnClickListener {
@@ -95,27 +113,27 @@ class FilterPayments : AppCompatActivity() {
         editTextEndDate.setOnClickListener {
             DatePickerDialog(this, endDatePicker, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show()
         }
+    }
 
-        buttonGenerateReport.setOnClickListener {
-            val action = "filterPayments"
-            val serviceType = spinnerServiceType.selectedItem.toString()
-            val status = spinnerStatus.selectedItem.toString()
+    private fun handleGenerateReportClick() {
+        val action = "filterPayments"
+        val serviceType = spinnerServiceType.selectedItem.toString()
+        val status = spinnerStatus.selectedItem.toString()
+        val statusCode = mapStatusToCode(status)
+        val startDate = editTextStartDate.text.toString()
+        val endDate = editTextEndDate.text.toString()
 
-            // Convert selectedStatus to corresponding code
-            val statusCode = when (status) {
-                "success" -> 1
-                "pending" -> 2
-                "missing" -> 3
-                "failed" -> 4
-                else -> -1
-            }
-            val startDate = editTextStartDate.text.toString()
-            val endDate = editTextEndDate.text.toString()
+        viewModel.filterPayments(action, serviceType, statusCode.toString(), startDate, endDate)
+    }
 
-            viewModel.filterPayments(action, serviceType, statusCode.toString(), startDate, endDate)
+    private fun mapStatusToCode(status: String): Int {
+        return when (status) {
+            "success" -> 1
+            "pending" -> 2
+            "missing" -> 3
+            "failed" -> 4
+            else -> -1
         }
-
-        observeFilteredPayments()
     }
 
     private fun observeFilteredPayments() {
@@ -123,7 +141,6 @@ class FilterPayments : AppCompatActivity() {
             when {
                 state.isLoading -> {
                     Log.d("FilterPaymentsActivity", "Loading...")
-                    //   Toast.makeText(this, "Loading", Toast.LENGTH_SHORT).show()
                 }
                 state.error.isNotEmpty() -> {
                     Log.d("FilterPaymentsActivity", "Error: ${state.error}")
@@ -131,7 +148,6 @@ class FilterPayments : AppCompatActivity() {
                 }
                 state.filterPayments != null -> {
                     Log.d("FilterPaymentsActivity", "Success: ${state.filterPayments}")
-                    // Generate PDF report here
                     generatePdf(state.filterPayments)
                 }
             }
@@ -139,8 +155,7 @@ class FilterPayments : AppCompatActivity() {
     }
 
     private fun checkPermission(): Boolean {
-        val permission = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-        return permission == PackageManager.PERMISSION_GRANTED
+        return ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
     }
 
     private fun requestPermission() {
@@ -168,14 +183,7 @@ class FilterPayments : AppCompatActivity() {
             return
         }
 
-        val externalStorageDir = Environment.getExternalStorageDirectory().absolutePath
-        val directoryPath = "$externalStorageDir/Download"
-        val directory = File(directoryPath)
-
-        if (!directory.exists()) {
-            directory.mkdirs()
-        }
-
+        val directoryPath = getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)?.absolutePath ?: return
         val filePath = "$directoryPath/filtered_payments_report.pdf"
         val file = File(filePath)
 
@@ -186,15 +194,14 @@ class FilterPayments : AppCompatActivity() {
 
             document.add(Paragraph("Payments Report"))
 
-            // Adjust column widths
             val columnWidths = floatArrayOf(2f, 2f, 2f, 2f, 2f, 2f, 2f, 2f, 2f, 2f, 2f, 2f)
-            val table = Table(columnWidths)
-            table.setWidth(100f)
+            val table = Table(columnWidths).apply {
+                setWidth(100f)
+            }
 
             val headerFont = com.itextpdf.kernel.font.PdfFontFactory.createFont(com.itextpdf.io.font.constants.StandardFonts.HELVETICA_BOLD)
             val cellFont = com.itextpdf.kernel.font.PdfFontFactory.createFont(com.itextpdf.io.font.constants.StandardFonts.HELVETICA)
 
-            // Adding header
             val headers = listOf(
                 "Service Code", "Initiator Phone", "Amount", "Internal Ref", "Mpesa Ref",
                 "SalesForce Phone", "Group ID", "Recipient Name", "Session ID",
@@ -202,9 +209,7 @@ class FilterPayments : AppCompatActivity() {
             )
 
             headers.forEach { header ->
-                val cell = com.itextpdf.layout.element.Cell()
-                cell.add(Paragraph(header).setFont(headerFont).setFontSize(10f))
-                table.addHeaderCell(cell)
+                table.addHeaderCell(Paragraph(header).setFont(headerFont).setFontSize(10f))
             }
 
             filterPayments.forEach { item ->
@@ -224,10 +229,9 @@ class FilterPayments : AppCompatActivity() {
 
             document.add(table)
             document.close()
-            Toast.makeText(this, "PDF Report Generated at $filePath", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "PDF generated at $filePath", Toast.LENGTH_SHORT).show()
         } catch (e: Exception) {
-            e.printStackTrace()
-            Toast.makeText(this, "Error generating PDF: ${e.localizedMessage}", Toast.LENGTH_LONG).show()
+            Log.e("FilterPaymentsActivity", "Error generating PDF: ${e.message}")
         }
     }
 }

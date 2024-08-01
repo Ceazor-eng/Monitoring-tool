@@ -48,11 +48,6 @@ class FilterUssdSessions : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_filter_ussd_sessions)
-//        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-//            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-//            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-//            insets
-//        }
 
         phoneNumberEditText = findViewById(R.id.phoneNumberEditText)
         sessionIdEditText = findViewById(R.id.sessionIdEditText)
