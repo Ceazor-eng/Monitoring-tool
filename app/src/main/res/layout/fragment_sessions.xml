@@ -31,7 +31,7 @@
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:layout_below="@id/history_title"
-        android:paddingHorizontal="20dp">
+       >
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardPaymentsReport"
@@ -39,8 +39,9 @@
             android:layout_height="100dp"
             android:layout_alignParentLeft="true"
             android:layout_marginTop="32dp"
+            android:layout_marginLeft="20dp"
             app:cardCornerRadius="16dp"
-            app:cardElevation="0dp">
+            app:cardElevation="10dp">
 
             <RelativeLayout
                 android:id="@+id/payments_card"
@@ -58,7 +59,11 @@
                     android:text="Payments"
                     android:textColor="#FFFFFF"
                     android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:shadowColor="#AA2F2F2F"
+                    android:shadowDx="3"
+                    android:shadowDy="3"
+                    android:shadowRadius="2"/>
             </RelativeLayout>
         </androidx.cardview.widget.CardView>
 
@@ -68,8 +73,9 @@
             android:layout_height="100dp"
             android:layout_alignParentRight="true"
             android:layout_marginTop="32dp"
+            android:layout_marginRight="20dp"
             app:cardCornerRadius="16dp"
-            app:cardElevation="0dp">
+            app:cardElevation="10dp">
 
             <RelativeLayout
                 android:id="@+id/sessions_card"
@@ -88,7 +94,11 @@
                     android:text="Sessions"
                     android:textColor="#FFFFFF"
                     android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:shadowColor="#AA2F2F2F"
+                    android:shadowDx="3"
+                    android:shadowDy="3"
+                    android:shadowRadius="2"/>
             </RelativeLayout>
         </androidx.cardview.widget.CardView>
     </RelativeLayout>
