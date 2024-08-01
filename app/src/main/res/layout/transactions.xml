@@ -10,7 +10,7 @@
         android:id="@+id/user"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:weightSum="2">
+        android:weightSum="3">
 
         <ImageView
             android:layout_width="80dp"
@@ -23,7 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
-            android:layout_weight="1"
+            android:weightSum="4"
             android:orientation="vertical">
 
             <RelativeLayout
@@ -64,7 +64,7 @@
                     android:shadowRadius="1"
                     android:text="Reference"
                     android:textColor="@color/black"
-                    android:textSize="1.5sp" />
+                    android:textSize="11.5sp" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -92,20 +92,22 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
 
-            <TextView
-                android:id="@+id/dateTimeTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:layout_marginTop=""
-                android:fontFamily="@font/josefinsansregular"
-                android:shadowColor="#AA2F2F2F"
-                android:shadowDx="1"
-                android:shadowDy="1"
-                android:shadowRadius="1"
-                android:text="Time"
-                android:textColor="@color/black"
-                android:textSize="11.5sp" />
+                <TextView
+                    android:id="@+id/dateTimeTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop=""
+                    android:fontFamily="@font/josefinsansregular"
+                    android:shadowColor="#AA2F2F2F"
+                    android:shadowDx="1"
+                    android:shadowDy="1"
+                    android:shadowRadius="1"
+                    android:text="Time"
+                    android:textColor="@color/black"
+                    android:textSize="11.5sp" />
+            </RelativeLayout>
+
         </LinearLayout>
 
         <LinearLayout
@@ -134,12 +136,11 @@
                     android:textColor="@color/black"
                     android:textSize="31.5sp" />
             </RelativeLayout>
+
+
         </LinearLayout>
 
-
     </LinearLayout>
+
 
 </LinearLayout>
-
-
-    </LinearLayout>
