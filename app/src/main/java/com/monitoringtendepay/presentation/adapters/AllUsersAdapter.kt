@@ -37,19 +37,15 @@ class AllUsersAdapter(
     class UserViewHolder(itemView: View, private val userActionsViewModel: UserActionsViewModel) : RecyclerView.ViewHolder(itemView) {
 
         private val username: TextView = itemView.findViewById(R.id.username_item)
-        private val createdAt: TextView = itemView.findViewById(R.id.createdAt_item)
         private val role: TextView = itemView.findViewById(R.id.role_item)
         private val status: TextView = itemView.findViewById(R.id.status_txt_item)
-        private val createdBy: TextView = itemView.findViewById(R.id.createdBy_item)
         private val actions: ImageView = itemView.findViewById(R.id.actions_Image_View)
 
         fun bind(user: UserDetails) {
             username.text = user.username
-            createdAt.text = user.createdAt
             role.text = user.role
             status.text = getStatusText(user.status)
             status.setTextColor(getStatusColor(user.status))
-            createdBy.text = user.createdBy
             actions.setImageResource(R.drawable.actions)
 
             actions.setOnClickListener {

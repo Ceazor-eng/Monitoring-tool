@@ -57,12 +57,12 @@
 
                     <ImageView
                         android:id="@+id/logout_image_view"
-                        android:layout_width="30dp"
+                        android:layout_width="40dp"
                         android:layout_height="30dp"
                         android:layout_alignParentRight="true"
-                        android:layout_marginTop="73dp"
-                        android:layout_marginRight="20dp"
-                        android:background="@drawable/logout"
+                        android:layout_marginTop="77dp"
+                        android:layout_marginRight="35dp"
+                        android:background="@drawable/logoutrounded"
                         android:elevation="40dp" />
 
 
@@ -98,14 +98,14 @@
                             android:layout_marginHorizontal="20dp"
                             android:layout_marginVertical="15dp"
                             app:cardCornerRadius="15dp"
-                            app:cardElevation="10dp"
+                            app:cardElevation="5dp"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent">
 
                             <RelativeLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:background="@drawable/tc">
+                                android:background="@color/white">
 
                                 <ImageView
                                     android:id="@+id/complete_image_view"
@@ -163,14 +163,14 @@
                             android:layout_marginHorizontal="20dp"
                             android:layout_marginVertical="15dp"
                             app:cardCornerRadius="15dp"
-                            app:cardElevation="10dp"
+                            app:cardElevation="5dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent">
 
                             <RelativeLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:background="@drawable/tc">
+                                android:background="@color/white">
 
                                 <ImageView
                                     android:id="@+id/pending_image_view"
@@ -227,7 +227,7 @@
                             android:layout_marginTop="10dp"
                             android:background="@android:color/transparent"
                             app:cardCornerRadius="15dp"
-                            app:cardElevation="10dp"
+                            app:cardElevation="5dp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/totaltransactioncard">
@@ -235,7 +235,7 @@
                             <RelativeLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:background="@drawable/tc">
+                                android:background="@color/white">
 
                                 <ImageView
                                     android:id="@+id/failed_image_view"
@@ -295,14 +295,14 @@
                             android:layout_marginTop="10dp"
                             android:background="@android:color/transparent"
                             app:cardCornerRadius="15dp"
-                            app:cardElevation="10dp"
+                            app:cardElevation="5dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/pendingtransactioncard">
 
                             <RelativeLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:background="@drawable/tc">
+                                android:background="@color/white">
 
                                 <ImageView
                                     android:id="@+id/missing_image_view"

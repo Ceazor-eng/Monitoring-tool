@@ -9,21 +9,35 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:weightSum="2"
+        android:weightSum="3"
         android:id="@+id/user">
 
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_margin="20dp"
-            android:background="@drawable/useric"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+               android:layout_marginTop="20dp"
+                android:layout_marginStart="60dp"
+                android:background="@drawable/prsnn"/>
+
+
+
+        </LinearLayout>
+
+
+
 
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_margin="20dp"
+            android:layout_marginTop="20dp"
             android:layout_weight="1">
 
             <RelativeLayout
@@ -88,6 +102,22 @@
             </RelativeLayout>
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:id="@+id/actions_Image_View"
+                android:layout_marginTop="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/more"/>
+
+        </LinearLayout>
+
     </LinearLayout>
 
 
@@ -96,62 +126,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         >
-        
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
-
-            <TextView
-                android:id="@+id/createdAt_item"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:fontFamily="@font/josefinsansregular"
-                android:text="@string/createdat"
-                android:textColor="@color/black"
-                android:textSize="11.5sp"
-                android:shadowColor="#AA2F2F2F"
-                android:shadowDx="1"
-                android:shadowDy="1"
-                android:shadowRadius="1"/>
-        </RelativeLayout>
 
 
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
 
 
-            <TextView
-                android:id="@+id/createdBy_item"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:fontFamily="@font/josefinsansregular"
-                android:text="@string/createdBy"
-                android:textColor="@color/black"
-                android:textSize="11.5sp"
-                android:shadowColor="#AA2F2F2F"
-                android:shadowDx="1"
-                android:shadowDy="1"
-                android:shadowRadius="1"/>
-        </RelativeLayout>
 
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:id="@+id/actions_Image_View"
-                android:layout_height="20dp"
-                android:src="@drawable/actions"/>
 
-        </RelativeLayout>
 
 
 
@@ -162,7 +143,8 @@
     <LinearLayout
         android:layout_width="350dp"
         android:layout_height="2dp"
-        android:background="#ACA7A7"
+        android:layout_marginTop="10dp"
+        android:background="#847E7E"
         android:layout_gravity="center_horizontal"/>
 
 

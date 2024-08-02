@@ -1,0 +1,22 @@
+<!-- res/drawable/rounded_logout_icon.xml -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Shadow layer -->
+    <item>
+        <shape android:shape="oval">
+            <solid android:color="#80000000" /> <!-- semi-transparent black for shadow -->
+            <size android:width="100dp" android:height="100dp" />
+        </shape>
+    </item>
+    <!-- Icon layer -->
+    <item android:right="4dp" android:bottom="4dp">
+        <shape android:shape="oval">
+            <size android:width="100dp" android:height="100dp" />
+        </shape>
+    </item>
+    <!-- Image layer -->
+    <item android:right="4dp" android:bottom="4dp">
+        <bitmap
+            android:src="@drawable/logout"
+            android:gravity="center" />
+    </item>
+</layer-list>

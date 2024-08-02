@@ -58,6 +58,17 @@
             android:background="@drawable/bg4"
             android:padding="16dp">
 
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Service Type"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="10dp"
+                android:fontFamily="@font/josefinsansregular"
+                android:textColor="#706C6C"
+                />
+
             <!-- Service Type Dropdown -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardServiceType"
@@ -81,6 +92,17 @@
                         android:spinnerMode="dropdown" />
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Status"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="10dp"
+                android:fontFamily="@font/josefinsansregular"
+                android:textColor="#847D7D"
+                />
 
             <!-- Status Dropdown -->
             <androidx.cardview.widget.CardView
