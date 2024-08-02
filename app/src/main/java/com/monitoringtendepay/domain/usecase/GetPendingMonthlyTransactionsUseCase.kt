@@ -17,7 +17,7 @@ class GetPendingMonthlyTransactionsUseCase @Inject constructor(
 
     operator fun invoke(action: String): Flow<Resource<PendingTransactions>> = flow {
         try {
-            emit(Resource.Loading())
+            emit(Resource.Loading<PendingTransactions>())
             Log.d("GetPendingMonthlyTransactionsUseCase", "Fetching pending monthly transactions...")
             val pendingTransactionsDto = repository.getPendingTransactions(action)
             Log.d("GetPendingMonthlyTransactionsUseCase", "Fetched pending monthly transactions DTO: $pendingTransactionsDto")

@@ -1,4 +1,4 @@
-package com.monitoringtendepay.data.localdatasource
+package com.monitoringtendepay.data.localdatasource.allpaymentslocaldatabase
 
 import androidx.room.Dao
 import androidx.room.Insert
@@ -11,8 +11,8 @@ interface AllPaymentsDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertPayments(payments: List<AllPaymentsEntity>)
 
-    @Query("SELECT * FROM all_payments")
-    suspend fun getAllPayments(): List<AllPaymentsEntity>
+    @Query("SELECT * FROM all_payments WHERE timestamp > :validTime ")
+    suspend fun getAllPayments(validTime: Long): List<AllPaymentsEntity>
 
     @Query("DELETE FROM all_payments")
     suspend fun clearPayments()

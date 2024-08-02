@@ -1,6 +1,6 @@
 package com.monitoringtendepay.data.remote.dto.payments
 
-import com.monitoringtendepay.data.localdatasource.AllPaymentsEntity
+import com.monitoringtendepay.data.localdatasource.allpaymentslocaldatabase.AllPaymentsEntity
 import com.monitoringtendepay.domain.models.AllPayments
 
 data class FetchAllPaymentsDto(
@@ -16,10 +16,11 @@ data class FetchAllPaymentsDto(
     val salesforcePhone: String,
     val serviceCode: String,
     val sessionId: String,
-    val transactionDate: String
+    val transactionDate: String,
+    val timestamp: Long // Add a timestamp field
 )
 
-fun FetchAllPaymentsDto.toEntity(): AllPaymentsEntity {
+fun FetchAllPaymentsDto.toEntity(timestamp: Long): AllPaymentsEntity {
     return AllPaymentsEntity(
         Id,
         amount,
@@ -33,7 +34,8 @@ fun FetchAllPaymentsDto.toEntity(): AllPaymentsEntity {
         salesforcePhone,
         serviceCode,
         sessionId,
-        transactionDate
+        transactionDate,
+        timestamp
     )
 }
 
