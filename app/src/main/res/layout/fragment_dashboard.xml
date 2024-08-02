@@ -392,9 +392,10 @@
 
                                 <androidx.recyclerview.widget.RecyclerView
                                     android:id="@+id/recyclerView"
+                                    android:scrollbars="horizontal"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginTop="20dp"
+                                    android:layout_marginTop="10dp"
                                     android:background="@color/white"
                                     tools:listitem="@layout/transactions" />
                             </LinearLayout>

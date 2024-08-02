@@ -45,7 +45,6 @@ class Dashboard : Fragment() {
 
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
     private lateinit var scrollView: ScrollView
-
     private lateinit var recyclerView: RecyclerView
     private lateinit var paymentsAdapter: PaymentsAdapter
     private lateinit var completeMonthlyTransactions: TextView
@@ -78,7 +77,6 @@ class Dashboard : Fragment() {
 
         setUpViews(view)
         updateGreetingMessage()
-
         observePayments()
         observeCompleteTransactions()
         observePendingTransactions()
@@ -126,7 +124,7 @@ class Dashboard : Fragment() {
         recyclerView = view.findViewById(R.id.recyclerView)
         swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout)
         scrollView = view.findViewById(R.id.Scroll)
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        recyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         paymentsAdapter = PaymentsAdapter(emptyList())
         recyclerView.adapter = paymentsAdapter
         barChart = view.findViewById(R.id.barChart)
@@ -220,7 +218,8 @@ class Dashboard : Fragment() {
             barChart.data = barData
 
             barChart.xAxis.apply {
-                valueFormatter = IndexAxisValueFormatter(listOf("Success", "Failed", "Pending", "Missing"))
+                valueFormatter =
+                    IndexAxisValueFormatter(listOf("Success", "Failed", "Pending", "Missing"))
                 granularity = 1f
                 setDrawLabels(true)
             }
@@ -239,6 +238,7 @@ class Dashboard : Fragment() {
                     Log.d("Dashboard", "Error: ${state.error}")
                     Toast.makeText(requireContext(), state.error, Toast.LENGTH_SHORT).show()
                 }
+
                 state.missingPayments != null -> {
                     Log.d("Dashboard", "Success: ${state.missingPayments}")
                     missingPayments.text = state.missingPayments.missingPayments
@@ -255,6 +255,7 @@ class Dashboard : Fragment() {
                     Log.d("Dashboard", "Error: ${state.error}")
                     Toast.makeText(requireContext(), state.error, Toast.LENGTH_SHORT).show()
                 }
+
                 state.failedTransactions != null -> {
                     Log.d("Dashboard", "Success: ${state.failedTransactions}")
                     failedMonthlyTransactions.text = state.failedTransactions.failedPayments
@@ -271,6 +272,7 @@ class Dashboard : Fragment() {
                     Log.d("Dashboard", "Error: ${state.error}")
                     Toast.makeText(requireContext(), state.error, Toast.LENGTH_SHORT).show()
                 }
+
                 state.pendingTransactions != null -> {
                     Log.d("Dashboard", "Success: ${state.pendingTransactions}")
                     pendingMonthlyTransactions.text = state.pendingTransactions.pendingPayments
@@ -287,9 +289,13 @@ class Dashboard : Fragment() {
                     Log.d("Dashboard", "Error: ${state.error}")
                     Toast.makeText(requireContext(), state.error, Toast.LENGTH_SHORT).show()
                 }
+
                 state.payments.isNotEmpty() -> {
                     Log.d("Dashboard", "Success: ${state.payments}")
-                    paymentsAdapter.updateData(state.payments.sortedByDescending { it.transactionDate }.take(3))
+                    paymentsAdapter.updateData(
+                        state.payments.sortedByDescending { it.transactionDate }
+                            .take(3)
+                    )
                 }
             }
         }.launchIn(viewLifecycleOwner.lifecycleScope)
@@ -303,6 +309,7 @@ class Dashboard : Fragment() {
                     Log.d("Dashboard", "Error: ${state.error}")
                     Toast.makeText(requireContext(), state.error, Toast.LENGTH_SHORT).show()
                 }
+
                 state.completeTransactions != null -> {
                     Log.d("Dashboard", "Success: ${state.completeTransactions}")
                     completeMonthlyTransactions.text = state.completeTransactions.completePayments
