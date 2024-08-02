@@ -1,7 +1,7 @@
 package com.monitoringtendepay.data.repository
 
-import com.monitoringtendepay.data.localdatasource.AllPaymentsDao
-import com.monitoringtendepay.data.localdatasource.toFetchAllPaymentsDto
+import com.monitoringtendepay.data.localdatasource.allpaymentslocaldatabase.AllPaymentsDao
+import com.monitoringtendepay.data.localdatasource.allpaymentslocaldatabase.toFetchAllPaymentsDto
 import com.monitoringtendepay.data.remote.apiservice.AllPaymentsApi
 import com.monitoringtendepay.data.remote.dto.payments.FetchAllPaymentsDto
 import com.monitoringtendepay.data.remote.dto.payments.toEntity
@@ -15,8 +15,10 @@ class AllPaymentsRepositoryImpl @Inject constructor(
     private val dao: AllPaymentsDao
 ) : AllPaymentsRepository {
     override suspend fun getAllPayments(action: String): List<FetchAllPaymentsDto> = withContext(Dispatchers.IO) {
+        val validTime = System.currentTimeMillis() - 5000
+
         // check Room database first
-        val cachedPayments = dao.getAllPayments()
+        val cachedPayments = dao.getAllPayments(validTime)
         if (cachedPayments.isNotEmpty()) {
             return@withContext cachedPayments.map { it.toFetchAllPaymentsDto() }
         }
@@ -25,7 +27,7 @@ class AllPaymentsRepositoryImpl @Inject constructor(
         val payments = api.getAllPayments(action)
 
         // save to Room Database
-        dao.insertPayments(payments.data.map { it.toEntity() })
+        dao.insertPayments(payments.data.map { it.toEntity(System.currentTimeMillis()) })
 
         return@withContext payments.data
     }

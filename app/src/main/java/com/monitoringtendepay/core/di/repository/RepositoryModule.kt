@@ -1,6 +1,10 @@
 package com.monitoringtendepay.core.di.repository
 
-import com.monitoringtendepay.data.localdatasource.AllPaymentsDao
+import com.monitoringtendepay.data.localdatasource.allpaymentslocaldatabase.AllPaymentsDao
+import com.monitoringtendepay.data.localdatasource.monthlytransactionlocaldatabase.complete.CompleteMonthlyTransactionsDao
+import com.monitoringtendepay.data.localdatasource.monthlytransactionlocaldatabase.failed.FailedTransactionsDao
+import com.monitoringtendepay.data.localdatasource.monthlytransactionlocaldatabase.missing.MissingTransactionsDao
+import com.monitoringtendepay.data.localdatasource.monthlytransactionlocaldatabase.pending.PendingTransactionsDao
 import com.monitoringtendepay.data.remote.apiservice.AllPaymentsApi
 import com.monitoringtendepay.data.remote.apiservice.AuthService
 import com.monitoringtendepay.data.repository.AllPaymentsRepositoryImpl
@@ -61,26 +65,26 @@ object RepositoryModule {
 
     @Singleton
     @Provides
-    fun provideCompleteTransactionsRepository(api: AllPaymentsApi): CompleteMonthlyTransactionsRepository {
-        return CompleteMonthlyTransactionsImpl(api)
+    fun provideCompleteTransactionsRepository(api: AllPaymentsApi, monthlyDao: CompleteMonthlyTransactionsDao): CompleteMonthlyTransactionsRepository {
+        return CompleteMonthlyTransactionsImpl(api, monthlyDao)
     }
 
     @Singleton
     @Provides
-    fun providePendingTransactionsRepository(api: AllPaymentsApi): PendingMonthlyTransactionsRepository {
-        return PendingMonthlyTransactionsRepositoryImpl(api)
+    fun providePendingTransactionsRepository(api: AllPaymentsApi, pendingDao: PendingTransactionsDao): PendingMonthlyTransactionsRepository {
+        return PendingMonthlyTransactionsRepositoryImpl(api, pendingDao)
     }
 
     @Singleton
     @Provides
-    fun provideFailedTransactionsRepository(api: AllPaymentsApi): FailedTransactionsRepository {
-        return FailedTransactionsRepositoryImpl(api)
+    fun provideFailedTransactionsRepository(api: AllPaymentsApi, failedDao: FailedTransactionsDao): FailedTransactionsRepository {
+        return FailedTransactionsRepositoryImpl(api, failedDao)
     }
 
     @Singleton
     @Provides
-    fun provideMissingPaymentsRepository(api: AllPaymentsApi): MissingPaymentsRepository {
-        return MissingPaymentsRepositoryImpl(api)
+    fun provideMissingPaymentsRepository(api: AllPaymentsApi, missingDao: MissingTransactionsDao): MissingPaymentsRepository {
+        return MissingPaymentsRepositoryImpl(api, missingDao)
     }
 
     @Provides

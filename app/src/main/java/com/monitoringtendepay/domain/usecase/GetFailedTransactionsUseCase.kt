@@ -17,7 +17,7 @@ class GetFailedTransactionsUseCase @Inject constructor(
 
     operator fun invoke(action: String): Flow<Resource<FailedTransactions>> = flow {
         try {
-            emit(Resource.Loading())
+            emit(Resource.Loading<FailedTransactions>())
             Log.d("GetFailedMonthlyTransactionsUseCase", "Fetching failed monthly transactions...")
             val failedTransactionsDto = repository.getFailedTransactions(action)
             Log.d("GetFailedMonthlyTransactionsUseCase", "Fetched failed monthly transactions DTO: $failedTransactionsDto")

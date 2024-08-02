@@ -16,7 +16,7 @@ class GetCompleteMonthlyTransactionsUseCase @Inject constructor(
 ) {
     operator fun invoke(action: String): Flow<Resource<CompleteTransactions>> = flow {
         try {
-            emit(Resource.Loading())
+            emit(Resource.Loading<CompleteTransactions>())
             Log.d("GetCompleteMonthlyTransactionsUseCase", "Fetching complete monthly transactions...")
             val completeTransactionsDto = repository.getCompleteTransactions(action)
             Log.d("GetCompleteMonthlyTransactionsUseCase", "Fetched complete monthly transactions DTO: $completeTransactionsDto")

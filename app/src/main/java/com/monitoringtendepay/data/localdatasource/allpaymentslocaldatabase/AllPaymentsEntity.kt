@@ -1,4 +1,4 @@
-package com.monitoringtendepay.data.localdatasource
+package com.monitoringtendepay.data.localdatasource.allpaymentslocaldatabase
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -18,7 +18,9 @@ data class AllPaymentsEntity(
     val salesforcePhone: String,
     val serviceCode: String,
     val sessionId: String,
-    val transactionDate: String
+    val transactionDate: String,
+    val timestamp: Long // Add a timestamp field
+
 )
 
 fun AllPaymentsEntity.toFetchAllPaymentsDto(): FetchAllPaymentsDto {
@@ -35,6 +37,7 @@ fun AllPaymentsEntity.toFetchAllPaymentsDto(): FetchAllPaymentsDto {
         salesforcePhone,
         serviceCode,
         sessionId,
-        transactionDate
+        transactionDate,
+        timestamp
     )
 }
