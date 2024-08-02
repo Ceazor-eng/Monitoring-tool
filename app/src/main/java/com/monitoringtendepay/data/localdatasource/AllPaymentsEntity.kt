@@ -1,10 +1,12 @@
-package com.monitoringtendepay.data.remote.dto.payments
+package com.monitoringtendepay.data.localdatasource
 
-import com.monitoringtendepay.data.localdatasource.AllPaymentsEntity
-import com.monitoringtendepay.domain.models.AllPayments
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import com.monitoringtendepay.data.remote.dto.payments.FetchAllPaymentsDto
 
-data class FetchAllPaymentsDto(
-    val Id: String,
+@Entity(tableName = "all_payments")
+data class AllPaymentsEntity(
+    @PrimaryKey val id: String,
     val amount: String,
     val groupId: String,
     val initiatorName: String,
@@ -19,9 +21,9 @@ data class FetchAllPaymentsDto(
     val transactionDate: String
 )
 
-fun FetchAllPaymentsDto.toEntity(): AllPaymentsEntity {
-    return AllPaymentsEntity(
-        Id,
+fun AllPaymentsEntity.toFetchAllPaymentsDto(): FetchAllPaymentsDto {
+    return FetchAllPaymentsDto(
+        id,
         amount,
         groupId,
         initiatorName,
@@ -31,18 +33,6 @@ fun FetchAllPaymentsDto.toEntity(): AllPaymentsEntity {
         paymentStatus,
         paymentStatusMessage,
         salesforcePhone,
-        serviceCode,
-        sessionId,
-        transactionDate
-    )
-}
-
-fun FetchAllPaymentsDto.toAllPayments(): AllPayments {
-    return AllPayments(
-        amount,
-        initiatorPhone,
-        mpesaRef,
-        paymentStatus,
         serviceCode,
         sessionId,
         transactionDate

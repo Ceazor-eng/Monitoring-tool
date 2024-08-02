@@ -16,7 +16,7 @@ class GetAllPaymentsUseCase @Inject constructor(
 ) {
     operator fun invoke(action: String): Flow<Resource<List<AllPayments>>> = flow {
         try {
-            emit(Resource.Loading())
+            emit(Resource.Loading<List<AllPayments>>())
             Log.d("GetAllPaymentsUseCase", "Fetching payments...")
             val paymentsDto = repository.getAllPayments(action)
             Log.d("GetAllPaymentsUseCase", "Fetched payments DTO: $paymentsDto")

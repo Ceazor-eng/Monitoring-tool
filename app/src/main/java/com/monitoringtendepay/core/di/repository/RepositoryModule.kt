@@ -1,5 +1,6 @@
 package com.monitoringtendepay.core.di.repository
 
+import com.monitoringtendepay.data.localdatasource.AllPaymentsDao
 import com.monitoringtendepay.data.remote.apiservice.AllPaymentsApi
 import com.monitoringtendepay.data.remote.apiservice.AuthService
 import com.monitoringtendepay.data.repository.AllPaymentsRepositoryImpl
@@ -36,8 +37,8 @@ object RepositoryModule {
 
     @Singleton
     @Provides
-    fun provideAllPaymentsRepository(api: AllPaymentsApi): AllPaymentsRepository {
-        return AllPaymentsRepositoryImpl(api)
+    fun provideAllPaymentsRepository(api: AllPaymentsApi, dao: AllPaymentsDao): AllPaymentsRepository {
+        return AllPaymentsRepositoryImpl(api, dao)
     }
 
     @Singleton
