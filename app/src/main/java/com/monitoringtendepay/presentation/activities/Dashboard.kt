@@ -123,7 +123,7 @@ class Dashboard : Fragment() {
     private fun setUpViews(view: View) {
         recyclerView = view.findViewById(R.id.recyclerView)
         swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout)
-        scrollView = view.findViewById(R.id.Scroll)
+        scrollView = view.findViewById(R.id.scrollV)
         recyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         paymentsAdapter = PaymentsAdapter(emptyList())
         recyclerView.adapter = paymentsAdapter
@@ -147,6 +147,7 @@ class Dashboard : Fragment() {
 
     private fun setUpChart() {
         // Configure chart settings
+
         barChart.apply {
             xAxis.position = XAxis.XAxisPosition.BOTTOM
             xAxis.valueFormatter = object : IAxisValueFormatter {

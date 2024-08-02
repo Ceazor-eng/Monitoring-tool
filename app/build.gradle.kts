@@ -42,6 +42,7 @@ android {
 dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
+    implementation(libs.bundles.vico)
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
@@ -50,6 +51,7 @@ dependencies {
     // Hilt dependencies
     implementation(libs.dagger.hilt)
     implementation(libs.androidx.swiperefreshlayout)
+    implementation(libs.androidx.cardview)
     testImplementation(libs.junit.junit)
     // testImplementation(libs.junit.junit)
     kapt(libs.kapt)
