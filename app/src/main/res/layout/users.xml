@@ -102,21 +102,7 @@
             </RelativeLayout>
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight="1"
-            android:orientation="vertical">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:id="@+id/actions_Image_View"
-                android:layout_marginTop="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/more"/>
-
-        </LinearLayout>
 
     </LinearLayout>
 
@@ -141,11 +127,109 @@
     </LinearLayout>
 
     <LinearLayout
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:weightSum="4">
+
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/Make_Admin_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/josefinsansregular"
+                android:text="Make Admin"
+                android:textColor="@color/black"
+                android:textSize="11.5sp"
+                android:shadowColor="#AA2F2F2F"
+                android:shadowDx="1"
+                android:shadowDy="1"
+                android:shadowRadius="1"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/Activate_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/josefinsansregular"
+                android:text="  Activate"
+                android:textColor="@color/black"
+                android:textSize="11.5sp"
+                android:shadowColor="#AA2F2F2F"
+                android:shadowDx="1"
+                android:shadowDy="1"
+                android:shadowRadius="1"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/Deactivate_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/josefinsansregular"
+                android:text="Deactivate"
+                android:textColor="@color/black"
+                android:textSize="11.5sp"
+                android:shadowColor="#AA2F2F2F"
+                android:shadowDx="1"
+                android:shadowDy="1"
+                android:shadowRadius="1"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/Resend_OTP_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/josefinsansregular"
+                android:text="Resend OTP"
+                android:textColor="@color/black"
+                android:textSize="11.5sp"
+                android:shadowColor="#AA2F2F2F"
+                android:shadowDx="1"
+                android:shadowDy="1"
+                android:shadowRadius="1"/>
+        </RelativeLayout>
+
+
+
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
         android:layout_width="350dp"
         android:layout_height="2dp"
         android:layout_marginTop="10dp"
         android:background="#847E7E"
         android:layout_gravity="center_horizontal"/>
+
+
 
 
 
