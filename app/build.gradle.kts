@@ -17,6 +17,8 @@ android {
         versionCode = 1
         versionName = "1.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "com.monitoringtendepay.HiltTestRunner"
+        javaCompileOptions.annotationProcessorOptions.arguments["dagger.hilt.disableCrossCompilationRootValidation"] = "true"
     }
 
     buildTypes {
@@ -53,6 +55,7 @@ dependencies {
     implementation(libs.androidx.swiperefreshlayout)
     implementation(libs.androidx.cardview)
     testImplementation(libs.junit.junit)
+    testImplementation(libs.junit.junit)
     // testImplementation(libs.junit.junit)
     kapt(libs.kapt)
 
@@ -82,6 +85,21 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+//    androidTestImplementation ("androidx.test.ext:junit:1.1.5")
+//    androidTestImplementation ("androidx.test.espresso:espresso-core:3.5.1")
+    androidTestImplementation("androidx.test.espresso:espresso-intents:3.6.1")
+    androidTestImplementation("androidx.test.espresso:espresso-contrib:3.6.1")
+    androidTestImplementation("androidx.test.espresso:espresso-idling-resource:3.6.1")
+    androidTestImplementation("androidx.test:rules:1.6.1")
+    androidTestImplementation("androidx.test:runner:1.6.1")
+
+    // Hilt for instrumentation tests
+    androidTestImplementation("com.google.dagger:hilt-android-testing:2.49")
+    kaptAndroidTest("com.google.dagger:hilt-compiler:2.49")
+
+    // For launching fragments
+    debugImplementation("androidx.fragment:fragment-testing:1.8.2")
 
     testImplementation("org.mockito:mockito-core:5.7.0")
     androidTestImplementation("org.mockito:mockito-core:5.7.0")

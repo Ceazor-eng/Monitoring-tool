@@ -3,6 +3,7 @@ package com.monitoringtendepay.presentation.activities
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Environment
@@ -17,6 +18,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
@@ -79,17 +81,17 @@ class FilterPayments : AppCompatActivity() {
     }
 
     private fun setupSpinners() {
-        // Populate Service Type Spinner
-        val serviceTypes = listOf("mpesa", "bank")
-        val serviceTypeAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, serviceTypes)
-        serviceTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spinnerServiceType.adapter = serviceTypeAdapter
+        viewModel.serviceCodes.observe(this) { serviceCodes ->
+            val serviceTypeAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, serviceCodes)
+            serviceTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            spinnerServiceType.adapter = serviceTypeAdapter
+        }
 
-        // Populate Status Spinner
-        val statuses = listOf("success", "pending", "missing", "failed")
-        val statusAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, statuses)
-        statusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spinnerStatus.adapter = statusAdapter
+        viewModel.statusCodes.observe(this) { statuses ->
+            val statusAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, statuses)
+            statusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            spinnerStatus.adapter = statusAdapter
+        }
     }
 
     private fun setupDatePickers() {
@@ -122,6 +124,12 @@ class FilterPayments : AppCompatActivity() {
         val statusCode = mapStatusToCode(status)
         val startDate = editTextStartDate.text.toString()
         val endDate = editTextEndDate.text.toString()
+
+        // Validate selections
+        if (serviceType == "Select service type" || status == "Select status") {
+            Toast.makeText(this, "Please select valid options", Toast.LENGTH_SHORT).show()
+            return
+        }
 
         viewModel.filterPayments(action, serviceType, statusCode.toString(), startDate, endDate)
     }
@@ -230,8 +238,22 @@ class FilterPayments : AppCompatActivity() {
             document.add(table)
             document.close()
             Toast.makeText(this, "PDF generated at $filePath", Toast.LENGTH_SHORT).show()
+
+            // openPdf(file)
+            openPdf(file)
         } catch (e: Exception) {
             Log.e("FilterPaymentsActivity", "Error generating PDF: ${e.message}")
         }
+    }
+
+    private fun openPdf(file: File) {
+        val pdfUri = FileProvider.getUriForFile(this, "$packageName.fileprovider", file)
+        val intent = Intent(Intent.ACTION_VIEW).apply {
+            setDataAndType(pdfUri, "application/pdf")
+            flags = Intent.FLAG_ACTIVITY_NO_HISTORY
+            addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+        }
+        val chooser = Intent.createChooser(intent, "Open PDF with")
+        startActivity(chooser)
     }
 }

@@ -19,12 +19,12 @@ class FilterPaymentsViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val _serviceCodes = MutableLiveData<List<String>>().apply {
-        value = listOf("mpesa", "bank")
+        value = listOf("Select service type", "mpesa", "bank")
     }
     val serviceCodes: LiveData<List<String>> = _serviceCodes
 
     private val _statusCodes = MutableLiveData<List<String>>().apply {
-        value = listOf("success", "pending", "missing", "failed")
+        value = listOf("Select status", "success", "pending", "missing", "failed")
     }
     val statusCodes: LiveData<List<String>> = _statusCodes
 

@@ -2,6 +2,7 @@ package com.monitoringtendepay.presentation.activities
 
 import android.Manifest
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Environment
@@ -16,6 +17,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
 import androidx.lifecycle.lifecycleScope
 import com.itextpdf.kernel.pdf.PdfWriter
 import com.itextpdf.layout.Document
@@ -148,10 +150,24 @@ class FilterUssdSessions : AppCompatActivity() {
             document.close()
 
             Toast.makeText(this, "Report generated: ${file.absolutePath}", Toast.LENGTH_LONG).show()
+
+            // openPdf(file)
+            openPdf(file)
         } catch (e: Exception) {
             e.printStackTrace()
             Toast.makeText(this, "Error generating PDF: ${e.localizedMessage}", Toast.LENGTH_LONG).show()
         }
+    }
+
+    private fun openPdf(file: File) {
+        val pdfUri = FileProvider.getUriForFile(this, "$packageName.fileprovider", file)
+        val intent = Intent(Intent.ACTION_VIEW).apply {
+            setDataAndType(pdfUri, "application/pdf")
+            flags = Intent.FLAG_ACTIVITY_NO_HISTORY
+            addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+        }
+        val chooser = Intent.createChooser(intent, "Open PDF with")
+        startActivity(chooser)
     }
 
     // Changed method signature to include view parameter

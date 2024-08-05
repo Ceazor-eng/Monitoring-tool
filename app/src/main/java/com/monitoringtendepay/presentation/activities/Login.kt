@@ -93,7 +93,12 @@ class Login : AppCompatActivity() {
 
                 Log.d("LoginActivity", "Login successful")
                 // Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show()
-                navigateToHomeScreen()
+
+                val intent = Intent(this, MainActivity::class.java).apply {
+                    putExtra("role", data.role) // Pass the role directly
+                }
+                startActivity(intent)
+                finish()
             } else {
                 Log.d("LoginActivity", "Login failed")
                 Toast.makeText(this, "Login failed", Toast.LENGTH_SHORT).show()
@@ -116,8 +121,10 @@ class Login : AppCompatActivity() {
     }
 
     private fun navigateToChangePasswordScreen(loginState: String?) {
-        val intent = Intent(this, UpdatePassword::class.java)
-        intent.putExtra("username", loginState)
+        Log.d("LoginActivity", "Navigating to update password screen with username: $loginState")
+        val intent = Intent(this, UpdatePassword::class.java).apply {
+            putExtra("username", loginState)
+        }
         startActivity(intent)
         finish()
     }
