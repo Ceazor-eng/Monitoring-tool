@@ -4,7 +4,10 @@
     <color name="purple_500">#6D2088</color>
     <color name="white">#FFFFFFFF</color>
     <color name="green">#4CAF50</color>
+    <color name="tint_green">#95f671</color>
+    <color name="dark_green">#507963</color>
     <color name="red">#F44336</color>
+    <color name="light_red">#FF7F7F</color>
     <color name="orange">#FF9800</color>
     <color name="yellow">#FFEB3B</color>
     <color name="light_blue">#7299FF</color>

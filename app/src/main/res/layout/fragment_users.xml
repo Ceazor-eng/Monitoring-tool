@@ -140,9 +140,10 @@
             </ScrollView>
 
 
-            <com.google.android.material.bottomnavigation.BottomNavigationView
+            <include
                 android:id="@+id/bottom_nav_view"
                 android:layout_width="match_parent"
+                layout="@layout/bottom_navigation_view"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:background="@color/white"

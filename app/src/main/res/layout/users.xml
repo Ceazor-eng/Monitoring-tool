@@ -7,11 +7,10 @@
     android:weightSum="6">
 
     <LinearLayout
+        android:id="@+id/user"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:weightSum="3"
-        android:id="@+id/user">
-
+        android:weightSum="2">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -21,45 +20,38 @@
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-               android:layout_marginTop="20dp"
                 android:layout_marginStart="60dp"
-                android:background="@drawable/prsnn"/>
-
-
+                android:layout_marginTop="20dp"
+                android:background="@drawable/prsnn" />
 
         </LinearLayout>
-
-
-
-
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_marginTop="20dp"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:orientation="vertical">
 
             <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
-
-            <TextView
-                android:id="@+id/username_item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:fontFamily="@font/josefinsansregular"
-                android:text="@string/username"
-                android:textColor="@color/black"
-                android:textSize="11.5sp"
-                android:shadowColor="#AA2F2F2F"
-                android:shadowDx="1"
-                android:shadowDy="1"
-                android:shadowRadius="1"/>
-        </RelativeLayout>
+                android:layout_weight="1">
 
+                <TextView
+                    android:id="@+id/username_item"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:fontFamily="@font/josefinsansregular"
+                    android:shadowColor="#AA2F2F2F"
+                    android:shadowDx="1"
+                    android:shadowDy="1"
+                    android:shadowRadius="1"
+                    android:text="@string/username"
+                    android:textColor="@color/black"
+                    android:textSize="11.5sp" />
+            </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="wrap_content"
@@ -72,13 +64,13 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:fontFamily="@font/josefinsansregular"
-                    android:text="@string/Role"
-                    android:textColor="@color/black"
-                    android:textSize="11.5sp"
                     android:shadowColor="#AA2F2F2F"
                     android:shadowDx="1"
                     android:shadowDy="1"
-                    android:shadowRadius="1"/>
+                    android:shadowRadius="1"
+                    android:text="@string/Role"
+                    android:textColor="@color/black"
+                    android:textSize="11.5sp" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -92,58 +84,34 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:fontFamily="@font/josefinsansregular"
-                    android:text="@string/status"
-                    android:textColor="@color/black"
-                    android:textSize="11.5sp"
                     android:shadowColor="#AA2F2F2F"
                     android:shadowDx="1"
                     android:shadowDy="1"
-                    android:shadowRadius="1"/>
+                    android:shadowRadius="1"
+                    android:text="@string/status"
+                    android:textColor="@color/black"
+                    android:textSize="11.5sp" />
             </RelativeLayout>
         </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:id="@+id/actions_Image_View"
-                android:layout_marginTop="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/more"/>
-
-        </LinearLayout>
-
-
-
-
-
-
-
-
-
-
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="400dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
         android:orientation="horizontal"
-        android:weightSum="4">
-
+        android:weightSum="4"
+        android:padding="10dp">
 
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:background="@drawable/border_background"
+            android:padding="10dp"
+            android:layout_marginEnd="10dp">
 
             <TextView
                 android:id="@+id/Make_Admin_txt"
@@ -151,19 +119,22 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:fontFamily="@font/josefinsansregular"
-                android:text="Make Admin"
-                android:textColor="@color/black"
-                android:textSize="11.5sp"
                 android:shadowColor="#AA2F2F2F"
                 android:shadowDx="1"
                 android:shadowDy="1"
-                android:shadowRadius="1"/>
+                android:shadowRadius="1"
+                android:text="Make Admin"
+                android:textColor="@color/black"
+                android:textSize="11.5sp" />
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:background="@drawable/border_background"
+            android:padding="10dp"
+            android:layout_marginEnd="10dp">
 
             <TextView
                 android:id="@+id/Activate_txt"
@@ -171,19 +142,22 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:fontFamily="@font/josefinsansregular"
-                android:text="  Activate"
-                android:textColor="@color/black"
-                android:textSize="11.5sp"
                 android:shadowColor="#AA2F2F2F"
                 android:shadowDx="1"
                 android:shadowDy="1"
-                android:shadowRadius="1"/>
+                android:shadowRadius="1"
+                android:text="Activate"
+                android:textColor="@color/black"
+                android:textSize="11.5sp" />
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:background="@drawable/border_background"
+            android:padding="10dp"
+            android:layout_marginEnd="10dp">
 
             <TextView
                 android:id="@+id/Deactivate_txt"
@@ -191,19 +165,21 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:fontFamily="@font/josefinsansregular"
-                android:text="Deactivate"
-                android:textColor="@color/black"
-                android:textSize="11.5sp"
                 android:shadowColor="#AA2F2F2F"
                 android:shadowDx="1"
                 android:shadowDy="1"
-                android:shadowRadius="1"/>
+                android:shadowRadius="1"
+                android:text="Deactivate"
+                android:textColor="@color/black"
+                android:textSize="11.5sp" />
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:background="@drawable/border_background"
+            android:padding="10dp">
 
             <TextView
                 android:id="@+id/Resend_OTP_txt"
@@ -211,32 +187,22 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:fontFamily="@font/josefinsansregular"
-                android:text="Resend OTP"
-                android:textColor="@color/black"
-                android:textSize="11.5sp"
                 android:shadowColor="#AA2F2F2F"
                 android:shadowDx="1"
                 android:shadowDy="1"
-                android:shadowRadius="1"/>
+                android:shadowRadius="1"
+                android:text="Resend OTP"
+                android:textColor="@color/black"
+                android:textSize="11.5sp" />
         </RelativeLayout>
 
-
-
-
-
     </LinearLayout>
-
 
     <LinearLayout
         android:layout_width="350dp"
         android:layout_height="2dp"
+        android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
-        android:background="#847E7E"
-        android:layout_gravity="center_horizontal"/>
-
-
-
-
-
+        android:background="#847E7E" />
 
 </LinearLayout>

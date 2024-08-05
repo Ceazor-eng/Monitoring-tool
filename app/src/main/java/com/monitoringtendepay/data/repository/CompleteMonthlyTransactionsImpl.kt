@@ -1,5 +1,6 @@
 package com.monitoringtendepay.data.repository
 
+import com.monitoringtendepay.core.common.Constants.CACHE_TIME
 import com.monitoringtendepay.data.localdatasource.monthlytransactionlocaldatabase.complete.CompleteMonthlyTransactionsDao
 import com.monitoringtendepay.data.localdatasource.monthlytransactionlocaldatabase.complete.toTotalMonthlyTransactionsDto
 import com.monitoringtendepay.data.remote.apiservice.AllPaymentsApi
@@ -15,7 +16,7 @@ class CompleteMonthlyTransactionsImpl @Inject constructor(
     private val dao: CompleteMonthlyTransactionsDao
 ) : CompleteMonthlyTransactionsRepository {
     override suspend fun getCompleteTransactions(action: String): TotalMonthlyTransactionsDto = withContext(Dispatchers.IO) {
-        val validTime = System.currentTimeMillis() - 5000
+        val validTime = System.currentTimeMillis() - CACHE_TIME
         // check Room database first
         val cachedCompleteTransactions = dao.getAllCompleteTransactions(validTime)
         if (cachedCompleteTransactions != null) {

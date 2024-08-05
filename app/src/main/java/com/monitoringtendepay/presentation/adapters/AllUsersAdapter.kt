@@ -3,8 +3,6 @@ package com.monitoringtendepay.presentation.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.monitoringtendepay.R
@@ -39,17 +37,30 @@ class AllUsersAdapter(
         private val username: TextView = itemView.findViewById(R.id.username_item)
         private val role: TextView = itemView.findViewById(R.id.role_item)
         private val status: TextView = itemView.findViewById(R.id.status_txt_item)
-        private val actions: ImageView = itemView.findViewById(R.id.actions_Image_View)
+        private val makeAdmin: TextView = itemView.findViewById(R.id.Make_Admin_txt)
+        private val activate: TextView = itemView.findViewById(R.id.Activate_txt)
+        private val deactivate: TextView = itemView.findViewById(R.id.Deactivate_txt)
+        private val resendOtp: TextView = itemView.findViewById(R.id.Resend_OTP_txt)
 
         fun bind(user: UserDetails) {
-            username.text = user.username
-            role.text = user.role
-            status.text = getStatusText(user.status)
+            username.text = user.username.capitalizeFirstLetter()
+            role.text = user.role.capitalizeFirstLetter()
+            status.text = getStatusText(user.status).capitalizeFirstLetter()
             status.setTextColor(getStatusColor(user.status))
-            actions.setImageResource(R.drawable.actions)
+            makeAdmin.setOnClickListener {
+                userActionsViewModel.makeUserAdmin("makeAdmin", user.username)
+            }
 
-            actions.setOnClickListener {
-                showPopupMenu(it, user.username)
+            activate.setOnClickListener {
+                userActionsViewModel.activateUser("activateUser", user.username)
+            }
+
+            deactivate.setOnClickListener {
+                userActionsViewModel.deactivateUser("disableUser", user.username)
+            }
+
+            resendOtp.setOnClickListener {
+                userActionsViewModel.resendOtp("regenerateOtp", user.username)
             }
         }
 
@@ -71,31 +82,8 @@ class AllUsersAdapter(
             }
         }
 
-        private fun showPopupMenu(view: View, username: String) {
-            val popupMenu = PopupMenu(view.context, view)
-            popupMenu.menuInflater.inflate(R.menu.popup_menu, popupMenu.menu)
-            popupMenu.setOnMenuItemClickListener { menuItem ->
-                when (menuItem.itemId) {
-                    R.id.action_make_admin -> {
-                        userActionsViewModel.makeUserAdmin("makeAdmin", username)
-                        true
-                    }
-                    R.id.action_resend_otp -> {
-                        userActionsViewModel.resendOtp("regenerateOtp", username)
-                        true
-                    }
-                    R.id.action_activate -> {
-                        userActionsViewModel.activateUser("activateUser", username)
-                        true
-                    }
-                    R.id.action_deactivate -> {
-                        userActionsViewModel.deactivateUser("disableUser", username)
-                        true
-                    }
-                    else -> false
-                }
-            }
-            popupMenu.show()
+        private fun String.capitalizeFirstLetter(): String {
+            return this.lowercase().replaceFirstChar { if (it.isLowerCase()) it.titlecase() else it.toString() }
         }
     }
 }

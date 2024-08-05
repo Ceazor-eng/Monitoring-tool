@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RelativeLayout
+import android.widget.ScrollView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
@@ -18,6 +19,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.monitoringtendepay.R
 import com.monitoringtendepay.presentation.adapters.HistoryPaymentsAdapter
 import com.monitoringtendepay.presentation.viewmodels.AllPaymentsViewModel
@@ -32,6 +34,8 @@ class History : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var historyPaymentsAdapter: HistoryPaymentsAdapter
+    private lateinit var swipeRefreshLayout: SwipeRefreshLayout
+    private lateinit var scrollView: ScrollView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,10 +63,23 @@ class History : Fragment() {
 
         setUpViews(view)
         observePayments()
+        // Initialize the SwipeRefreshLayout
+        swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout)
+        scrollView = view.findViewById(R.id.scroll_transactions)
+
+        swipeRefreshLayout.setOnRefreshListener {
+            refreshData()
+        }
+
+        scrollView.setOnScrollChangeListener { _, _, scrollY, _, _ ->
+            swipeRefreshLayout.isEnabled = scrollY == 0
+        }
+
+        // Fetch data only after SwipeRefreshLayout is initialized
         fetchData()
 
         val cardSessions: RelativeLayout = view.findViewById(R.id.sessions_card)
-        val textSessions: TextView = view.findViewById(R.id.payments_history_text)
+        val textSessions: TextView = view.findViewById(R.id.sessions_history_text)
 
         cardSessions.setOnClickListener {
             Log.d("HistoryFragment", "Sessions card clicked")
@@ -73,6 +90,10 @@ class History : Fragment() {
                 .addToBackStack(null)
                 .commit()
         }
+    }
+
+    private fun refreshData() {
+        fetchData()
     }
 
     private fun setUpViews(view: View) {
@@ -87,7 +108,6 @@ class History : Fragment() {
             when {
                 state.isLoading -> {
                     Log.d("HistoryFragment", "Loading...")
-                    // Toast.makeText(requireContext(), "Loading", Toast.LENGTH_SHORT).show()
                 }
 
                 state.error.isNotEmpty() -> {
@@ -98,14 +118,18 @@ class History : Fragment() {
                 state.payments.isNotEmpty() -> {
                     Log.d("HistoryFragment", "Success: ${state.payments}")
                     historyPaymentsAdapter.updatePayments(state.payments.sortedByDescending { it.transactionDate })
-                    // Toast.makeText(requireContext(), "Success", Toast.LENGTH_SHORT).show()
                 }
             }
         }.launchIn(viewLifecycleOwner.lifecycleScope)
     }
 
     private fun fetchData() {
-        viewModel.fetchAllPayments("fetchAllPayments")
+        if (::swipeRefreshLayout.isInitialized) {
+            viewModel.fetchAllPayments("fetchAllPayments")
+            swipeRefreshLayout.isRefreshing = false
+        } else {
+            Log.e("HistoryFragment", "SwipeRefreshLayout not initialized")
+        }
     }
 
     private fun enableEdgeToEdge() {

@@ -70,9 +70,9 @@ class PaymentsAdapter(private var payments: List<AllPayments>) : RecyclerView.Ad
         // Utility function to format the date
         private fun formatDate(dateString: String): String {
             return try {
-                val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
+                val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
                 val date = sdf.parse(dateString)
-                val formattedSdf = SimpleDateFormat("dd MMM yyyy h:mm a", Locale.getDefault())
+                val formattedSdf = SimpleDateFormat("dd MMM yyyy", Locale.getDefault())
                 formattedSdf.format(date!!)
             } catch (e: Exception) {
                 dateString

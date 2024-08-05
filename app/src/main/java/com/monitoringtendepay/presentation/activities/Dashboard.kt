@@ -207,10 +207,10 @@ class Dashboard : Fragment() {
 
             val dataSet = BarDataSet(entries, "Payment Status").apply {
                 colors = listOf(
-                    requireContext().getColor(R.color.green),
-                    requireContext().getColor(R.color.red),
+                    requireContext().getColor(R.color.dark_green),
+                    requireContext().getColor(R.color.light_red),
                     requireContext().getColor(R.color.orange),
-                    requireContext().getColor(R.color.yellow)
+                    requireContext().getColor(R.color.light_blue)
                 )
                 valueTextColor = requireContext().getColor(R.color.black)
             }

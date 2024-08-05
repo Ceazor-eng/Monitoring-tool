@@ -1,5 +1,6 @@
 package com.monitoringtendepay.data.repository
 
+import com.monitoringtendepay.core.common.Constants.CACHE_TIME
 import com.monitoringtendepay.data.localdatasource.monthlytransactionlocaldatabase.failed.FailedTransactionsDao
 import com.monitoringtendepay.data.localdatasource.monthlytransactionlocaldatabase.failed.toFailedTransactionsDto
 import com.monitoringtendepay.data.remote.apiservice.AllPaymentsApi
@@ -15,7 +16,7 @@ class FailedTransactionsRepositoryImpl @Inject constructor(
     private val dao: FailedTransactionsDao
 ) : FailedTransactionsRepository {
     override suspend fun getFailedTransactions(action: String): FailedMonthlyTransactionsDto = withContext(Dispatchers.IO) {
-        val validTime = System.currentTimeMillis() - 5000
+        val validTime = System.currentTimeMillis() - CACHE_TIME
         // check the Room database first
         val cachedFailedTransactions = dao.getAllFailedTransactions(validTime)
         if (cachedFailedTransactions != null) {

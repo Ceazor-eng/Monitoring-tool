@@ -1,5 +1,6 @@
 package com.monitoringtendepay.data.repository
 
+import com.monitoringtendepay.core.common.Constants.CACHE_TIME
 import com.monitoringtendepay.data.localdatasource.monthlytransactionlocaldatabase.pending.PendingTransactionsDao
 import com.monitoringtendepay.data.localdatasource.monthlytransactionlocaldatabase.pending.toPendingMonthlyTransactionsDto
 import com.monitoringtendepay.data.remote.apiservice.AllPaymentsApi
@@ -15,7 +16,7 @@ class PendingMonthlyTransactionsRepositoryImpl @Inject constructor(
     private val dao: PendingTransactionsDao
 ) : PendingMonthlyTransactionsRepository {
     override suspend fun getPendingTransactions(action: String): PendingMonthlyTransactionsDto = withContext(Dispatchers.IO) {
-        val validTime = System.currentTimeMillis() - 5000
+        val validTime = System.currentTimeMillis() - CACHE_TIME
 
         // check the Room database first
         val cachedPendingTransactions = dao.getAllPendingTransactions(validTime)

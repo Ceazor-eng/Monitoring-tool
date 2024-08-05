@@ -1,5 +1,6 @@
 package com.monitoringtendepay.data.repository
 
+import com.monitoringtendepay.core.common.Constants.CACHE_TIME
 import com.monitoringtendepay.data.localdatasource.allpaymentslocaldatabase.AllPaymentsDao
 import com.monitoringtendepay.data.localdatasource.allpaymentslocaldatabase.toFetchAllPaymentsDto
 import com.monitoringtendepay.data.remote.apiservice.AllPaymentsApi
@@ -15,7 +16,7 @@ class AllPaymentsRepositoryImpl @Inject constructor(
     private val dao: AllPaymentsDao
 ) : AllPaymentsRepository {
     override suspend fun getAllPayments(action: String): List<FetchAllPaymentsDto> = withContext(Dispatchers.IO) {
-        val validTime = System.currentTimeMillis() - 5000
+        val validTime = System.currentTimeMillis() - CACHE_TIME
 
         // check Room database first
         val cachedPayments = dao.getAllPayments(validTime)

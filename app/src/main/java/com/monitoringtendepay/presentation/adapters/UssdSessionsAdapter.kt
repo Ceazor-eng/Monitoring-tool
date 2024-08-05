@@ -7,6 +7,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.monitoringtendepay.R
 import com.monitoringtendepay.domain.models.AllUssdSessions
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 class UssdSessionsAdapter(private var ussdSessions: List<AllUssdSessions>) : RecyclerView.Adapter<UssdSessionsAdapter.UssdSessionViewHolder>() {
 
@@ -35,7 +37,19 @@ class UssdSessionsAdapter(private var ussdSessions: List<AllUssdSessions>) : Rec
         fun bind(ussdSession: AllUssdSessions) {
             initiatorPhoneTextView.text = ussdSession.msisdn
             SessionIdTextView.text = ussdSession.sessionId
-            dateTimeTextView.text = ussdSession.sessionsDate
+            dateTimeTextView.text = formatDate(ussdSession.sessionsDate)
+        }
+
+        // Utility function to format the date
+        private fun formatDate(dateString: String): String {
+            return try {
+                val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+                val date = sdf.parse(dateString)
+                val formattedSdf = SimpleDateFormat("dd MMM yyyy", Locale.getDefault())
+                formattedSdf.format(date!!)
+            } catch (e: Exception) {
+                dateString
+            }
         }
     }
 }
