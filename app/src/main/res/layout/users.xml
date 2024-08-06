@@ -109,7 +109,7 @@
                     android:shadowRadius="1"
                     android:text="Make Admin"
                     android:textColor="@color/black"
-                    android:textSize="11.5sp" />
+                    android:textSize="9.5sp" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -133,7 +133,7 @@
                     android:shadowRadius="1"
                     android:text="Activate"
                     android:textColor="@color/black"
-                    android:textSize="11.5sp" />
+                    android:textSize="9.5sp" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -157,7 +157,7 @@
                     android:shadowRadius="1"
                     android:text="Deactivate"
                     android:textColor="@color/black"
-                    android:textSize="11.5sp" />
+                    android:textSize="9.5sp" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -180,7 +180,7 @@
                     android:shadowRadius="1"
                     android:text="ResendOTP"
                     android:textColor="@color/black"
-                    android:textSize="11.5sp" />
+                    android:textSize="9.5sp" />
             </RelativeLayout>
 
         </RelativeLayout>
