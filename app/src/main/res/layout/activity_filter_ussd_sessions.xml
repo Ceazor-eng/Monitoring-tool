@@ -8,6 +8,14 @@
     android:background="@drawable/bg5"
     tools:context=".presentation.activities.FilterUssdSessions">
 
+    <View
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/bck"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="40dp"
+        />
+
     <TextView
         android:id="@+id/sessions_re"
         android:layout_width="wrap_content"
