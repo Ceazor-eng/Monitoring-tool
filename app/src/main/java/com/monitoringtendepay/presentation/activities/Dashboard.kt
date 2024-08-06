@@ -100,7 +100,14 @@ class Dashboard : Fragment() {
             in 12..17 -> "Good afternoon"
             else -> "Good evening"
         }
-        welcomeText.text = "$greeting!"
+        val username = preferenceManager.getUsername()
+        Log.d("DashboardFragment", "Username: $username")
+
+        if (username != null) {
+            welcomeText.text = "$greeting,$username"
+        } else {
+            welcomeText.text = "$greeting,User"
+        }
     }
 
     private fun logOut() {

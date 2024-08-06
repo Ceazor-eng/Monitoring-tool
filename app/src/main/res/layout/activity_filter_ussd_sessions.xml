@@ -107,7 +107,7 @@
                     android:background="@drawable/rcc">
 
                     <TextView
-                        android:id="@+id/startDateTextView"
+                        android:id="@+id/startSessionDateTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="10dp"
@@ -119,6 +119,7 @@
                         android:textColorHint="@color/black" />
 
                     <View
+                        android:id="@+id/startSessionDateView"
                         android:layout_width="15dp"
                         android:layout_height="15dp"
                         android:layout_alignParentEnd="true"
@@ -147,7 +148,7 @@
                     android:background="@drawable/rcc">
 
                     <TextView
-                        android:id="@+id/endDateTextView"
+                        android:id="@+id/endSessionDateTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/josefinsansregular"
@@ -159,6 +160,7 @@
                         android:textColorHint="@color/black" />
 
                     <View
+                        android:id="@+id/endSessionDateView"
                         android:layout_width="15dp"
                         android:layout_height="15dp"
                         android:layout_alignParentEnd="true"

@@ -42,6 +42,8 @@ class FilterUssdSessions : AppCompatActivity() {
     private lateinit var startDateTextView: TextView
     private lateinit var endDateTextView: TextView
     private val STORAGE_PERMISSION_CODE = 100
+    private lateinit var startDateImageView: View
+    private lateinit var endDateImageView: View
 
     private var startDate: String = ""
     private var endDate: String = ""
@@ -53,12 +55,15 @@ class FilterUssdSessions : AppCompatActivity() {
 
         phoneNumberEditText = findViewById(R.id.phoneNumberEditText)
         sessionIdEditText = findViewById(R.id.sessionIdEditText)
-        startDateTextView = findViewById(R.id.startDateTextView)
-        endDateTextView = findViewById(R.id.endDateTextView)
+        startDateTextView = findViewById(R.id.startSessionDateTextView)
+        endDateTextView = findViewById(R.id.endSessionDateTextView)
+        startDateImageView = findViewById(R.id.startSessionDateView)
+        endDateImageView = findViewById(R.id.endSessionDateView)
+
         val generateReportButton: LinearLayout = findViewById(R.id.generateReportButton)
 
-        startDateTextView.setOnClickListener { showDatePickerDialog(true) }
-        endDateTextView.setOnClickListener { showDatePickerDialog(false) }
+        startDateImageView.setOnClickListener { showDatePickerDialog(true) }
+        endDateImageView.setOnClickListener { showDatePickerDialog(false) }
 
         generateReportButton.setOnClickListener { view ->
             generateReport(view) // <-- Updated to include view parameter
