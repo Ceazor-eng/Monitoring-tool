@@ -178,7 +178,7 @@
                     android:shadowDx="1"
                     android:shadowDy="1"
                     android:shadowRadius="1"
-                    android:text="Resend OTP"
+                    android:text="ResendOTP"
                     android:textColor="@color/black"
                     android:textSize="11.5sp" />
             </RelativeLayout>

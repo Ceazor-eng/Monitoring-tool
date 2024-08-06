@@ -383,8 +383,8 @@
                             android:layout_height="150dp"
                             android:layout_marginTop="10dp"
                             android:background="@color/white"
-                            app:cardCornerRadius="20dp"
-                            app:cardElevation="4dp"
+                            app:cardCornerRadius="0dp"
+                            app:cardElevation="0dp"
                             app:layout_constraintBottom_toTopOf="@id/barChartCard"
                             app:layout_constraintTop_toTopOf="parent">
 
@@ -402,7 +402,7 @@
                                         android:id="@+id/recyclerView"
                                         android:scrollbars="horizontal"
                                         android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
+                                        android:layout_height="200dp"
                                         android:layout_marginTop="10dp"
                                         android:background="@color/white"
                                         tools:listitem="@layout/transactions" />
@@ -416,7 +416,7 @@
                             android:id="@+id/barChartCard"
                             android:layout_width="360dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
+                            android:layout_marginTop="0dp"
                             android:layout_marginBottom="10dp"
                             app:cardCornerRadius="10dp"
                             app:cardElevation="10dp"
