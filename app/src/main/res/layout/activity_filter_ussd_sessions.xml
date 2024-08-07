@@ -9,11 +9,11 @@
     tools:context=".presentation.activities.FilterUssdSessions">
 
     <View
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:background="@drawable/bck"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="40dp"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:background="@drawable/left"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="30dp"
         />
 
     <TextView
@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="51dp"
+        android:layout_marginTop="71dp"
         android:fontFamily="@font/josefinsansregular"
         android:gravity="top"
         android:text="Sessions report"
@@ -54,7 +54,7 @@
         android:id="@+id/cardGeneratePaymentsReport"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="170dp"
         android:layout_centerHorizontal="true"
         app:cardCornerRadius="16dp"
         app:cardElevation="8dp">

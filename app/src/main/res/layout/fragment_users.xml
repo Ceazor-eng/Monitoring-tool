@@ -45,8 +45,10 @@
                 android:fontFamily="@font/josefinsansregular"
                 android:hint="@string/search_users"
                 android:inputType="text"
+                android:drawableEnd="@drawable/baseline_search_24"
                 android:paddingVertical="10dp"
-                android:paddingStart="16dp" />
+                android:paddingEnd="20dp"
+                android:paddingStart="16dp"/>
 
 
             <LinearLayout
