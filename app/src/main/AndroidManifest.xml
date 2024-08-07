@@ -23,6 +23,9 @@
             android:name=".presentation.activities.SuccessActivity"
             android:exported="false" />
         <activity
+            android:name=".presentation.activities.FailedActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.activities.UpdatePassword"
             android:exported="false" />
         <activity

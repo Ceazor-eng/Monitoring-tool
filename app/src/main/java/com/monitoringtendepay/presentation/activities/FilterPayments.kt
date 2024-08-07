@@ -8,6 +8,7 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Environment
 import android.util.Log
+import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.LinearLayout
 import android.widget.Spinner
@@ -48,6 +49,8 @@ class FilterPayments : AppCompatActivity() {
     private lateinit var editTextStartDate: TextView
     private lateinit var editTextEndDate: TextView
     private lateinit var buttonGenerateReport: LinearLayout
+    private lateinit var startDateImageView: View
+    private lateinit var endDateImageView: View
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -78,6 +81,8 @@ class FilterPayments : AppCompatActivity() {
         editTextStartDate = findViewById(R.id.startDateTextView)
         editTextEndDate = findViewById(R.id.endDateTextView)
         buttonGenerateReport = findViewById(R.id.buttonGenerateReport)
+        startDateImageView = findViewById(R.id.viewStartDate)
+        endDateImageView = findViewById(R.id.viewEndDate)
     }
 
     private fun setupSpinners() {
@@ -108,11 +113,11 @@ class FilterPayments : AppCompatActivity() {
             editTextEndDate.text = dateFormatter.format(calendar.time)
         }
 
-        editTextStartDate.setOnClickListener {
+        startDateImageView.setOnClickListener {
             DatePickerDialog(this, startDatePicker, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show()
         }
 
-        editTextEndDate.setOnClickListener {
+        endDateImageView.setOnClickListener {
             DatePickerDialog(this, endDatePicker, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show()
         }
     }

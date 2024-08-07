@@ -87,15 +87,13 @@ class Login : AppCompatActivity() {
                 // Save login state and session token to SharedPreferences
                 preferenceManager.setLoggedIn(true)
                 preferenceManager.setSessionToken(data.sessionToken)
-                preferenceManager.setUsername(data.username ?: "")
+                preferenceManager.setUsername(data.username)
                 preferenceManager.setRole(data.role)
                 Log.d("LoginActivity", "Session token saved: ${preferenceManager.getSessionToken()}")
 
                 Log.d("LoginActivity", "Login successful")
-                // Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show()
-
                 val intent = Intent(this, MainActivity::class.java).apply {
-                    putExtra("role", data.role) // Pass the role directly
+                    putExtra("role", data.role)
                 }
                 startActivity(intent)
                 finish()
@@ -106,7 +104,12 @@ class Login : AppCompatActivity() {
         }
         loginState.error?.let { error ->
             Log.d("LoginActivity", "Error: $error")
-            Toast.makeText(this, error, Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, FailedActivity::class.java).apply {
+                putExtra("responseMessage", error)
+            }
+            startActivity(intent)
+            finish()
+            // Toast.makeText(this, error, Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -120,11 +123,9 @@ class Login : AppCompatActivity() {
         finish()
     }
 
-    private fun navigateToChangePasswordScreen(loginState: String?) {
-        Log.d("LoginActivity", "Navigating to update password screen with username: $loginState")
-        val intent = Intent(this, UpdatePassword::class.java).apply {
-            putExtra("username", loginState)
-        }
+    private fun navigateToChangePasswordScreen(username: String?) {
+        Log.d("LoginActivity", "Navigating to update password screen with username: $username")
+        val intent = Intent(this, UpdatePassword::class.java)
         startActivity(intent)
         finish()
     }

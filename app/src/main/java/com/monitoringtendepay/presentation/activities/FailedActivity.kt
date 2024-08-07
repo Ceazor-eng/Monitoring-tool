@@ -1,6 +1,5 @@
 package com.monitoringtendepay.presentation.activities
 
-import android.content.Intent
 import android.os.Bundle
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -9,7 +8,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.monitoringtendepay.R
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class FailedActivity : AppCompatActivity() {
 
     private lateinit var closeButton: LinearLayout
@@ -27,9 +28,7 @@ class FailedActivity : AppCompatActivity() {
         closeButton = findViewById(R.id.closeButton)
 
         closeButton.setOnClickListener {
-            val intent = Intent(this, AddUser::class.java)
-            startActivity(intent)
-            finish()
+            onBackPressed()
         }
 
         val responseText: TextView = findViewById(R.id.responseText)

@@ -14,6 +14,7 @@ import java.io.IOException
 import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import org.json.JSONObject
 import retrofit2.HttpException
 
 class AuthRepositoryImpl @Inject constructor(
@@ -27,24 +28,29 @@ class AuthRepositoryImpl @Inject constructor(
             Log.d("AuthRepository", "API Response: ${response.body()}")
             if (response.isSuccessful) {
                 response.body()?.let { loginResponse ->
-                    if (loginResponse.status == "success" || loginResponse.status == "changePassword") {
-                        val user = LoginUser(
-                            message = loginResponse.message ?: "",
-                            status = loginResponse.status,
-                            role = loginResponse.role,
-                            username = loginResponse.username,
-                            sessionToken = loginResponse.sessionToken,
-                            salutation = loginResponse.salutation
-                        )
+                    val status = loginResponse.status
+                    val user = LoginUser(
+                        message = loginResponse.message ?: "",
+                        status = status,
+                        role = loginResponse.role,
+                        username = loginResponse.username,
+                        sessionToken = loginResponse.sessionToken,
+                        salutation = loginResponse.salutation
+                    )
+                    if (status == "success" || status == "changePassword") {
                         emit(Resource.Success(Result.success(user)))
                     } else {
                         emit(Resource.Error(loginResponse.message ?: "Unexpected error"))
                     }
                 } ?: emit(Resource.Error("Unexpected error"))
             } else {
-                val errorMessage = response.message() ?: "Unknown error"
                 val errorBody = response.errorBody()?.string() ?: "No error body"
-                Log.d("AuthRepository", "Login failed: $errorMessage. Error body: $errorBody")
+                val errorMessage = try {
+                    JSONObject(errorBody).getString("error")
+                } catch (e: Exception) {
+                    "Unknown error"
+                }
+                Log.d("AuthRepository", "Login failed. Error body: $errorBody")
                 emit(Resource.Error(errorMessage))
             }
         } catch (e: IOException) {
@@ -78,8 +84,13 @@ class AuthRepositoryImpl @Inject constructor(
                     }
                 } ?: emit(Resource.Error("Unexpected error"))
             } else {
-                val errorMessage = response.message() ?: "Unknown error"
-                Log.d("AuthRepository", "Registering failed: $errorMessage")
+                val errorBody = response.errorBody()?.string() ?: "No error body"
+                val errorMessage = try {
+                    JSONObject(errorBody).getString("error")
+                } catch (e: Exception) {
+                    "Unknown error"
+                }
+                Log.d("AuthRepository", "Registering user failed. Error body: $errorBody")
                 emit(Resource.Error(errorMessage))
             }
         } catch (e: IOException) {
@@ -112,8 +123,13 @@ class AuthRepositoryImpl @Inject constructor(
                     }
                 } ?: emit(Resource.Error("Unexpected error"))
             } else {
-                val errorMessage = response.message() ?: "Unknown error"
-                Log.d("AuthRepository", "Update Password failed: $errorMessage")
+                val errorBody = response.errorBody()?.string() ?: "No error body"
+                val errorMessage = try {
+                    JSONObject(errorBody).getString("error")
+                } catch (e: Exception) {
+                    "Unknown error"
+                }
+                Log.d("AuthRepository", "Update password failed. Error body: $errorBody")
                 emit(Resource.Error(errorMessage))
             }
         } catch (e: IOException) {

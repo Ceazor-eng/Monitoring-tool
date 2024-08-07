@@ -16,6 +16,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import com.monitoringtendepay.R
+import com.monitoringtendepay.core.common.PreferenceManager
 import com.monitoringtendepay.core.common.hashPassword
 import com.monitoringtendepay.presentation.states.AuthState
 import com.monitoringtendepay.presentation.viewmodels.AuthViewModel
@@ -26,6 +27,7 @@ class UpdatePassword : AppCompatActivity() {
 
     private val authViewModel: AuthViewModel by viewModels()
 
+    private lateinit var preferenceManager: PreferenceManager
     private lateinit var username: String
     private lateinit var password: EditText
     private lateinit var confirmPassword: EditText
@@ -47,14 +49,14 @@ class UpdatePassword : AppCompatActivity() {
         confirmPassword = findViewById(R.id.confirm_Password)
         btnUpdatePassword = findViewById(R.id.btnUpdatePassword)
         progressBar = findViewById(R.id.progressBar)
+        preferenceManager = PreferenceManager(this)
 
         // Get the username from the intent extras
-        val intentUsername = intent.getStringExtra("username")
-        if (intentUsername != null) {
-            username = intentUsername
-        } else {
-            Toast.makeText(this, "Error: Username not found", Toast.LENGTH_SHORT).show()
-            finish()
+
+        val passedUsername = preferenceManager.getUsername()
+        Log.d("UpdatePasswordActivity", "Username: $passedUsername")
+        if (passedUsername != null) {
+            username = passedUsername
         }
 
         lifecycleScope.launchWhenStarted {

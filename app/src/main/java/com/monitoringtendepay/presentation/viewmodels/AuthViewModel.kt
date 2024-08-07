@@ -55,7 +55,7 @@ class AuthViewModel @Inject constructor(
                             // Save login details in preferences
                             preferenceManager.setLoggedIn(true)
                             preferenceManager.setSessionToken(loginResponse.sessionToken)
-                            preferenceManager.setUsername(loginResponse.username ?: "")
+                            preferenceManager.setUsername(loginResponse.username)
                             preferenceManager.setRole(loginResponse.role)
                         } else {
                             Log.d(TAG, "LoginResponse is null")

@@ -3,6 +3,7 @@ package com.monitoringtendepay.presentation.activities
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.LinearLayout
@@ -32,6 +33,7 @@ class AddUser : AppCompatActivity() {
     private lateinit var registerBtn: LinearLayout
     private lateinit var progressBar: ProgressBar
     private lateinit var roleSpinner: Spinner
+    private lateinit var backButton: View
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,12 +52,17 @@ class AddUser : AppCompatActivity() {
         email = findViewById(R.id.email)
         registerBtn = findViewById(R.id.btnRegister)
         progressBar = findViewById(R.id.progressBar)
+        backButton = findViewById(R.id.backButton)
 
         roleSpinner = findViewById(R.id.roleSpinner)
-        val roles = arrayOf("Admin", "User")
+        val roles = arrayOf("Select Role", "Admin", "User")
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, roles)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         roleSpinner.adapter = adapter
+
+        backButton.setOnClickListener {
+            finish()
+        }
 
         registerBtn.setOnClickListener {
             val username = etUsername.text.toString()
@@ -66,8 +73,8 @@ class AddUser : AppCompatActivity() {
             // Get selected role
             val selectedRole = roleSpinner.selectedItemPosition
             val roleId = when (selectedRole) {
-                0 -> "1" // Admin
-                1 -> "2" // User
+                1 -> "1" // Admin
+                2 -> "2" // User
                 else -> ""
             }
             val action = "createUser"
@@ -94,7 +101,6 @@ class AddUser : AppCompatActivity() {
         } else {
             progressBar.visibility = ProgressBar.GONE
             authState.error?.let { error ->
-                // Toast.makeText(this, error, Toast.LENGTH_SHORT).show()
                 Log.d("RegisterUser", "AuthState data: $error")
                 val intent = Intent(this, FailedActivity::class.java)
                 intent.putExtra("responseMessage", error)
@@ -107,7 +113,6 @@ class AddUser : AppCompatActivity() {
                 intent.putExtra("responseMessage", data.salutation)
                 startActivity(intent)
                 finish()
-//                Toast.makeText(this, "register successfully", Toast.LENGTH_SHORT).show()
             }
         }
     }

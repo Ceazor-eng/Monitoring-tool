@@ -11,21 +11,19 @@
 
 
     <View
+        android:id="@+id/backButton"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:background="@drawable/bck"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
-        />
-
-
+        android:background="@drawable/bck" />
 
 
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="101dp"
-        android:layout_gravity="center">
+        android:layout_gravity="center"
+        android:layout_marginTop="101dp">
 
 
         <TextView
@@ -33,16 +31,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:gravity="center_horizontal"
             android:layout_marginBottom="20dp"
             android:fontFamily="@font/josefinsansregular"
-            android:text="Register User"
-            android:textColor="#6D2088"
-            android:textSize="28sp"
+            android:gravity="center_horizontal"
             android:shadowColor="#AA2F2F2F"
             android:shadowDx="3"
             android:shadowDy="3"
-            android:shadowRadius="5"/>
+            android:shadowRadius="5"
+            android:text="Register User"
+            android:textColor="#6D2088"
+            android:textSize="28sp" />
 
 
         <EditText
@@ -88,31 +86,30 @@
             android:layout_height="42dp"
             android:layout_below="@id/lName"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="16dp"
             android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
             android:background="@drawable/rectangle_2"
             android:fontFamily="@font/josefinsansregular"
             android:hint="Phonenumber"
             android:paddingStart="16dp" />
 
         <RelativeLayout
+            android:id="@+id/roleSpinnerly"
             android:layout_width="292dp"
             android:layout_height="42dp"
             android:layout_below="@id/phoneNumber"
-            android:background="@drawable/rectangle_2"
-            android:id="@+id/roleSpinnerly"
-            >
+            android:background="@drawable/rectangle_2">
 
 
-        <Spinner
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/roleSpinner"
-            android:layout_centerInParent="true"
-            android:layout_marginTop="16dp"
-            android:fontFamily="@font/josefinsansregular"
-            android:paddingStart="16dp"
-            android:spinnerMode="dropdown"/>
+            <Spinner
+                android:id="@+id/roleSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/josefinsansregular"
+                android:paddingStart="16dp"
+                android:spinnerMode="dropdown" />
 
         </RelativeLayout>
 
@@ -139,26 +136,23 @@
             android:layout_marginTop="16dp"
             android:layout_marginBottom="56dp"
             android:background="@drawable/bg_linear_layout_button"
-            android:fontFamily="@font/josefinsansbold"
-            android:gravity="center_horizontal"
             android:elevation="15dp"
-        >
-
+            android:fontFamily="@font/josefinsansbold"
+            android:gravity="center_horizontal">
 
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Register"
-                android:paddingHorizontal="25dp"
                 android:layout_gravity="center"
-                android:textColor="@color/white"
                 android:fontFamily="@font/josefinsansregular"
+                android:paddingHorizontal="25dp"
                 android:shadowColor="#AA2F2F2F"
                 android:shadowDx="1"
                 android:shadowDy="1"
                 android:shadowRadius="1"
-                />
+                android:text="Register"
+                android:textColor="@color/white" />
 
         </LinearLayout>
 
