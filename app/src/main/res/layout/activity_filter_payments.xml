@@ -206,6 +206,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="16dp"
                 android:background="@drawable/bg_linear_layout_button"
+                android:elevation="10dp"
                 android:fontFamily="@font/josefinsansbold">
 
 

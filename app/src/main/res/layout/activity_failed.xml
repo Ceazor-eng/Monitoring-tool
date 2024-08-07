@@ -55,6 +55,7 @@
         android:background="@drawable/bg_linear_layout_button"
         android:clickable="true"
         android:focusable="true"
+        android:elevation="10dp"
         android:fontFamily="@font/josefinsansbold">
 
         <TextView

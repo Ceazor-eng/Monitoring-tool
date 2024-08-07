@@ -179,6 +179,7 @@
                 android:layout_below="@id/cardCalendarEndDate"
                 android:layout_centerHorizontal="true"
                 android:background="@drawable/bg_linear_layout_button"
+                android:elevation="10dp"
                 android:fontFamily="@font/josefinsansbold"
                 >
 
