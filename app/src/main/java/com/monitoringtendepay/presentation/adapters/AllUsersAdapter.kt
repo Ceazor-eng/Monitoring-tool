@@ -3,6 +3,7 @@ package com.monitoringtendepay.presentation.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.monitoringtendepay.R
@@ -41,16 +42,54 @@ class AllUsersAdapter(
         private val username: TextView = itemView.findViewById(R.id.username_item)
         private val role: TextView = itemView.findViewById(R.id.role_item)
         private val status: TextView = itemView.findViewById(R.id.status_txt_item)
-        private val makeAdmin: TextView = itemView.findViewById(R.id.Make_Admin_txt)
-        private val activate: TextView = itemView.findViewById(R.id.Activate_txt)
-        private val deactivate: TextView = itemView.findViewById(R.id.Deactivate_txt)
-        private val resendOtp: TextView = itemView.findViewById(R.id.Resend_OTP_txt)
+        private val makeAdmin: RelativeLayout = itemView.findViewById(R.id.Make_Admin_txtlyt)
+        private val activate: RelativeLayout = itemView.findViewById(R.id.Activate_txtlyt)
+        private val deactivate: RelativeLayout = itemView.findViewById(R.id.Deactivate_txtlyt)
+        private val resendOtp: RelativeLayout = itemView.findViewById(R.id.Resend_OTP_txtlyt)
+        private val usernameInitial: TextView = itemView.findViewById(R.id.username_initial)
 
         fun bind(user: UserDetails) {
             username.text = user.username.capitalizeFirstLetter()
             role.text = user.role.capitalizeFirstLetter()
             status.text = getStatusText(user.status).capitalizeFirstLetter()
             status.setTextColor(getStatusColor(user.status))
+
+            // Set the initial of the username
+            usernameInitial.text = user.username.firstOrNull()?.uppercase() ?: ""
+
+            val isAdmin = user.role.equals("admin", ignoreCase = true)
+            val isUser = user.role.equals("user", ignoreCase = true)
+            val isOtp = user.status.equals("otp", ignoreCase = true)
+            val isActive = user.status.equals("active", ignoreCase = true)
+            val isInactive = user.status.equals("inactive", ignoreCase = true)
+
+            when (user.status) {
+                "active" -> {
+                    makeAdmin.visibility = if (isUser) View.VISIBLE else View.GONE
+                    resendOtp.visibility = View.VISIBLE
+                    activate.visibility = View.GONE
+                    deactivate.visibility = View.VISIBLE
+                }
+                "inactive" -> {
+                    makeAdmin.visibility = View.GONE
+                    resendOtp.visibility = View.GONE
+                    activate.visibility = if (isInactive) View.VISIBLE else View.GONE
+                    deactivate.visibility = View.GONE
+                }
+                "OTP" -> {
+                    makeAdmin.visibility = View.GONE
+                    resendOtp.visibility = View.VISIBLE
+                    activate.visibility = View.GONE
+                    deactivate.visibility = View.GONE
+                }
+                else -> {
+                    makeAdmin.visibility = View.GONE
+                    resendOtp.visibility = View.GONE
+                    activate.visibility = View.GONE
+                    deactivate.visibility = View.GONE
+                }
+            }
+
             makeAdmin.setOnClickListener {
                 showConfirmationDialog(
                     "Make Admin",

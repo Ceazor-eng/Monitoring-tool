@@ -16,6 +16,7 @@ import java.io.IOException
 import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import org.json.JSONObject
 import retrofit2.HttpException
 
 class UserActionsRepositoryImpl @Inject constructor(
@@ -39,8 +40,13 @@ class UserActionsRepositoryImpl @Inject constructor(
                     }
                 } ?: emit(Resource.Error("Unexpected error"))
             } else {
-                val errorMessage = response.message() ?: "Unknown error"
-                Log.d("UserActionsRepository", "Make user admin failed: $errorMessage")
+                val errorBody = response.errorBody()?.string() ?: "No error body"
+                val errorMessage = try {
+                    JSONObject(errorBody).getString("error")
+                } catch (e: Exception) {
+                    "Unknown error"
+                }
+                Log.d("UserActionsRepository", "Make User Admin failed. Error body: $errorBody")
                 emit(Resource.Error(errorMessage))
             }
         } catch (e: IOException) {
@@ -76,8 +82,13 @@ class UserActionsRepositoryImpl @Inject constructor(
                     }
                 } ?: emit(Resource.Error("Unexpected error"))
             } else {
-                val errorMessage = response.message() ?: "Unknown error"
-                Log.d("UserActionsRepository", "Resend Otp failed: $errorMessage")
+                val errorBody = response.errorBody()?.string() ?: "No error body"
+                val errorMessage = try {
+                    JSONObject(errorBody).getString("error")
+                } catch (e: Exception) {
+                    "Unknown error"
+                }
+                Log.d("UserActionsRepository", "Resend OTP failed. Error body: $errorBody")
                 emit(Resource.Error(errorMessage))
             }
         } catch (e: IOException) {
@@ -109,8 +120,13 @@ class UserActionsRepositoryImpl @Inject constructor(
                     }
                 } ?: emit(Resource.Error("Unexpected error"))
             } else {
-                val errorMessage = response.message() ?: "Unknown error"
-                Log.d("UserActionsRepository", "Activate User failed: $errorMessage")
+                val errorBody = response.errorBody()?.string() ?: "No error body"
+                val errorMessage = try {
+                    JSONObject(errorBody).getString("error")
+                } catch (e: Exception) {
+                    "Unknown error"
+                }
+                Log.d("UserActionsRepository", "Activate User failed. Error body: $errorBody")
                 emit(Resource.Error(errorMessage))
             }
         } catch (e: IOException) {
@@ -143,8 +159,13 @@ class UserActionsRepositoryImpl @Inject constructor(
                     }
                 } ?: emit(Resource.Error("Unexpected error"))
             } else {
-                val errorMessage = response.message() ?: "Unknown error"
-                Log.d("UserActionsRepository", "Activate User failed: $errorMessage")
+                val errorBody = response.errorBody()?.string() ?: "No error body"
+                val errorMessage = try {
+                    JSONObject(errorBody).getString("error")
+                } catch (e: Exception) {
+                    "Unknown error"
+                }
+                Log.d("UserActionsRepository", "Deactivate user failed. Error body: $errorBody")
                 emit(Resource.Error(errorMessage))
             }
         } catch (e: IOException) {

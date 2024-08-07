@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_margin="10dp"
     android:padding="10dp"
     app:cardCornerRadius="8dp"
@@ -19,19 +19,25 @@
             android:layout_height="wrap_content"
             android:padding="10dp">
 
-            <ImageView
-                android:id="@+id/prsnn"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+
+            <TextView
+                android:id="@+id/username_initial"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="20sp"
+                android:textStyle="bold"
                 android:layout_marginStart="100dp"
                 android:layout_marginTop="20dp"
-                android:background="@drawable/prsnn" />
+                tools:text="I"
+                android:textColor="@color/black"
+                android:background="@drawable/circle_background" />
 
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:layout_toEndOf="@id/prsnn"
+                android:layout_toEndOf="@id/username_initial"
                 android:layout_marginStart="40dp"
                 android:orientation="vertical">
 
