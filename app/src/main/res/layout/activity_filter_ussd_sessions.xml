@@ -11,10 +11,9 @@
     <View
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:background="@drawable/left"
         android:layout_marginStart="40dp"
         android:layout_marginTop="70dp"
-        />
+        android:background="@drawable/left" />
 
     <TextView
         android:id="@+id/sessions_re"
@@ -42,20 +41,20 @@
         android:fontFamily="@font/josefinsansregular"
         android:gravity="center_horizontal"
         android:paddingHorizontal="40dp"
-        android:text="Generate sessions report and export for further analysis"
-        android:textColor="#6C2671"
-        android:textSize="18dp"
         android:shadowColor="#AA2F2F2F"
         android:shadowDx="3"
         android:shadowDy="3"
-        android:shadowRadius="2"/>
+        android:shadowRadius="2"
+        android:text="Generate sessions report and export for further analysis"
+        android:textColor="#6C2671"
+        android:textSize="18dp" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardGeneratePaymentsReport"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="170dp"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="170dp"
         app:cardCornerRadius="16dp"
         app:cardElevation="8dp">
 
@@ -69,24 +68,24 @@
                 android:id="@+id/phoneNumberEditText"
                 android:layout_width="262dp"
                 android:layout_height="42dp"
-                android:background="@drawable/rectangle_2"
                 android:layout_centerHorizontal="true"
-                android:fontFamily="@font/josefinsansregular"
                 android:layout_marginTop="16dp"
-                android:paddingStart="16dp"
-                android:hint="Enter Phone Number" />
+                android:background="@drawable/rectangle_2"
+                android:fontFamily="@font/josefinsansregular"
+                android:hint="Enter Phone Number"
+                android:paddingStart="16dp" />
 
             <EditText
                 android:id="@+id/sessionIdEditText"
                 android:layout_width="262dp"
                 android:layout_height="42dp"
-                android:background="@drawable/rectangle_2"
-                android:layout_centerHorizontal="true"
-                android:fontFamily="@font/josefinsansregular"
                 android:layout_below="@id/phoneNumberEditText"
+                android:layout_centerHorizontal="true"
                 android:layout_marginTop="36dp"
-                android:paddingStart="16dp"
-                android:hint="Enter Session ID" />
+                android:background="@drawable/rectangle_2"
+                android:fontFamily="@font/josefinsansregular"
+                android:hint="Enter Session ID"
+                android:paddingStart="16dp" />
 
             <!-- Start Date Picker -->
             <androidx.cardview.widget.CardView
@@ -112,8 +111,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="10dp"
                         android:layout_marginVertical="10dp"
-                        android:fontFamily="@font/josefinsansregular"
                         android:focusable="false"
+                        android:fontFamily="@font/josefinsansregular"
                         android:gravity="right"
                         android:hint="Start date"
                         android:textColorHint="@color/black" />
@@ -151,10 +150,10 @@
                         android:id="@+id/endSessionDateTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/josefinsansregular"
                         android:layout_marginHorizontal="10dp"
                         android:layout_marginVertical="10dp"
                         android:focusable="false"
+                        android:fontFamily="@font/josefinsansregular"
                         android:gravity="right"
                         android:hint="End date"
                         android:textColorHint="@color/black" />
@@ -175,30 +174,24 @@
                 android:id="@+id/generateReportButton"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
-                android:layout_marginTop="16dp"
                 android:layout_below="@id/cardCalendarEndDate"
                 android:layout_centerHorizontal="true"
+                android:layout_marginTop="16dp"
                 android:background="@drawable/bg_linear_layout_button"
                 android:fontFamily="@font/josefinsansbold">
-                android:elevation="10dp"
-                android:fontFamily="@font/josefinsansbold"
-                >
-
-
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Generate Report"
-                    android:paddingHorizontal="25dp"
                     android:layout_gravity="center"
-                    android:textColor="@color/white"
                     android:fontFamily="@font/josefinsansregular"
+                    android:paddingHorizontal="25dp"
                     android:shadowColor="#AA2F2F2F"
                     android:shadowDx="1"
                     android:shadowDy="1"
                     android:shadowRadius="1"
-                    />
+                    android:text="Generate Report"
+                    android:textColor="@color/white" />
 
             </LinearLayout>
 
