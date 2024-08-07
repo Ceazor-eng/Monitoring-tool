@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.monitoringtendepay.R
+import com.monitoringtendepay.core.common.ConfirmationDialog
 import com.monitoringtendepay.data.remote.dto.allusers.UserDetails
 import com.monitoringtendepay.presentation.viewmodels.UserActionsViewModel
 
@@ -51,20 +52,52 @@ class AllUsersAdapter(
             status.text = getStatusText(user.status).capitalizeFirstLetter()
             status.setTextColor(getStatusColor(user.status))
             makeAdmin.setOnClickListener {
-                userActionsViewModel.makeUserAdmin("makeAdmin", user.username)
+                showConfirmationDialog(
+                    "Make Admin",
+                    "Are you sure you want to make ${user.username} an admin?",
+                    "Yes",
+                    "No"
+                ) {
+                    userActionsViewModel.makeUserAdmin("makeAdmin", user.username)
+                }
             }
 
             activate.setOnClickListener {
-                userActionsViewModel.activateUser("activateUser", user.username)
+                showConfirmationDialog(
+                    "Activate User",
+                    "Are you sure you want to activate ${user.username}?",
+                    "Yes",
+                    "No"
+                ) {
+                    userActionsViewModel.activateUser("activateUser", user.username)
+                }
             }
 
             deactivate.setOnClickListener {
-                userActionsViewModel.deactivateUser("disableUser", user.username)
+                showConfirmationDialog(
+                    "Deactivate User",
+                    "Are you sure you want to deactivate ${user.username}?",
+                    "Yes",
+                    "No"
+                ) {
+                    userActionsViewModel.deactivateUser("disableUser", user.username)
+                }
             }
 
             resendOtp.setOnClickListener {
-                userActionsViewModel.resendOtp("regenerateOtp", user.username)
+                showConfirmationDialog(
+                    "Resend OTP",
+                    "Are you sure you want to resend OTP to ${user.username}?",
+                    "Yes",
+                    "No"
+                ) {
+                    userActionsViewModel.resendOtp("regenerateOtp", user.username)
+                }
             }
+        }
+
+        private fun showConfirmationDialog(title: String, message: String, positiveButtonText: String, negativeButtonText: String, onPositiveClick: () -> Unit) {
+            ConfirmationDialog.show(itemView.context, title, message, positiveButtonText, negativeButtonText, onPositiveClick)
         }
 
         private fun getStatusText(status: String): String {

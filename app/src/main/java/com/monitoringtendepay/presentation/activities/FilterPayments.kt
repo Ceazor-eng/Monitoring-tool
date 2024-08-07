@@ -51,6 +51,7 @@ class FilterPayments : AppCompatActivity() {
     private lateinit var buttonGenerateReport: LinearLayout
     private lateinit var startDateImageView: View
     private lateinit var endDateImageView: View
+    private lateinit var backButton: View
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -63,6 +64,9 @@ class FilterPayments : AppCompatActivity() {
         setupDatePickers()
         buttonGenerateReport.setOnClickListener {
             handleGenerateReportClick()
+        }
+        backButton.setOnClickListener {
+            finish()
         }
         observeFilteredPayments()
     }
@@ -83,6 +87,7 @@ class FilterPayments : AppCompatActivity() {
         buttonGenerateReport = findViewById(R.id.buttonGenerateReport)
         startDateImageView = findViewById(R.id.viewStartDate)
         endDateImageView = findViewById(R.id.viewEndDate)
+        backButton = findViewById(R.id.filterPaymentsBackButton)
     }
 
     private fun setupSpinners() {
@@ -253,12 +258,19 @@ class FilterPayments : AppCompatActivity() {
 
     private fun openPdf(file: File) {
         val pdfUri = FileProvider.getUriForFile(this, "$packageName.fileprovider", file)
-        val intent = Intent(Intent.ACTION_VIEW).apply {
-            setDataAndType(pdfUri, "application/pdf")
-            flags = Intent.FLAG_ACTIVITY_NO_HISTORY
+        val shareIntent = Intent(Intent.ACTION_SEND).apply {
+            type = "application/pdf"
+            putExtra(Intent.EXTRA_STREAM, pdfUri)
             addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
         }
-        val chooser = Intent.createChooser(intent, "Open PDF with")
-        startActivity(chooser)
+
+        val chooserIntent = Intent.createChooser(shareIntent, "Open or Share PDF with")
+        val resInfoList = packageManager.queryIntentActivities(shareIntent, PackageManager.MATCH_DEFAULT_ONLY)
+        for (resolveInfo in resInfoList) {
+            val packageName = resolveInfo.activityInfo.packageName
+            grantUriPermission(packageName, pdfUri, Intent.FLAG_GRANT_WRITE_URI_PERMISSION or Intent.FLAG_GRANT_READ_URI_PERMISSION)
+        }
+
+        startActivity(chooserIntent)
     }
 }

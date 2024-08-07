@@ -44,6 +44,7 @@ class FilterUssdSessions : AppCompatActivity() {
     private val STORAGE_PERMISSION_CODE = 100
     private lateinit var startDateImageView: View
     private lateinit var endDateImageView: View
+    private lateinit var backButton: View
 
     private var startDate: String = ""
     private var endDate: String = ""
@@ -59,6 +60,7 @@ class FilterUssdSessions : AppCompatActivity() {
         endDateTextView = findViewById(R.id.endSessionDateTextView)
         startDateImageView = findViewById(R.id.startSessionDateView)
         endDateImageView = findViewById(R.id.endSessionDateView)
+        backButton = findViewById(R.id.filterUssdBackButton)
 
         val generateReportButton: LinearLayout = findViewById(R.id.generateReportButton)
 
@@ -67,6 +69,10 @@ class FilterUssdSessions : AppCompatActivity() {
 
         generateReportButton.setOnClickListener { view ->
             generateReport(view) // <-- Updated to include view parameter
+        }
+
+        backButton.setOnClickListener {
+            finish()
         }
 
         observeFilteredSessions()
@@ -166,13 +172,20 @@ class FilterUssdSessions : AppCompatActivity() {
 
     private fun openPdf(file: File) {
         val pdfUri = FileProvider.getUriForFile(this, "$packageName.fileprovider", file)
-        val intent = Intent(Intent.ACTION_VIEW).apply {
-            setDataAndType(pdfUri, "application/pdf")
-            flags = Intent.FLAG_ACTIVITY_NO_HISTORY
+        val shareIntent = Intent(Intent.ACTION_SEND).apply {
+            type = "application/pdf"
+            putExtra(Intent.EXTRA_STREAM, pdfUri)
             addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
         }
-        val chooser = Intent.createChooser(intent, "Open PDF with")
-        startActivity(chooser)
+
+        val chooserIntent = Intent.createChooser(shareIntent, "Open or Share PDF with")
+        val resInfoList = packageManager.queryIntentActivities(shareIntent, PackageManager.MATCH_DEFAULT_ONLY)
+        for (resolveInfo in resInfoList) {
+            val packageName = resolveInfo.activityInfo.packageName
+            grantUriPermission(packageName, pdfUri, Intent.FLAG_GRANT_WRITE_URI_PERMISSION or Intent.FLAG_GRANT_READ_URI_PERMISSION)
+        }
+
+        startActivity(chooserIntent)
     }
 
     // Changed method signature to include view parameter
@@ -212,6 +225,4 @@ class FilterUssdSessions : AppCompatActivity() {
         )
         datePickerDialog.show()
     }
-
-    fun showDatePickerDialog(view: View) {}
 }

@@ -10,6 +10,7 @@
 
 
     <View
+        android:id="@+id/filterPaymentsBackButton"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:background="@drawable/left"
