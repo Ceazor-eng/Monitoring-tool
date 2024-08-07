@@ -6,9 +6,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.ScrollView
 import android.widget.Toast
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -29,8 +31,7 @@ class Users : Fragment() {
 
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
     private lateinit var scrollView: ScrollView
-
-    // private  var users:List<UserDetails> = emptyList()
+    private lateinit var searchInput: EditText
     private val viewModel: AllUsersViewModel by viewModels()
     private val userActionsViewModel: UserActionsViewModel by viewModels()
     private lateinit var adapter: AllUsersAdapter
@@ -50,21 +51,11 @@ class Users : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // val searchUser = view.findViewById<EditText>(R.id.searchUser)
-
         val addUserBtn = view.findViewById<LinearLayout>(R.id.AddUserBtn)
         val recyclerView = view.findViewById<RecyclerView>(R.id.usersRecyclerView)
+        searchInput = view.findViewById(R.id.searchUser)
 
         adapter = AllUsersAdapter(emptyList(), userActionsViewModel) // Initialize the adapter
-
-//        searchUser.addTextChangedListener(object :TextWatcher{
-//            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-//            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-//                val query = s.toString().trim()
-//                filterUsers(query)
-//            }
-//            override fun afterTextChanged(p0: Editable?) {}
-//        })
 
         addUserBtn.setOnClickListener {
             val intent = Intent(requireContext(), AddUser::class.java)
@@ -107,13 +98,22 @@ class Users : Fragment() {
             swipeRefreshLayout.isEnabled = scrollY == 0
         }
 
+        searchInput.addTextChangedListener { text ->
+            filterUsers(text.toString())
+        }
+
         fetchData()
     }
 
-//    private fun filterUsers(query: String) {
-//        val filteredUsers = users.filter { it.username.contains(query, ignoreCase = true) }
-//        adapter.updateData(filteredUsers)
-//    }
+    private fun filterUsers(query: String) {
+        val filteredList = viewModel.usersState.value.users.filter { user ->
+            user.username.contains(query, ignoreCase = true) || user.status.contains(query, ignoreCase = true) || user.role.contains(query, ignoreCase = true)
+        }
+        adapter.updateData(filteredList)
+        if (filteredList.isEmpty()) {
+            Toast.makeText(requireContext(), "No users found", Toast.LENGTH_SHORT).show()
+        }
+    }
 
     private fun refreshData() {
         fetchData()

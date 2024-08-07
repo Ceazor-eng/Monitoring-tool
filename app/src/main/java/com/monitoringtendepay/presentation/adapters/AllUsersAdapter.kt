@@ -14,7 +14,10 @@ class AllUsersAdapter(
     private val userActionsViewModel: UserActionsViewModel
 ) : RecyclerView.Adapter<AllUsersAdapter.UserViewHolder>() {
 
+    private var originalUsers: List<UserDetails> = users
+
     fun updateData(newUsers: List<UserDetails>) {
+        originalUsers = newUsers
         users = newUsers
         notifyDataSetChanged()
     }

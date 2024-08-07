@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -50,7 +49,6 @@
                 android:paddingEnd="20dp"
                 android:paddingStart="16dp"/>
 
-
             <LinearLayout
                 android:id="@+id/AddUserBtn"
                 android:layout_width="wrap_content"
@@ -62,7 +60,6 @@
                 android:background="@drawable/bg_linear_layout_button"
                 android:elevation="10dp"
                 android:fontFamily="@font/josefinsansbold">
-
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -79,7 +76,6 @@
 
             </LinearLayout>
 
-
             <LinearLayout
                 android:id="@+id/AllUsersTextView"
                 android:layout_width="match_parent"
@@ -93,18 +89,16 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:fontFamily="@font/josefinsansbold"
-                    android:text="All Users"
-                 />
+                    android:text="All Users" />
 
             </LinearLayout>
-
 
             <ScrollView
                 android:id="@+id/Scroll"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/AllUsersTextView"
-                android:layout_above="@+id/bottom_nav_view">
+                android:layout_above="@+id/bottom_nav_view"
+                android:layout_below="@+id/AllUsersTextView">
 
                 <RelativeLayout
                     android:layout_width="wrap_content"
@@ -121,7 +115,6 @@
                         android:layout_marginTop="462dp"
                         android:elevation="4dp" />
 
-
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -137,22 +130,18 @@
                             tools:listitem="@layout/users" />
                     </LinearLayout>
 
-
                 </RelativeLayout>
             </ScrollView>
 
-
             <include
                 android:id="@+id/bottom_nav_view"
-                android:layout_width="match_parent"
                 layout="@layout/bottom_navigation_view"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:background="@color/white"
                 android:foregroundGravity="bottom"
                 app:menu="@menu/bottom_navigation_menu" />
-
-
         </RelativeLayout>
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

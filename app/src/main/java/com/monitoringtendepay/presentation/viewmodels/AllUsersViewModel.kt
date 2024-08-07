@@ -8,8 +8,8 @@ import com.monitoringtendepay.domain.repository.AllUsersRepository
 import com.monitoringtendepay.presentation.states.UsersState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
-import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 @HiltViewModel
@@ -17,8 +17,8 @@ class AllUsersViewModel @Inject constructor(
     private val repository: AllUsersRepository
 ) : ViewModel() {
 
-    private val _allUsersState = Channel<UsersState>()
-    val usersState = _allUsersState.receiveAsFlow()
+    private val _allUsersState = MutableStateFlow(UsersState())
+    val usersState: StateFlow<UsersState> = _allUsersState
 
     fun fetchAllUsers(action: String) {
         viewModelScope.launch {
@@ -27,15 +27,15 @@ class AllUsersViewModel @Inject constructor(
                     is Resource.Success -> {
                         Log.d("AllUsersViewModel", "Fetching users successful: ${result.data}")
                         val users = result.data?.data?.users?.map { it.userDetails } ?: emptyList()
-                        _allUsersState.send(UsersState(users = users))
+                        _allUsersState.value = UsersState(users = users)
                     }
                     is Resource.Loading -> {
                         Log.d("AllUsersViewModel", "Loading ...")
-                        _allUsersState.send(UsersState(isLoading = true))
+                        _allUsersState.value = UsersState(isLoading = true)
                     }
                     is Resource.Error -> {
                         Log.d("AllUsersViewModel", "Error fetching users: ${result.message}")
-                        _allUsersState.send(UsersState(error = result.message ?: "Unknown error occurred"))
+                        _allUsersState.value = UsersState(error = result.message ?: "Unknown error occurred")
                     }
                 }
             }
