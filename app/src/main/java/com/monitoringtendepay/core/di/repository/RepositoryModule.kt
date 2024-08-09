@@ -1,6 +1,7 @@
 package com.monitoringtendepay.core.di.repository
 
 import com.monitoringtendepay.data.localdatasource.allpaymentslocaldatabase.AllPaymentsDao
+import com.monitoringtendepay.data.localdatasource.allussdsessionslocal.UssdSessionsDao
 import com.monitoringtendepay.data.localdatasource.monthlytransactionlocaldatabase.complete.CompleteMonthlyTransactionsDao
 import com.monitoringtendepay.data.localdatasource.monthlytransactionlocaldatabase.failed.FailedTransactionsDao
 import com.monitoringtendepay.data.localdatasource.monthlytransactionlocaldatabase.missing.MissingTransactionsDao
@@ -47,8 +48,8 @@ object RepositoryModule {
 
     @Singleton
     @Provides
-    fun provideUssdSessionsRepository(api: AllPaymentsApi): UssdSessionsRepository {
-        return AllUssdSessionsRepositoryImpl(api)
+    fun provideUssdSessionsRepository(api: AllPaymentsApi, ussdDao: UssdSessionsDao): UssdSessionsRepository {
+        return AllUssdSessionsRepositoryImpl(api, ussdDao)
     }
 
     @Singleton

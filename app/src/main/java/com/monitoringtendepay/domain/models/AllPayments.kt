@@ -9,4 +9,3 @@ data class AllPayments(
     val sessionId: String,
     val transactionDate: String
 )
-// Service Code	Initiator Phone	Amount	Mpesa Ref	Recipient Name	Session Id	Payment Status	Date and Time

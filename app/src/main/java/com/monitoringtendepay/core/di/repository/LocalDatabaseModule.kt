@@ -4,6 +4,8 @@ import android.content.Context
 import androidx.room.Room
 import com.monitoringtendepay.data.localdatasource.allpaymentslocaldatabase.AllPaymentsDao
 import com.monitoringtendepay.data.localdatasource.allpaymentslocaldatabase.AllPaymentsDatabase
+import com.monitoringtendepay.data.localdatasource.allussdsessionslocal.UssdSessionsDao
+import com.monitoringtendepay.data.localdatasource.allussdsessionslocal.UssdSessionsDatabase
 import com.monitoringtendepay.data.localdatasource.monthlytransactionlocaldatabase.complete.CompleteMonthlyTransactionsDao
 import com.monitoringtendepay.data.localdatasource.monthlytransactionlocaldatabase.complete.CompleteMonthlyTransactionsDatabase
 import com.monitoringtendepay.data.localdatasource.monthlytransactionlocaldatabase.failed.FailedTransactionsDao
@@ -51,6 +53,12 @@ object LocalDatabaseModule {
     @Singleton
     fun provideMissingMonthlyTransactionsDao(database: MissingTransactionsDatabase): MissingTransactionsDao {
         return database.missingTransactionsDao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideUssdSessionsDao(database: UssdSessionsDatabase): UssdSessionsDao {
+        return database.ussdSessionsDao()
     }
 
     @Provides
@@ -104,6 +112,17 @@ object LocalDatabaseModule {
             context.applicationContext,
             MissingTransactionsDatabase::class.java,
             "missing_transactions"
+        ).fallbackToDestructiveMigration()
+            .build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideAllUssdSessionsDatabase(@ApplicationContext context: Context): UssdSessionsDatabase {
+        return Room.databaseBuilder(
+            context.applicationContext,
+            UssdSessionsDatabase::class.java,
+            "all_ussd_sessions"
         ).fallbackToDestructiveMigration()
             .build()
     }

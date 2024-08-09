@@ -1,8 +1,6 @@
 package com.monitoringtendepay.presentation.activities
 
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -25,6 +23,9 @@ import kotlinx.coroutines.flow.onEach
 
 @AndroidEntryPoint
 class SessionsFragment : Fragment() {
+
+    // Variable to keep track of the selected card
+    private var selectedCard: RelativeLayout? = null
 
     private val sessionsViewModel: AllUssdSessionsViewModel by viewModels()
     private lateinit var recyclerView: RecyclerView
@@ -54,7 +55,7 @@ class SessionsFragment : Fragment() {
         val textSessions: TextView = view.findViewById(R.id.sessions_history_text)
         cardPayments.setOnClickListener {
             Log.d("SessionsFragment", "Payments card clicked")
-            changeBackgroundAndTextColorTemporarily(cardPayments, textSessions, R.drawable.bg_white, R.drawable.bg1, R.color.purple_500, R.color.white)
+            changeBackgroundAndTextColorTemporarily(cardPayments, textSessions)
             // Replace the fragment
             parentFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, History())
@@ -94,12 +95,27 @@ class SessionsFragment : Fragment() {
         sessionsViewModel.fetchAllUssdSessions("fetchSessionMonitoring")
     }
 
-    private fun changeBackgroundAndTextColorTemporarily(view: View, textView: TextView, newBackground: Int, originalBackground: Int, newTextColor: Int, originalTextColor: Int) {
-        view.setBackgroundResource(newBackground)
-        textView.setTextColor(ContextCompat.getColor(requireContext(), newTextColor))
-        Handler(Looper.getMainLooper()).postDelayed({
-            view.setBackgroundResource(originalBackground)
-            textView.setTextColor(ContextCompat.getColor(requireContext(), originalTextColor))
-        }, 400)
+//    private fun changeBackgroundAndTextColorTemporarily(view: View, textView: TextView, newBackground: Int, originalBackground: Int, newTextColor: Int, originalTextColor: Int) {
+//        view.setBackgroundResource(newBackground)
+//        textView.setTextColor(ContextCompat.getColor(requireContext(), newTextColor))
+//        Handler(Looper.getMainLooper()).postDelayed({
+//            view.setBackgroundResource(originalBackground)
+//            textView.setTextColor(ContextCompat.getColor(requireContext(), originalTextColor))
+//        }, 400)
+//    }
+
+    private fun changeBackgroundAndTextColorTemporarily(selectedView: RelativeLayout, textView: TextView) {
+        // Reset the background of the previously selected card
+        selectedCard?.apply {
+            setBackgroundResource(R.drawable.bg_white)
+            findViewById<TextView>(R.id.sessions_history_text).setTextColor(ContextCompat.getColor(requireContext(), R.color.purple_500))
+        }
+
+        // Set the background of the newly selected card
+        selectedView.setBackgroundResource(R.drawable.bg1)
+        textView.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+
+        // Update the selected card reference
+        selectedCard = selectedView
     }
 }

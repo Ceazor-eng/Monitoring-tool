@@ -19,8 +19,7 @@ data class AllPaymentsEntity(
     val serviceCode: String,
     val sessionId: String,
     val transactionDate: String,
-    val timestamp: Long // Add a timestamp field
-
+    val timestamp: Long
 )
 
 fun AllPaymentsEntity.toFetchAllPaymentsDto(): FetchAllPaymentsDto {

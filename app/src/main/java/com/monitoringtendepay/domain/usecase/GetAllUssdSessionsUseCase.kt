@@ -17,7 +17,7 @@ class GetAllUssdSessionsUseCase @Inject constructor(
 
     operator fun invoke(action: String): Flow<Resource<List<AllUssdSessions>>> = flow {
         try {
-            emit(Resource.Loading())
+            emit(Resource.Loading<List<AllUssdSessions>>())
             Log.d("GetAllUssdSessionsUseCase", "Fetching sessions...")
             val fetchUssdSessions = repository.getUssdSessions(action)
             Log.d("GetAllUssdSessionsUseCase", "Fetched ussdSessions DTO: $fetchUssdSessions")
